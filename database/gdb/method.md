@@ -130,6 +130,7 @@ _, err := db.BatchInsert("user", gdb.List {
 
 ### 7. 数据更新/删除
 ```go
+// db.Update/db.Delete 同理
 // UPDATE `user` SET `name`='john' WHERE `uid`=10000
 r, err := db.Update("user", gdb.Map {"name": "john"}, "uid=?", 10000)
 // UPDATE `user` SET `name`='john' WHERE `uid`=10000
