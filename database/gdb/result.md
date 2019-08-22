@@ -1,7 +1,7 @@
 [TOC]
 
 接口文档：
-https://godoc.org/github.com/gogf/gf/g/database/gdb
+https://godoc.org/github.com/gogf/gf/database/gdb
 
 # 数据结构
 

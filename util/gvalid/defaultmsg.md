@@ -4,7 +4,7 @@
 
 
 修改默认错误信息方法：
-https://godoc.org/github.com/gogf/gf/g/util/gvalid
+https://godoc.org/github.com/gogf/gf/util/gvalid
 ```go
 func SetDefaultErrorMsgs(msgs map[string]string)
 ```

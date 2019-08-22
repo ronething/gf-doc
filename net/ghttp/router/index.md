@@ -4,11 +4,11 @@
 `Web Server`提供服务需要回调函数/方法/对象/控制器的支持，`ghttp`包支持多种路由注册模式，为开发者提供非常强大和灵活的接口功能。路由注册是整个Web Server最核心的部分，也是`gf`框架中最精心设计的一个模块。
 
 <!-- 
-> 以下章节中部分示例按照MVC模式进行目录管理（控制器需要分别通过独立的包```init```方法进行自动注册），所有示例代码存放于：[github.com/gogf/gf/blob/master/geg/frame/mvc/](https://github.com/gogf/gf/blob/master/geg/frame/mvc) 目录中，每个示例无法独立运行（只是独立注册服务，没有```main```模块），需要访问示例结果的话，需要执行外层的```main.go```入口程序。（少部分示例位于 [github.com/gogf/gf/blob/master/geg/net/ghttp/server/](https://github.com/gogf/gf/blob/master/geg/net/ghttp/server/)  目录中，可独立运行）
+> 以下章节中部分示例按照MVC模式进行目录管理（控制器需要分别通过独立的包```init```方法进行自动注册），所有示例代码存放于：[github.com/gogf/gf/blob/master/.example/frame/mvc/](https://github.com/gogf/gf/blob/master/.example/frame/mvc) 目录中，每个示例无法独立运行（只是独立注册服务，没有```main```模块），需要访问示例结果的话，需要执行外层的```main.go```入口程序。（少部分示例位于 [github.com/gogf/gf/blob/master/.example/net/ghttp/server/](https://github.com/gogf/gf/blob/master/.example/net/ghttp/server/)  目录中，可独立运行）
 -->
 
 接口文档：
-https://godoc.org/github.com/gogf/gf/g/net/ghttp
+https://godoc.org/github.com/gogf/gf/net/ghttp
 
 # g与ghttp包
 

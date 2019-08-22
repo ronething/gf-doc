@@ -6,7 +6,7 @@
 
 接口文档地址： 
 
-https://godoc.org/github.com/gogf/gf/g/net/ghttp
+https://godoc.org/github.com/gogf/gf/net/ghttp
 
 # 哈喽世界
 

@@ -19,7 +19,7 @@
 
 我们可以通过```BindController```方法完成控制器的注册。
 
-[github.com/gogf/gf/blob/master/geg/frame/mvc/controller/demo/user.go](https://github.com/gogf/gf/blob/master/geg/frame/mvc/controller/demo/user.go)
+[github.com/gogf/gf/blob/master/.example/frame/mvc/controller/demo/user.go](https://github.com/gogf/gf/blob/master/.example/frame/mvc/controller/demo/user.go)
 
 ```go
 package demo
@@ -148,7 +148,7 @@ func (c *Method) Info() {
 
 以下是一个示例：
 
-[github.com/gogf/gf/blob/master/geg/frame/mvc/controller/demo/rest.go](https://github.com/gogf/gf/blob/master/geg/frame/mvc/controller/demo/rest.go)
+[github.com/gogf/gf/blob/master/.example/frame/mvc/controller/demo/rest.go](https://github.com/gogf/gf/blob/master/.example/frame/mvc/controller/demo/rest.go)
 
 ```go
 package demo

@@ -16,7 +16,7 @@ import "github.com/gogf/gf/g/os/grpool"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/os/grpool
+https://godoc.org/github.com/gogf/gf/os/grpool
 
 
 
@@ -28,7 +28,7 @@ https://godoc.org/github.com/gogf/gf/g/os/grpool
 
 **1、使用默认的goroutine池，限制10个工作goroutine执行1000个任务**
 
-[github.com/gogf/gf/blob/master/geg/os/grpool/grpool1.go](https://github.com/gogf/gf/blob/master/geg/os/grpool/grpool1.go)
+[github.com/gogf/gf/blob/master/.example/os/grpool/grpool1.go](https://github.com/gogf/gf/blob/master/.example/os/grpool/grpool1.go)
 
 ```go
 package main
@@ -65,7 +65,7 @@ func main() {
 
 **2、我们再来看一个新手经常容易出错的例子**
 
-[github.com/gogf/gf/blob/master/geg/os/grpool/grpool2.go](https://github.com/gogf/gf/blob/master/geg/os/grpool/grpool2.go)
+[github.com/gogf/gf/blob/master/.example/os/grpool/grpool2.go](https://github.com/gogf/gf/blob/master/.example/os/grpool/grpool2.go)
 
 ```go
 package main
@@ -108,7 +108,7 @@ func main() {
 
 1)、使用go关键字
 
-[github.com/gogf/gf/blob/master/geg/os/grpool/grpool3.go](https://github.com/gogf/gf/blob/master/geg/os/grpool/grpool3.go)
+[github.com/gogf/gf/blob/master/.example/os/grpool/grpool3.go](https://github.com/gogf/gf/blob/master/.example/os/grpool/grpool3.go)
 
 ```go
 package main
@@ -147,7 +147,7 @@ func main() {
 
 2)、使用临时变量
 
-[github.com/gogf/gf/blob/master/geg/os/grpool/grpool4.go](https://github.com/gogf/gf/blob/master/geg/os/grpool/grpool4.go)
+[github.com/gogf/gf/blob/master/.example/os/grpool/grpool4.go](https://github.com/gogf/gf/blob/master/.example/os/grpool/grpool4.go)
 
 ```go
 package main

@@ -13,7 +13,7 @@ import "github.com/gogf/gf/g/container/gchan"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/container/gchan
+https://godoc.org/github.com/gogf/gf/container/gchan
 
 
 `gchan`与原生`channel`的性能测试：

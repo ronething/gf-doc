@@ -4,7 +4,7 @@
 
 # 接口文档
 
-https://godoc.org/github.com/gogf/gf/g/net/ghttp#Cookie
+https://godoc.org/github.com/gogf/gf/net/ghttp#Cookie
 
 
 任何时候都可以通过```*ghttp.Request```对象获取到当前请求对应的Cookie对象，因为Cookie和Session都是和请求会话相关，因此都属于ghttp.Request的成员对象，并对外公开。Cookie对象不需要手动Close，请求流程结束后，HTTP Server会自动关闭掉。

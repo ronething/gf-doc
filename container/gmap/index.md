@@ -27,7 +27,7 @@ import "github.com/gogf/gf/g/container/gmap"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/container/gmap
+https://godoc.org/github.com/gogf/gf/container/gmap
 
 
 

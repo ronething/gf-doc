@@ -12,7 +12,7 @@ import "github.com/gogf/gf/g/os/gtime"
 
 **接口文档**： 
 
-https://godoc.org/github.com/gogf/gf/g/os/gtime
+https://godoc.org/github.com/gogf/gf/os/gtime
 
 **时间格式**：
 

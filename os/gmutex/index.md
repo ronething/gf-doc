@@ -15,7 +15,7 @@ import "github.com/gogf/gf/g/os/gmutex"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/os/gmutex
+https://godoc.org/github.com/gogf/gf/os/gmutex
 
 ```go
 type Mutex

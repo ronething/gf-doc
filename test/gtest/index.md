@@ -9,7 +9,7 @@ import "github.com/gogf/gf/g/test/gtest"
 
 **接口文档**： 
 
-https://godoc.org/github.com/gogf/gf/g/test/gtest
+https://godoc.org/github.com/gogf/gf/test/gtest
 
 ```go
 func Case(t *testing.T, f func())

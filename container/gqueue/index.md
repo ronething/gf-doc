@@ -15,7 +15,7 @@ import "github.com/gogf/gf/g/container/gqueue"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/container/gqueue
+https://godoc.org/github.com/gogf/gf/container/gqueue
 
 
 ## 使用示例1，基本使用

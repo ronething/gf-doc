@@ -12,7 +12,7 @@ import "github.com/gogf/gf/g/os/gflock"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/os/gflock
+https://godoc.org/github.com/gogf/gf/os/gflock
 
 
 方法比较实用也很简单，我们这里来展示一个`Lock/Unlock`的示例。

@@ -1,6 +1,6 @@
 [TOC]
 
-接口文档：https://godoc.org/github.com/gogf/gf/g/util/gvalid
+接口文档：https://godoc.org/github.com/gogf/gf/util/gvalid
 ```go
 func Check(value interface{}, rules string, msgs interface{}, params ...interface{}) *Error
 ```

@@ -9,5 +9,5 @@ import "github.com/gogf/gf/g/util/grand"
 
 **接口文档**： 
 
-[godoc.org/github.com/gogf/gf/g/util/grand](https://godoc.org/github.com/gogf/gf/g/util/grand)
+[godoc.org/github.com/gogf/gf/g/util/grand](https://godoc.org/github.com/gogf/gf/util/grand)
 

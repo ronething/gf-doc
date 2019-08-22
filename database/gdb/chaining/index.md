@@ -8,7 +8,7 @@
 链式操作可以通过数据库对象的`db.Table`/`db.From`方法或者事务对象的`tx.Table`/`tx.From`方法，基于指定的数据表返回一个链式操作对象`*Model`，该对象可以执行以下方法。
 
 接口文档：
-https://godoc.org/github.com/gogf/gf/g/database/gdb#Model
+https://godoc.org/github.com/gogf/gf/database/gdb#Model
 
 ```go
 func (md *Model) LeftJoin(joinTable string, on string) *Model

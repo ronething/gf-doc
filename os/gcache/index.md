@@ -12,7 +12,7 @@ import "github.com/gogf/gf/g/os/gcache"
 
 **接口文档**： 
 
-https://godoc.org/github.com/gogf/gf/g/os/gcache
+https://godoc.org/github.com/gogf/gf/os/gcache
 
 `gcache`可以使用`New`方法创建使用，并且也可以使用包方法使用。在通过包方法使用缓存功能时，其实操作`gcache`默认提供的一个`gcache.Cache`对象，具有全局性，因此在使用时注意全局键名的覆盖。
 

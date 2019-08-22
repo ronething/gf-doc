@@ -25,7 +25,7 @@ s.BindObjectMethod("POST:/api/user/{id}", user, "Edit")
 
 我们可以通过```ghttp.BindObject```方法完成执行对象的注册。
 
-[github.com/gogf/gf/blob/master/geg/frame/mvc/controller/demo/object.go](https://github.com/gogf/gf/blob/master/geg/frame/mvc/controller/demo/object.go)
+[github.com/gogf/gf/blob/master/.example/frame/mvc/controller/demo/object.go](https://github.com/gogf/gf/blob/master/.example/frame/mvc/controller/demo/object.go)
 
 ```go
 package demo
@@ -68,7 +68,7 @@ panic: interface conversion: interface {} is xxx, not func(*ghttp.Request)
 当使用`BindObject`方法进行执行对象注册时，在路由规则中可以使用两个内置的变量：```{.struct}```和```{.method}```，前者表示当前**对象名称**，后者表示当前注册的**方法名**。这两个内置变量使得开发者可以非常灵活地自定义路由规则。
 
 我们来看一个例子：
-[github.com/gogf/gf/blob/master/geg/frame/mvc/controller/demo/buildin-vars.go](https://github.com/gogf/gf/blob/master/geg/frame/mvc/controller/demo/buildin-vars.go)
+[github.com/gogf/gf/blob/master/.example/frame/mvc/controller/demo/buildin-vars.go](https://github.com/gogf/gf/blob/master/.example/frame/mvc/controller/demo/buildin-vars.go)
 ```go
 package demo
 
@@ -101,7 +101,7 @@ NAME_TO_URI_TYPE_ALLLOWER = 2      // 仅转为小写，单词间不使用连接
 NAME_TO_URI_TYPE_CAMEL    = 3      // 采用驼峰命名方式
 ```
 我们来看一个示例：
-[github.com/gogf/gf/blob/master/geg/net/ghttp/server/name.go](https://github.com/gogf/gf/blob/master/geg/net/ghttp/server/name.go)
+[github.com/gogf/gf/blob/master/.example/net/ghttp/server/name.go](https://github.com/gogf/gf/blob/master/.example/net/ghttp/server/name.go)
 ```go
 package main
 
@@ -234,7 +234,7 @@ func (o *ObjectMethod) Show3(r *ghttp.Request) {
 
 我们可以通过```ghttp.BindObjectRest```方法完成REST对象的注册。
 
-[github.com/gogf/gf/blob/master/geg/frame/mvc/controller/demo/object_rest.go](https://github.com/gogf/gf/blob/master/geg/frame/mvc/controller/demo/object_rest.go)
+[github.com/gogf/gf/blob/master/.example/frame/mvc/controller/demo/object_rest.go](https://github.com/gogf/gf/blob/master/.example/frame/mvc/controller/demo/object_rest.go)
 
 ```go
 package demo

@@ -10,7 +10,7 @@
 **注意：为提高数据库操作安全性，在ORM操作中不建议直接将参数拼接成SQL执行，又或者将参数拼接称字符串执行，建议尽量使用预处理的方式（充分使用```?```占位符）来传递SQL参数。**
 
 接口文档：
-https://godoc.org/github.com/gogf/gf/g/database/gdb
+https://godoc.org/github.com/gogf/gf/database/gdb
 
 # 数据结构
 

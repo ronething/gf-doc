@@ -13,7 +13,7 @@ import "github.com/gogf/gf/g/container/gring"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/container/gring
+https://godoc.org/github.com/gogf/gf/container/gring
 
 > `gring`支持链式操作。
 

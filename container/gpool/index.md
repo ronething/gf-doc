@@ -16,7 +16,7 @@ import "github.com/gogf/gf/g/container/gpool"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/container/gpool
+https://godoc.org/github.com/gogf/gf/container/gpool
 
 需要注意两点：
 1. `New`方法的过期时间单位为`毫秒`；

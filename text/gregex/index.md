@@ -9,7 +9,7 @@ import "github.com/gogf/gf/g/text/gregex"
 
 **接口文档**： 
 
-https://godoc.org/github.com/gogf/gf/g/text/gregex
+https://godoc.org/github.com/gogf/gf/text/gregex
 
 
 ## 示例1，基本使用

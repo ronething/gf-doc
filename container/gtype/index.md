@@ -20,7 +20,7 @@ import "github.com/gogf/gf/g/container/gtype"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/container/gtype
+https://godoc.org/github.com/gogf/gf/container/gtype
 
 
 ## 性能测试

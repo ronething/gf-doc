@@ -8,4 +8,4 @@ import "github.com/gogf/gf/g/crypto/gaes"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/crypto/gaes
+https://godoc.org/github.com/gogf/gf/crypto/gaes

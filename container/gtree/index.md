@@ -25,7 +25,7 @@ import "github.com/gogf/gf/g/container/gtree"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/container/gtree
+https://godoc.org/github.com/gogf/gf/container/gtree
 
 几种容器的API方法都非常类似，特点是需要在初始化时提供用于排序的方法，以下是红黑树的方法列表。
 

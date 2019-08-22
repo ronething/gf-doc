@@ -4,7 +4,7 @@
 
 # 接口文档
 
-https://godoc.org/github.com/gogf/gf/g/net/ghttp#Session
+https://godoc.org/github.com/gogf/gf/net/ghttp#Session
 
 
 任何时候都可以通过```*ghttp.Request```获取`Session`对象，因为`Cookie`和`Session`都是和请求会话相关，因此都属于`Request`的成员对象，并对外公开。gf框架的`Session`是存放在内存中的，因此处理效率非常高，默认过期时间是`600秒`。

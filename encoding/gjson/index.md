@@ -15,7 +15,7 @@ import "github.com/gogf/gf/g/encoding/gjson"
 
 **接口文档**： 
 
-https://godoc.org/github.com/gogf/gf/g/encoding/gjson
+https://godoc.org/github.com/gogf/gf/encoding/gjson
 
 
 ## 示例1，数据层级检索

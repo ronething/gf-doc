@@ -15,7 +15,7 @@ import "github.com/gogf/gf/g/container/garray"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/container/garray
+https://godoc.org/github.com/gogf/gf/container/garray
 
 
 由于`garray`模块下的对象及方法较多，支持`int`/`string`/`interface{}`三种数据类型，这里便不一一列举。`garray`下包含了多种数据类型的`slice`，可以使用 `garray.New*Array`/`garray.NewSorted*Array` 方法来创建，其中`garray.New*Array`为普通不排序数组，`garray.NewSorted*Array`为排序数组(当创建`interface{}`类型的数组时，创建时可以指定自定义的排序函数)。

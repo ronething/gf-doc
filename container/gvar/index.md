@@ -15,7 +15,7 @@ import "github.com/gogf/gf/g/container/gvar"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/container/gvar
+https://godoc.org/github.com/gogf/gf/container/gvar
 
  
 

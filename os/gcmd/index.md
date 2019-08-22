@@ -9,7 +9,7 @@ import "github.com/gogf/gf/g/os/gcmd"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/os/gcmd
+https://godoc.org/github.com/gogf/gf/os/gcmd
 
 ## 参数/选项读取
 

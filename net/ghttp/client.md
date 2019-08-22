@@ -8,7 +8,7 @@
 `gf`框架提供了强大易用的HTTP客户端，同样由`ghttp`模块实现。
 
 方法列表：
-https://godoc.org/github.com/gogf/gf/g/net/ghttp#Client
+https://godoc.org/github.com/gogf/gf/net/ghttp#Client
 ```go
 type Client
     func NewClient() *Client
@@ -179,7 +179,7 @@ func (r *ClientResponse) Close()
 
 1. 客户端
 
-    https://github.com/gogf/gf/blob/master/geg/net/ghttp/client/upload/client.go
+    https://github.com/gogf/gf/blob/master/.example/net/ghttp/client/upload/client.go
 
     ```go
     package main
@@ -206,7 +206,7 @@ func (r *ClientResponse) Close()
     > 其中，`文件路径`请使用本地文件绝对路径。
 1. 服务端
 
-    https://github.com/gogf/gf/blob/master/geg/net/ghttp/client/upload/server.go
+    https://github.com/gogf/gf/blob/master/.example/net/ghttp/client/upload/server.go
 
     ```go
     package main
@@ -266,7 +266,7 @@ http客户端发起请求时可以自定义发送给服务端的Header内容，�
 
 1. 客户端
     
-    https://github.com/gogf/gf/blob/master/geg/net/ghttp/client/cookie/client.go
+    https://github.com/gogf/gf/blob/master/.example/net/ghttp/client/cookie/client.go
     ```go
     package main
 
@@ -288,7 +288,7 @@ http客户端发起请求时可以自定义发送给服务端的Header内容，�
     通过`ghttp.NewClient()`创建一个自定义的http请求客户端对象，并通过`c.SetHeader("Cookie", "name=john; score=100")`设置自定义的Cookie，这里我们设置了两个示例用的Cookie参数，一个`name`，一个`score`，注意多个Cookie参数使用`;`符号分隔。
 1. 服务端
     
-    https://github.com/gogf/gf/blob/master/geg/net/ghttp/client/cookie/server.go
+    https://github.com/gogf/gf/blob/master/.example/net/ghttp/client/cookie/server.go
     ```go
     package main
 

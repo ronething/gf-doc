@@ -9,7 +9,7 @@ import "github.com/gogf/gf/g/os/gproc"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/os/gproc
+https://godoc.org/github.com/gogf/gf/os/gproc
 
 
 简要说明：

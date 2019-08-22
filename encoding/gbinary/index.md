@@ -10,7 +10,7 @@ import "github.com/gogf/gf/g/encoding/gbinary"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/encoding/gbinary
+https://godoc.org/github.com/gogf/gf/encoding/gbinary
 
 用于二进制数据结构转换处理的接口文档如下：
 ```go
@@ -66,7 +66,7 @@ type Bit int8
 
 我们来看一个比较完整的二进制操作示例，基本演示了绝大部分的二进制转换操作。
 
-[github.com/gogf/gf/blob/master/geg/encoding/gbinary/binary.go](https://github.com/gogf/gf/blob/master/geg/encoding/gbinary/binary.go)
+[github.com/gogf/gf/blob/master/.example/encoding/gbinary/binary.go](https://github.com/gogf/gf/blob/master/.example/encoding/gbinary/binary.go)
 
 ```go
 package main
@@ -179,7 +179,7 @@ I'm string!
     
     看以下的例子，用以上报平台100个传感器已开启，上报的状态顺序便是传感器在网关下端口顺序(索引从0开始)：
 
-    https://github.com/gogf/gf/blob/master/geg/encoding/gbinary/bits1.go
+    https://github.com/gogf/gf/blob/master/.example/encoding/gbinary/bits1.go
 
     ```go
     package main
@@ -231,7 +231,7 @@ I'm string!
     ```
     我们使用一条元数据来演示编码/解码操作。
 
-	[github.com/gogf/gf/blob/master/geg/encoding/gbinary/bits2.go](https://github.com/gogf/gf/blob/master/geg/encoding/gbinary/bits2.go)
+	[github.com/gogf/gf/blob/master/.example/encoding/gbinary/bits2.go](https://github.com/gogf/gf/blob/master/.example/encoding/gbinary/bits2.go)
 
     ```go
     package main

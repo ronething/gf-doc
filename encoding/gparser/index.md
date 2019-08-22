@@ -11,7 +11,7 @@ import "github.com/gogf/gf/g/encoding/gparser"
 
 ## 接口文档
 
-https://godoc.org/github.com/gogf/gf/g/encoding/gparser
+https://godoc.org/github.com/gogf/gf/encoding/gparser
 
 简要说明，
 1. ```Load```与```LoadContent```方法支持根据文件及内容，生成```gparser.Parser```对象；

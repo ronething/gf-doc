@@ -6,7 +6,7 @@ import "github.com/gogf/gf/g/util/gvalid"
 ```
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/util/gvalid
+https://godoc.org/github.com/gogf/gf/util/gvalid
 
 # 校验规则
 

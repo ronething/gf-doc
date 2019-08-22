@@ -9,7 +9,7 @@ import "github.com/gogf/gf/g/util/gconv"
 
 **接口文档**： 
 
-https://godoc.org/github.com/gogf/gf/g/util/gconv
+https://godoc.org/github.com/gogf/gf/util/gconv
 ```go
 // 基本类型
 func Bool(i interface{}) bool

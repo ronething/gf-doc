@@ -9,4 +9,4 @@ import "github.com/gogf/gf/g/encoding/gtoml"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/encoding/gtoml
+https://godoc.org/github.com/gogf/gf/encoding/gtoml

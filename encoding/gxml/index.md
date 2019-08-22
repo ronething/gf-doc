@@ -10,5 +10,5 @@ import "github.com/gogf/gf/g/encoding/gxml"
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/g/encoding/gxml
+https://godoc.org/github.com/gogf/gf/encoding/gxml
 
