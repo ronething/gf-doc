@@ -1,5 +1,5 @@
 <div align=center>
-<img src="https://gfcdn.johng.cn/logo.png" width="100"/>
+<img src="https://gf.cdn.johng.cn/logo.png" width="100"/>
 
 [![Go Doc](https://godoc.org/github.com/gogf/gf?status.svg)](https://godoc.org/github.com/gogf/gf/g#pkg-subdirectories) 
 [![Build Status](https://travis-ci.org/gogf/gf.svg?branch=master)](https://travis-ci.org/gogf/gf) 
@@ -31,7 +31,7 @@ golang版本 >= 1.10.0
 
 # 架构
 <div align=center>
-<img src="https://gfcdn.johng.cn/images/arch.png"/>
+<img src="https://gf.cdn.johng.cn/images/arch.png"/>
 </div>
 
 # 特点
