@@ -46,7 +46,6 @@ func (d *Domain) BindHookHandlerByMap(pattern string, hookmap map[string]Handler
 
 具体调用时机请参考图例所示。
 
-> `HOOK_BEFORE_CLOSE`及`HOOK_AFTER_CLOSE`事件在`gf`框架`v1.6.0`版本后被废弃。
 
 ## 事件优先级
 
