@@ -111,6 +111,9 @@ PLATFORMS
 
 具体介绍：
 ```
+USAGE
+    gf pack SRC DST
+
 ARGUMENT
     SRC  source path for packing, which can be multiple source paths.
     DST  destination file path for packed file. if extension of the filename is ".go" and "-n" option is given,
@@ -137,6 +140,9 @@ EXAMPLES
 
 具体介绍：
 ```
+USAGE
+    gf gen model [PATH] [OPTION]
+
 ARGUMENT
     PATH  the destination for storing generated files, not necessary, default is "./api/model"
 
