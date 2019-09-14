@@ -1,5 +1,6 @@
 * [框架介绍](index.md)
 * [加入我们](joinus.md)
+* [GF工具链](cli/cli.md)
 * [准备工作](#)
     * [环境安装](prepare/install.md)
     * [Go Module](prepare/gomodule.md)
