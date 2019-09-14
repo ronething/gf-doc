@@ -17,7 +17,7 @@ CGO_ENABLED=0 GOOS=windows GOARCH=386 go build hello.go
 ```
 遗憾的是交叉编译暂不支持`cgo`方式，因此需要将环境变量`$CGO_ENABLED`设置为0，这样执行之后会在当前目录生成一个`hello.exe`的`windows x86`架构的可执行文件。
 
-# 环境变量设置
+## 环境变量设置
 
 除了`$PATH`环境外，其他环境变量都是可选的。
 
