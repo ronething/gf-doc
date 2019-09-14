@@ -8,7 +8,8 @@
 工具安装成功后，可以通过`gf`或者`gf -h`查看所有支持的命令。复杂的命令可以通过`gf help COMMAND`或者`gf COMMAND -h`查看更详细的使用帮助信息，例如：`gf help gen`、`gf gen -h`。
 
 > 当前帮助文档以`gf cli v0.3.0`版本为例进行介绍，内容信息可能会有滞后，最新的具体详细介绍请查看工具帮助信息。
-```shell
+
+```
 $ gf
 USAGE
     gf COMMAND [ARGUMENT] [OPTION]
@@ -54,7 +55,7 @@ ADDITIONAL
 使用方式：`gf build FILE [OPTION]`
 
 具体介绍：
-```shell
+```
 USAGE
     gf build FILE [OPTION]
 
@@ -109,7 +110,7 @@ PLATFORMS
 使用方式：`gf pack SRC DST`
 
 具体介绍：
-```shell
+```
 ARGUMENT
     SRC  source path for packing, which can be multiple source paths.
     DST  destination file path for packed file. if extension of the filename is ".go" and "-n" option is given,
@@ -135,7 +136,7 @@ EXAMPLES
 使用方式：`gf gen model [PATH] [OPTION]`
 
 具体介绍：
-```shell
+```
 ARGUMENT
     PATH  the destination for storing generated files, not necessary, default is "./api/model"
 
