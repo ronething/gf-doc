@@ -51,8 +51,8 @@ https://godoc.org/github.com/gogf/gf/os/gsession
         UpdateTTL(id string) error
     }
     ```
+    
 ## 默认存储方式
-
 默认的`Session`存储使用了`内存+文件`的方式。具体原理为：
 1. `Session`的数据操作完全基于内存；
 1. 使用`gcache`进程缓存模块控制数据过期；
