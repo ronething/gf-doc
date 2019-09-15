@@ -6,12 +6,30 @@
 
 https://godoc.org/github.com/gogf/gf/net/ghttp#Cookie
 
+```go
+type Cookie
+    func GetCookie(r *Request) *Cookie
+    func (c *Cookie) Contains(key string) bool
+    func (c *Cookie) Get(key string, def ...string) string
+    func (c *Cookie) GetSessionId() string
+    func (c *Cookie) Map() map[string]string
+    func (c *Cookie) Output()
+    func (c *Cookie) Remove(key string)
+    func (c *Cookie) RemoveCookie(key, domain, path string)
+    func (c *Cookie) Set(key, value string)
+    func (c *Cookie) SetCookie(key, value, domain, path string, maxAge time.Duration, httpOnly ...bool)
+    func (c *Cookie) SetSessionId(id string)
+```
 
-任何时候都可以通过```*ghttp.Request```对象获取到当前请求对应的Cookie对象，因为Cookie和Session都是和请求会话相关，因此都属于ghttp.Request的成员对象，并对外公开。Cookie对象不需要手动Close，请求流程结束后，HTTP Server会自动关闭掉。
+任何时候都可以通过`*ghttp.Request`对象获取到当前请求对应的`Cookie`对象，因为`Cookie`和`Session`都是和请求会话相关，因此都属于`ghttp.Request`的成员对象，并对外公开。`Cookie`对象不需要手动`Close`，请求流程结束后，`HTTP Server`会自动关闭掉。
 
-此外，Cookie中封装了两个```SessionId```相关的方法，```Cookie.SessionId()```用于获取当前请求的SessionId，每个请求的SessionId都是唯一的，并且伴随整个请求流程。```Cookie.SetSessionId(session string)```用于自定义设置当前的SessionId，可以实现自定义的Session控制，以及Session跨域支持(特别是多服务器集群环境下)。
+此外，`Cookie`中封装了两个`SessionId`相关的方法：
+1. `Cookie.GetSessionId()`用于获取当前请求提交的SessionId，每个请求的SessionId都是唯一的，并且伴随整个请求流程，该值可能为空。
+1. `Cookie.SetSessionId(id string)`用于自定义设置SessionId到Cookie中，返回给客户端（往往是浏览器）存储，随后客户端每一次请求在Cookie中可带上该SessionId。
 
-在任何时候，我们都可以通过ghttp.Server对象来修改和获取Cookie的过期时间。
+在设置Cookie变量的时候可以给定过期时间，该时间为可选参数，默认的Cookie过期时间为一年。
+
+> 默认的`SessionId`在`Cookie`中的存储名称为`gfsession`。
 
 # 使用示例
 
@@ -35,18 +53,18 @@ func main() {
     s.Run()
 }
 ```
-执行外层的main.go，可以尝试刷新页面 http://127.0.0.1:8199/cookie ，显示的时间在一直变化。
+执行外层的`main.go`，可以尝试刷新页面 http://127.0.0.1:8199/cookie ，显示的时间在一直变化。
 
 
 对于控制器对象而言，从基类控制器中继承了很多会话相关的对象指针，可以看做alias，可以直接使用，他们都是指向的同一个对象：
 ```go
 type Controller struct {
-    Request  *ghttp.Request  // 请求数据对象
-    Response *ghttp.Response // 返回数据对象(r.Response)
-    Server   *ghttp.Server   // Web Server对象(r.Server)
-    Cookie   *ghttp.Cookie   // COOKIE操作对象(r.Cookie)
-    Session  *ghttp.Session  // SESSION操作对象
-    View     *View           // 视图对象
+	Request  *ghttp.Request  // 请求数据对象
+	Response *ghttp.Response // 返回数据对象(r.Response)
+	Server   *ghttp.Server   // Web Server对象(r.Server)
+	Cookie   *ghttp.Cookie   // COOKIE操作对象(r.Cookie)
+	Session  *ghttp.Session  // SESSION操作对象
+	View     *View           // 视图对象
 }
 ```
 
