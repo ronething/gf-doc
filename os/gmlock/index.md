@@ -8,7 +8,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/os/gmlock"
+import "github.com/gogf/gf/os/gmlock"
 ```
 
 
@@ -55,8 +55,8 @@ package main
 import (
     "time"
     "sync"
-    "github.com/gogf/gf/g/os/glog"
-    "github.com/gogf/gf/g/os/gmlock"
+    "github.com/gogf/gf/os/glog"
+    "github.com/gogf/gf/os/gmlock"
 )
 
 func main() {
@@ -100,9 +100,9 @@ package main
 
 import (
     "sync"
-    "github.com/gogf/gf/g/os/glog"
+    "github.com/gogf/gf/os/glog"
     "time"
-    "github.com/gogf/gf/g/os/gmlock"
+    "github.com/gogf/gf/os/gmlock"
 )
 
 func main() {

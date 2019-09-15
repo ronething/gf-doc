@@ -50,9 +50,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/g/net/gtcp"
-	"github.com/gogf/gf/g/os/glog"
-	"github.com/gogf/gf/g/util/gconv"
+	"github.com/gogf/gf/net/gtcp"
+	"github.com/gogf/gf/os/glog"
+	"github.com/gogf/gf/util/gconv"
 	"time"
 )
 
@@ -109,7 +109,7 @@ receive: [51]
     ```go
     package types
 
-    import "github.com/gogf/gf/g"
+    import "github.com/gogf/gf/frame/g"
 
     type NodeInfo struct {
         Cpu       float32 // CPU百分比(%)
@@ -128,8 +128,8 @@ receive: [51]
 
     import (
         "encoding/json"
-        "github.com/gogf/gf/g/net/gtcp"
-        "github.com/gogf/gf/g/os/glog"
+        "github.com/gogf/gf/net/gtcp"
+        "github.com/gogf/gf/os/glog"
         "github.com/gogf/gf/geg/net/gtcp/pkg_operations/monitor/types"
     )
 
@@ -164,10 +164,10 @@ receive: [51]
 
     import (
         "encoding/json"
-        "github.com/gogf/gf/g"
-        "github.com/gogf/gf/g/net/gtcp"
-        "github.com/gogf/gf/g/os/glog"
-        "github.com/gogf/gf/g/os/gtime"
+        "github.com/gogf/gf/frame/g"
+        "github.com/gogf/gf/net/gtcp"
+        "github.com/gogf/gf/os/glog"
+        "github.com/gogf/gf/os/gtime"
         "github.com/gogf/gf/geg/net/gtcp/pkg_operations/monitor/types"
     )
 

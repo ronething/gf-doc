@@ -4,7 +4,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/encoding/gyaml"
+import "github.com/gogf/gf/encoding/gyaml"
 ```
 
 **接口文档**：

@@ -186,8 +186,8 @@ func (r *ClientResponse) Close()
 
     import (
         "fmt"
-        "github.com/gogf/gf/g/os/glog"
-        "github.com/gogf/gf/g/net/ghttp"
+        "github.com/gogf/gf/os/glog"
+        "github.com/gogf/gf/net/ghttp"
     )
 
     func main() {
@@ -212,9 +212,9 @@ func (r *ClientResponse) Close()
     package main
 
     import (
-        "github.com/gogf/gf/g"
-        "github.com/gogf/gf/g/os/gfile"
-        "github.com/gogf/gf/g/net/ghttp"
+        "github.com/gogf/gf/frame/g"
+        "github.com/gogf/gf/os/gfile"
+        "github.com/gogf/gf/net/ghttp"
     )
 
     // 执行文件上传处理，上传到系统临时目录 /tmp
@@ -272,7 +272,7 @@ http客户端发起请求时可以自定义发送给服务端的Header内容，�
 
     import (
         "fmt"
-        "github.com/gogf/gf/g/net/ghttp"
+        "github.com/gogf/gf/net/ghttp"
     )
 
     func main() {
@@ -293,8 +293,8 @@ http客户端发起请求时可以自定义发送给服务端的Header内容，�
     package main
 
     import (
-        "github.com/gogf/gf/g"
-        "github.com/gogf/gf/g/net/ghttp"
+        "github.com/gogf/gf/frame/g"
+        "github.com/gogf/gf/net/ghttp"
     )
 
     func main() {

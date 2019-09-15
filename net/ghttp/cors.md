@@ -54,8 +54,8 @@ func (r *Response) DefaultCORSOptions() CORSOptions {
 package main
 
 import (
-	"github.com/gogf/gf/g"
-	"github.com/gogf/gf/g/net/ghttp"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
 )
 
 type Order struct {
@@ -86,8 +86,8 @@ $.get("http://localhost:8199/api.v1/order", function(result){
 package main
 
 import (
-	"github.com/gogf/gf/g"
-	"github.com/gogf/gf/g/net/ghttp"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
 )
 
 type Order struct{}

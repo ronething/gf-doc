@@ -4,7 +4,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/util/gconv"
+import "github.com/gogf/gf/util/gconv"
 ```
 
 **接口文档**： 

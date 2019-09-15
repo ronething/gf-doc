@@ -15,7 +15,7 @@
 **使用方式**：
 
 ```go
-import "github.com/gogf/gf/g/container/gtype"
+import "github.com/gogf/gf/container/gtype"
 ```
 
 **接口文档**：
@@ -87,7 +87,7 @@ func (t *Int) Add(delta int) int {
 package main
 
 import (
-    "github.com/gogf/gf/g/container/gtype"
+    "github.com/gogf/gf/container/gtype"
     "fmt"
 )
 

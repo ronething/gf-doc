@@ -10,7 +10,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/container/gqueue"
+import "github.com/gogf/gf/container/gqueue"
 ```
 
 **接口文档**：
@@ -26,8 +26,8 @@ package main
 import (
     "fmt"
     "time"
-    "github.com/gogf/gf/g/os/gtimer"
-    "github.com/gogf/gf/g/container/gqueue"
+    "github.com/gogf/gf/os/gtimer"
+    "github.com/gogf/gf/container/gqueue"
 )
 
 func main() {
@@ -72,9 +72,9 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/container/gqueue"
-    "github.com/gogf/gf/g/os/gtime"
-    "github.com/gogf/gf/g/os/gtimer"
+    "github.com/gogf/gf/container/gqueue"
+    "github.com/gogf/gf/os/gtime"
+    "github.com/gogf/gf/os/gtimer"
     "time"
 )
 

@@ -6,7 +6,7 @@
 ```go
 package main
 
-import "github.com/gogf/gf/g/os/glog"
+import "github.com/gogf/gf/os/glog"
 
 func Test() {
 	glog.Error("This is error!")
@@ -34,7 +34,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/gogf/gf/g/os/glog"
+	"github.com/gogf/gf/os/glog"
 )
 
 func main() {
@@ -72,8 +72,8 @@ package main
 
 import (
 	"errors"
-	"github.com/gogf/gf/g/errors/gerror"
-	"github.com/gogf/gf/g/os/glog"
+	"github.com/gogf/gf/errors/gerror"
+	"github.com/gogf/gf/os/glog"
 )
 
 func MakeError() error {

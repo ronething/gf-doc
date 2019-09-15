@@ -81,7 +81,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/util/gvalid"
+    "github.com/gogf/gf/util/gvalid"
 )
 
 func main() {

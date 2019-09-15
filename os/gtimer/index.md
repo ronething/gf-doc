@@ -22,7 +22,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/os/gtimer"
+import "github.com/gogf/gf/os/gtimer"
 ```
 
 **接口文档**： 
@@ -103,7 +103,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/os/gtimer"
+    "github.com/gogf/gf/os/gtimer"
     "time"
 )
 
@@ -135,8 +135,8 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g/os/glog"
-    "github.com/gogf/gf/g/os/gtimer"
+    "github.com/gogf/gf/os/glog"
+    "github.com/gogf/gf/os/gtimer"
     "time"
 )
 

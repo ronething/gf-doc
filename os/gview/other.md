@@ -16,8 +16,8 @@ func (r *Response) WriteTplContent(content string, params map[string]interface{}
 package main
 
 import (
-	"github.com/gogf/gf/g"
-	"github.com/gogf/gf/g/net/ghttp"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
@@ -60,8 +60,8 @@ func (view *View) RLockFunc(f func(vars map[string]interface{}))
 package main
 
 import (
-    "github.com/gogf/gf/g/net/ghttp"
-    "github.com/gogf/gf/g/frame/gmvc"
+    "github.com/gogf/gf/net/ghttp"
+    "github.com/gogf/gf/frame/gmvc"
 )
 
 type ControllerTemplate struct {
@@ -106,8 +106,8 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g/net/ghttp"
-    "github.com/gogf/gf/g/frame/gmvc"
+    "github.com/gogf/gf/net/ghttp"
+    "github.com/gogf/gf/frame/gmvc"
 )
 
 type ControllerTemplate struct {

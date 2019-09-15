@@ -20,7 +20,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/database/gdb"
+    "github.com/gogf/gf/database/gdb"
 )
 
 var db gdb.DB
@@ -82,8 +82,8 @@ func (md *Model) Cache(time int, name ... string) *Model
 package main
 
 import (
-    "github.com/gogf/gf/g/database/gdb"
-    "github.com/gogf/gf/g/util/gutil"
+    "github.com/gogf/gf/database/gdb"
+    "github.com/gogf/gf/util/gutil"
 )
 
 func main() {
@@ -193,8 +193,8 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/os/glog"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/os/glog"
 )
 
 func main() {

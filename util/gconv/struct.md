@@ -49,8 +49,8 @@ nick name  Nick_Name      match
 package main
 
 import (
-	"github.com/gogf/gf/g"
-	"github.com/gogf/gf/g/util/gconv"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/util/gconv"
 )
 
 func main() {
@@ -88,8 +88,8 @@ func main() {
 package main
 
 import (
-	"github.com/gogf/gf/g"
-	"github.com/gogf/gf/g/util/gconv"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/util/gconv"
 )
 
 func main() {
@@ -141,8 +141,8 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/util/gconv"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/util/gconv"
 )
 
 type User struct {
@@ -216,8 +216,8 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g/util/gconv"
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/util/gconv"
+    "github.com/gogf/gf/frame/g"
     "fmt"
 )
 
@@ -273,8 +273,8 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g/util/gconv"
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/util/gconv"
+    "github.com/gogf/gf/frame/g"
     "fmt"
 )
 
@@ -337,8 +337,8 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g/util/gconv"
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/util/gconv"
+    "github.com/gogf/gf/frame/g"
     "fmt"
 )
 
@@ -397,8 +397,8 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g/util/gconv"
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/util/gconv"
+    "github.com/gogf/gf/frame/g"
     "fmt"
 )
 
@@ -446,8 +446,8 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g/util/gconv"
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/util/gconv"
+    "github.com/gogf/gf/frame/g"
     "fmt"
 )
 

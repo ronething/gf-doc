@@ -5,7 +5,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/encoding/gbinary"
+import "github.com/gogf/gf/encoding/gbinary"
 ```
 
 **接口文档**：
@@ -73,8 +73,8 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/os/glog"
-    "github.com/gogf/gf/g/encoding/gbinary"
+    "github.com/gogf/gf/os/glog"
+    "github.com/gogf/gf/encoding/gbinary"
 )
 
 func main() {
@@ -186,7 +186,7 @@ I'm string!
 
     import (
         "fmt"
-        "github.com/gogf/gf/g/encoding/gbinary"
+        "github.com/gogf/gf/encoding/gbinary"
     )
 
     func main() {
@@ -238,7 +238,7 @@ I'm string!
 
     import (
         "fmt"
-        "github.com/gogf/gf/g/encoding/gbinary"
+        "github.com/gogf/gf/encoding/gbinary"
     )
 
     func main() {

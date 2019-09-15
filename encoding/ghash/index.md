@@ -4,7 +4,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/encoding/ghash"
+import "github.com/gogf/gf/encoding/ghash"
 ```
 **接口文档**：
 

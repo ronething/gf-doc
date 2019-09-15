@@ -158,7 +158,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/g"
+	"github.com/gogf/gf/frame/g"
 )
 
 func main() {
@@ -432,7 +432,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/g"
+	"github.com/gogf/gf/frame/g"
 )
 
 // 用于测试的带参数的内置函数

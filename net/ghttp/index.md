@@ -16,8 +16,8 @@ https://godoc.org/github.com/gogf/gf/net/ghttp
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
@@ -43,7 +43,7 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/frame/g"
 )
 
 func main() {
@@ -69,8 +69,8 @@ Web Server默认情况下是没有任何主目录的设置，只有设置了主�
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
@@ -98,7 +98,7 @@ http://127.0.0.1:8300/
 package main
 
 import (
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/frame/g"
 )
 
 func main() {
@@ -131,8 +131,8 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 func Hello1(r *ghttp.Request) {
@@ -168,8 +168,8 @@ s.Domain("localhost1,localhost2,localhost3").BindHandler("/", Hello2)
 package main
 
 import (
-    "github.com/gogf/gf/g/net/ghttp"
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/net/ghttp"
+    "github.com/gogf/gf/frame/g"
 )
 
 func main() {

@@ -15,7 +15,7 @@ F_TIME_STD = F_TIME_DATE | F_TIME_MILLI // (默认)打印当前日期+时间+毫
 package main
 
 import (
-	"github.com/gogf/gf/g/os/glog"
+	"github.com/gogf/gf/os/glog"
 )
 
 func main() {

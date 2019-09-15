@@ -4,7 +4,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/os/gcmd"
+import "github.com/gogf/gf/os/gcmd"
 ```
 
 **接口文档**：
@@ -58,7 +58,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/os/gcmd"
+    "github.com/gogf/gf/os/gcmd"
 )
 
 func help() {

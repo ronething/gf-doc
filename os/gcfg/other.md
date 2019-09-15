@@ -43,7 +43,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/os/gcfg"
+    "github.com/gogf/gf/os/gcfg"
 )
 
 func main() {
@@ -100,7 +100,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/os/gcfg"
+    "github.com/gogf/gf/os/gcfg"
 )
 
 func main() {

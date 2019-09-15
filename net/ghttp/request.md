@@ -133,9 +133,9 @@ https://github.com/gogf/gf/blob/master/.example/net/ghttp/server/request/request
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
-    "github.com/gogf/gf/g/util/gvalid"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
+    "github.com/gogf/gf/util/gvalid"
 )
 
 func main() {
@@ -188,8 +188,8 @@ ok
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 // 优先调用的HOOK

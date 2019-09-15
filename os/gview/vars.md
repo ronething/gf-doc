@@ -54,8 +54,8 @@
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
@@ -96,7 +96,7 @@ Config:127.0.0.1:6379,1, Cookie:default, Session:john, Get:john
 package main
 
 import (
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/frame/g"
 )
 
 type T struct {

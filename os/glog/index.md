@@ -3,7 +3,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/os/glog"
+import "github.com/gogf/gf/os/glog"
 ```
 
 **接口文档**：

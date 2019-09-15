@@ -8,7 +8,7 @@ ghttp包提供了非常强大和简便的服务性能分析功能，内部完美
 package main
 
 import (
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {

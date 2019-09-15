@@ -13,7 +13,7 @@
 package main
 
 import (
-	"github.com/gogf/gf/g/os/glog"
+	"github.com/gogf/gf/os/glog"
 )
 
 func main() {
@@ -28,7 +28,7 @@ func main() {
 package main
 
 import (
-	"github.com/gogf/gf/g/os/glog"
+	"github.com/gogf/gf/os/glog"
 	"time"
 )
 
@@ -62,7 +62,7 @@ func main() {
 package main
 
 import (
-	"github.com/gogf/gf/g/os/glog"
+	"github.com/gogf/gf/os/glog"
 	"time"
 )
 

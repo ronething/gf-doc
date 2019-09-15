@@ -4,7 +4,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/encoding/gcompress"
+import "github.com/gogf/gf/encoding/gcompress"
 ```
 
 **接口文档**：

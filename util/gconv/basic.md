@@ -5,7 +5,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/util/gconv"
+    "github.com/gogf/gf/util/gconv"
 )
 
 func main() {

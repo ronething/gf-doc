@@ -10,7 +10,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/container/garray"
+import "github.com/gogf/gf/container/garray"
 ```
 
 **接口文档**：
@@ -26,7 +26,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/container/garray"
+    "github.com/gogf/gf/container/garray"
 )
 
 
@@ -105,7 +105,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/container/garray"
+    "github.com/gogf/gf/container/garray"
 )
 
 

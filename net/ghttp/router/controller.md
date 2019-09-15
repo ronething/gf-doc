@@ -25,8 +25,8 @@
 package demo
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/frame/gmvc"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/frame/gmvc"
 )
 
 type User struct {
@@ -74,8 +74,8 @@ func (u *User) List() {
 package demo
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/frame/gmvc"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/frame/gmvc"
 )
 
 type Method struct {
@@ -113,8 +113,8 @@ func (c *Method) Info() {
 package demo
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/frame/gmvc"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/frame/gmvc"
 )
 
 type Method struct {
@@ -154,8 +154,8 @@ func (c *Method) Info() {
 package demo
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/frame/gmvc"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/frame/gmvc"
 )
 
 type Rest struct {

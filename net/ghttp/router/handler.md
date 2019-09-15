@@ -17,8 +17,8 @@
 package demo
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 type Product struct {
@@ -48,8 +48,8 @@ func (p *Product) List(r *ghttp.Request) {
 package stats
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 var (
@@ -72,8 +72,8 @@ func showTotal(r *ghttp.Request) {
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 type User struct {
@@ -111,9 +111,9 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
-    "github.com/gogf/gf/g/util/gvalid"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
+    "github.com/gogf/gf/util/gvalid"
 )
 
 func main() {

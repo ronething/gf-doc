@@ -22,9 +22,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/g/net/ghttp"
-	"github.com/gogf/gf/g/os/glog"
-	"github.com/gogf/gf/g/text/gregex"
+	"github.com/gogf/gf/net/ghttp"
+	"github.com/gogf/gf/os/glog"
+	"github.com/gogf/gf/text/gregex"
 )
 
 type MyWriter struct {
@@ -67,7 +67,7 @@ Stack:
 package main
 
 import (
-	"github.com/gogf/gf/g/os/glog"
+	"github.com/gogf/gf/os/glog"
 	"github.com/robertkowalski/graylog-golang"
 )
 

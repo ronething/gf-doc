@@ -7,20 +7,20 @@
 
 ### 1. 使用到的模块
 ```go
-"github.com/gogf/gf/g"
-"github.com/gogf/gf/g/os/gfile"
+"github.com/gogf/gf/frame/g"
+"github.com/gogf/gf/os/gfile"
 "gopkg.in/russross/blackfriday.v2"
-"github.com/gogf/gf/g/text/gregex"
-"github.com/gogf/gf/g/util/gstr"
-"github.com/gogf/gf/g/os/gfcache"
-"github.com/gogf/gf/g/os/gcache"
-"github.com/gogf/gf/g/os/gproc"
-"github.com/gogf/gf/g/os/glog"
-"github.com/gogf/gf/g/container/garray"
-"github.com/gogf/gf/g/util/gconv"
-"github.com/gogf/gf/g/net/ghttp"
-"github.com/gogf/gf/g/os/gview"
-"github.com/gogf/gf/g/encoding/gjson"
+"github.com/gogf/gf/text/gregex"
+"github.com/gogf/gf/util/gstr"
+"github.com/gogf/gf/os/gfcache"
+"github.com/gogf/gf/os/gcache"
+"github.com/gogf/gf/os/gproc"
+"github.com/gogf/gf/os/glog"
+"github.com/gogf/gf/container/garray"
+"github.com/gogf/gf/util/gconv"
+"github.com/gogf/gf/net/ghttp"
+"github.com/gogf/gf/os/gview"
+"github.com/gogf/gf/encoding/gjson"
 ```
 ### 2. 你能从这个项目了解什么？
 * `GoFrame`框架推荐的项目结构；

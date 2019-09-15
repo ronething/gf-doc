@@ -40,9 +40,9 @@ package main
 
 import (
     "time"
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/os/gproc"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/os/gproc"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
@@ -99,8 +99,8 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
@@ -133,7 +133,7 @@ gf框架的平滑重启特性相当强大及稳定，不仅仅支持单一服务
 package main
 
 import (
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/frame/g"
 )
 
 func main() {

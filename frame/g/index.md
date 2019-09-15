@@ -10,7 +10,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g"
+import "github.com/gogf/gf/frame/g"
 ```
 
 ## 数据类型

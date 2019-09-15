@@ -5,7 +5,7 @@ package router
 
 import (
     "github.com/gogf/gf-demos/app/api/user"
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/frame/g"
 )
 
 func init() {

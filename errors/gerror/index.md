@@ -6,7 +6,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/errors/gerror"
+import "github.com/gogf/gf/errors/gerror"
 ```
 
 **接口文档**：
@@ -38,7 +38,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/gogf/gf/g/errors/gerror"
+	"github.com/gogf/gf/errors/gerror"
 )
 
 func OpenFile() error {
@@ -103,7 +103,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/gogf/gf/g/errors/gerror"
+	"github.com/gogf/gf/errors/gerror"
 )
 
 func Error1() error {
@@ -158,7 +158,7 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/gogf/gf/g/errors/gerror"
+	"github.com/gogf/gf/errors/gerror"
 )
 
 func Error1() error {
@@ -204,7 +204,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/gogf/gf/g/errors/gerror"
+	"github.com/gogf/gf/errors/gerror"
 )
 
 func OpenFile() error {
@@ -240,9 +240,9 @@ package main
 import (
 	"errors"
 
-	"github.com/gogf/gf/g/os/glog"
+	"github.com/gogf/gf/os/glog"
 
-	"github.com/gogf/gf/g/errors/gerror"
+	"github.com/gogf/gf/errors/gerror"
 )
 
 func Error1() error {

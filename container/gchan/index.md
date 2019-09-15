@@ -8,7 +8,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/container/gchan"
+import "github.com/gogf/gf/container/gchan"
 ```
 
 **接口文档**：

@@ -15,8 +15,8 @@ func CheckStruct(object interface{}, rules interface{}, msgs ...CustomMsg) *Erro
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/util/gvalid"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/util/gvalid"
 )
 
 func main() {
@@ -70,8 +70,8 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/util/gvalid"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/util/gvalid"
 )
 
 type User struct {
@@ -158,8 +158,8 @@ func main() {
 package main
 
 import (
-	"github.com/gogf/gf/g"
-	"github.com/gogf/gf/g/util/gvalid"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/util/gvalid"
 )
 
 func main() {

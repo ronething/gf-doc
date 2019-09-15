@@ -11,7 +11,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/container/gpool"
+import "github.com/gogf/gf/container/gpool"
 ```
 
 **接口文档**：
@@ -35,7 +35,7 @@ https://godoc.org/github.com/gogf/gf/container/gpool
 package main
 
 import (
-    "github.com/gogf/gf/g/container/gpool"
+    "github.com/gogf/gf/container/gpool"
     "fmt"
     "time"
 )
@@ -68,9 +68,9 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/g/container/gpool"
-	"github.com/gogf/gf/g/net/gtcp"
-	"github.com/gogf/gf/g/os/glog"
+	"github.com/gogf/gf/container/gpool"
+	"github.com/gogf/gf/net/gtcp"
+	"github.com/gogf/gf/os/glog"
 	"time"
 )
 

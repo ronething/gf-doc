@@ -7,16 +7,16 @@
 
 ### 1. 使用到的模块
 ```go
-"github.com/gogf/gf/g/os/gfile"
-"github.com/gogf/gf/g/encoding/ghash"
-"github.com/gogf/gf/g/container/gmap"
-"github.com/gogf/gf/g/container/gtype"
-"github.com/gogf/gf/g/os/gmlock"
-"github.com/gogf/gf/g/os/grpool"
-"github.com/gogf/gf/g/container/glist"
-"github.com/gogf/gf/g/os/gcache"
+"github.com/gogf/gf/os/gfile"
+"github.com/gogf/gf/encoding/ghash"
+"github.com/gogf/gf/container/gmap"
+"github.com/gogf/gf/container/gtype"
+"github.com/gogf/gf/os/gmlock"
+"github.com/gogf/gf/os/grpool"
+"github.com/gogf/gf/container/glist"
+"github.com/gogf/gf/os/gcache"
 "gitee.com/johng/gkvdb/gkvdb/gfilespace"
-"github.com/gogf/gf/g/os/gtime"
+"github.com/gogf/gf/os/gtime"
 ```
 
 ### 2. 你能从这个项目了解什么？

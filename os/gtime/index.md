@@ -7,7 +7,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/os/gtime"
+import "github.com/gogf/gf/os/gtime"
 ```
 
 **接口文档**： 

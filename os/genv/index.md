@@ -5,7 +5,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/os/genv"
+import "github.com/gogf/gf/os/genv"
 ```
 
 **接口文档**：

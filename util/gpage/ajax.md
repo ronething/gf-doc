@@ -5,9 +5,9 @@ Ajax分页与其他分页方式的区别在于，分页链接会使用Javascript
 package main
 
 import (
-    "github.com/gogf/gf/g/os/gview"
-    "github.com/gogf/gf/g/net/ghttp"
-    "github.com/gogf/gf/g/util/gpage"
+    "github.com/gogf/gf/os/gview"
+    "github.com/gogf/gf/net/ghttp"
+    "github.com/gogf/gf/util/gpage"
 )
 
 func main() {

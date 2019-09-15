@@ -19,8 +19,8 @@ package user
 import (
     "github.com/gogf/gf-demos/app/service/user"
     "github.com/gogf/gf-demos/library/response"
-    "github.com/gogf/gf/g/net/ghttp"
-    "github.com/gogf/gf/g/util/gvalid"
+    "github.com/gogf/gf/net/ghttp"
+    "github.com/gogf/gf/util/gvalid"
 )
 
 // 用户API管理对象
@@ -111,10 +111,10 @@ package user
 import (
     "errors"
     "fmt"
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
-    "github.com/gogf/gf/g/os/gtime"
-    "github.com/gogf/gf/g/util/gvalid"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
+    "github.com/gogf/gf/os/gtime"
+    "github.com/gogf/gf/util/gvalid"
 )
 
 const (
@@ -208,8 +208,8 @@ func CheckNickName(nickname string) bool {
 package response
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 // 标准返回结果数据结构封装。

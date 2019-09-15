@@ -9,11 +9,11 @@
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/os/gview"
-    "github.com/gogf/gf/g/util/gstr"
-    "github.com/gogf/gf/g/net/ghttp"
-    "github.com/gogf/gf/g/util/gpage"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/os/gview"
+    "github.com/gogf/gf/util/gstr"
+    "github.com/gogf/gf/net/ghttp"
+    "github.com/gogf/gf/util/gpage"
 )
 
 // 分页标签使用li标签包裹
@@ -62,9 +62,9 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g/os/gview"
-    "github.com/gogf/gf/g/net/ghttp"
-    "github.com/gogf/gf/g/util/gpage"
+    "github.com/gogf/gf/os/gview"
+    "github.com/gogf/gf/net/ghttp"
+    "github.com/gogf/gf/util/gpage"
 )
 
 // 自定义分页名称

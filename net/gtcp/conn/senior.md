@@ -31,7 +31,7 @@
     import (
         "encoding/json"
         "fmt"
-        "github.com/gogf/gf/g/net/gtcp"
+        "github.com/gogf/gf/net/gtcp"
         "github.com/gogf/gf/geg/net/gtcp/pkg_operations/common/types"
     )
 
@@ -72,9 +72,9 @@
     package main
 
     import (
-        "github.com/gogf/gf/g/net/gtcp"
-        "github.com/gogf/gf/g/os/glog"
-        "github.com/gogf/gf/g/os/gtimer"
+        "github.com/gogf/gf/net/gtcp"
+        "github.com/gogf/gf/os/glog"
+        "github.com/gogf/gf/os/gtimer"
         "github.com/gogf/gf/geg/net/gtcp/pkg_operations/common/funcs"
         "github.com/gogf/gf/geg/net/gtcp/pkg_operations/common/types"
         "time"
@@ -126,9 +126,9 @@
     package main
 
     import (
-        "github.com/gogf/gf/g/net/gtcp"
-        "github.com/gogf/gf/g/os/glog"
-        "github.com/gogf/gf/g/os/gtimer"
+        "github.com/gogf/gf/net/gtcp"
+        "github.com/gogf/gf/os/glog"
+        "github.com/gogf/gf/os/gtimer"
         "github.com/gogf/gf/geg/net/gtcp/pkg_operations/common/funcs"
         "github.com/gogf/gf/geg/net/gtcp/pkg_operations/common/types"
         "time"

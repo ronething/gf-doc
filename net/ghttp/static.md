@@ -45,7 +45,7 @@ func (s *Server) SetRewriteMap(rewrites map[string]string)
 ```go
 package main
 
-import "github.com/gogf/gf/g"
+import "github.com/gogf/gf/frame/g"
 
 // 静态文件服务器基本使用
 func main() {
@@ -62,7 +62,7 @@ func main() {
 ```go
 package main
 
-import "github.com/gogf/gf/g"
+import "github.com/gogf/gf/frame/g"
 
 // 静态文件服务器，支持自定义静态目录映射
 func main() {
@@ -83,7 +83,7 @@ func main() {
 ```go
 package main
 
-import "github.com/gogf/gf/g"
+import "github.com/gogf/gf/frame/g"
 
 // 静态文件服务器，支持自定义静态目录映射
 func main() {
@@ -107,7 +107,7 @@ func main() {
 ```go
 package main
 
-import "github.com/gogf/gf/g"
+import "github.com/gogf/gf/frame/g"
 
 func main() {
     s := g.Server()

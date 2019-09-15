@@ -22,8 +22,8 @@ https://godoc.org/github.com/gogf/gf/net/ghttp
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
@@ -117,8 +117,8 @@ func (d *Domain) BindControllerRest(pattern string, c Controller) error
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
@@ -152,8 +152,8 @@ func main() {
     package ctlDoc
 
     import (
-        "github.com/gogf/gf/g/net/ghttp"
-        "github.com/gogf/gf/g"
+        "github.com/gogf/gf/net/ghttp"
+        "github.com/gogf/gf/frame/g"
     )
 
     // 必须公开服务方法
@@ -166,8 +166,8 @@ func main() {
     package router
 
     import (
-        "github.com/gogf/gf/g"
-        "github.com/gogf/gf/g/net/ghttp"
+        "github.com/gogf/gf/frame/g"
+        "github.com/gogf/gf/net/ghttp"
         "github.com/gogf/gf-home/app/ctl/doc"
     )
 
@@ -180,7 +180,7 @@ func main() {
     package main
 
     import (
-        "github.com/gogf/gf/g"
+        "github.com/gogf/gf/frame/g"
         _ "github.com/gogf/gf-home/boot"
         _ "github.com/gogf/gf-home/router"
     )
@@ -211,8 +211,8 @@ func main() {
     package controller
 
     import (
-        "github.com/gogf/gf/g/net/ghttp"
-        "github.com/gogf/gf/g"
+        "github.com/gogf/gf/net/ghttp"
+        "github.com/gogf/gf/frame/g"
     )
 
     // 统一在各自包的init包初始化方法中进行路由注册
@@ -230,8 +230,8 @@ func main() {
     package main
 
     import (
-    	"github.com/gogf/gf/g"
-        "github.com/gogf/gf/g/net/ghttp"
+    	"github.com/gogf/gf/frame/g"
+        "github.com/gogf/gf/net/ghttp"
         _ "PATH/TO/YOUR/PROJECT/app/ctl/api"
     )
 

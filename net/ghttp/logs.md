@@ -48,8 +48,8 @@ func (s *Server)IsErrorLogEnabled() bool
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
@@ -79,7 +79,7 @@ Web Server运行产生的任何错误信息(默认开启，输出到终端)，�
 package main
 
 import (
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
@@ -115,7 +115,7 @@ Trace:
 package main
 
 import (
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
@@ -154,7 +154,7 @@ package main
 import (
     "fmt"
     "net/http"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {

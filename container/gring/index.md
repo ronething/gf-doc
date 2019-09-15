@@ -8,7 +8,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/container/gring"
+import "github.com/gogf/gf/container/gring"
 ```
 
 **接口文档**：
@@ -32,7 +32,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/container/gring"
+    "github.com/gogf/gf/container/gring"
 )
 
 type Player struct {

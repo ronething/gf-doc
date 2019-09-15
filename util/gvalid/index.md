@@ -2,7 +2,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/util/gvalid"
+import "github.com/gogf/gf/util/gvalid"
 ```
 **接口文档**：
 

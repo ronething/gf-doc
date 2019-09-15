@@ -13,7 +13,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/encoding/gcharset"
+import "github.com/gogf/gf/encoding/gcharset"
 ```
 **接口文档**：
 
@@ -26,7 +26,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/g/encoding/gcharset"
+	"github.com/gogf/gf/encoding/gcharset"
 )
 
 func main() {

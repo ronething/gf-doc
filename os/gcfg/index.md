@@ -5,7 +5,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/os/gcfg"
+import "github.com/gogf/gf/os/gcfg"
 ```
 
 **接口文档**：
@@ -145,7 +145,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/frame/g"
 )
 
 func main() {
@@ -169,7 +169,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/g/os/gcfg"
+	"github.com/gogf/gf/os/gcfg"
 )
 
 func main() {

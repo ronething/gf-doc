@@ -5,7 +5,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/net/gtcp"
+import "github.com/gogf/gf/net/gtcp"
 ```
 
 **接口文档**：
@@ -65,9 +65,9 @@ package main
 import (
     "fmt"
     "time"
-    "github.com/gogf/gf/g/net/gtcp"
-    "github.com/gogf/gf/g/os/glog"
-    "github.com/gogf/gf/g/util/gconv"
+    "github.com/gogf/gf/net/gtcp"
+    "github.com/gogf/gf/os/glog"
+    "github.com/gogf/gf/util/gconv"
 )
 
 func main() {
@@ -129,9 +129,9 @@ package main
 import (
     "fmt"
     "time"
-    "github.com/gogf/gf/g/net/gtcp"
-    "github.com/gogf/gf/g/os/glog"
-    "github.com/gogf/gf/g/os/gtime"
+    "github.com/gogf/gf/net/gtcp"
+    "github.com/gogf/gf/os/glog"
+    "github.com/gogf/gf/os/gtime"
 )
 
 func main() {
@@ -189,8 +189,8 @@ package main
 import (
     "fmt"
     "bytes"
-    "github.com/gogf/gf/g/net/gtcp"
-    "github.com/gogf/gf/g/util/gconv"
+    "github.com/gogf/gf/net/gtcp"
+    "github.com/gogf/gf/util/gconv"
 )
 
 func main() {

@@ -20,7 +20,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/container/gtree"
+import "github.com/gogf/gf/container/gtree"
 ```
 
 **接口文档**：
@@ -96,8 +96,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/g/container/gtree"
-	"github.com/gogf/gf/g/util/gutil"
+	"github.com/gogf/gf/container/gtree"
+	"github.com/gogf/gf/util/gutil"
 )
 
 func main() {
@@ -178,8 +178,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/g/container/gtree"
-	"github.com/gogf/gf/g/util/gutil"
+	"github.com/gogf/gf/container/gtree"
+	"github.com/gogf/gf/util/gutil"
 )
 
 func main() {

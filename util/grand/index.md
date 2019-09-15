@@ -4,7 +4,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/util/grand"
+import "github.com/gogf/gf/util/grand"
 ```
 
 **接口文档**： 

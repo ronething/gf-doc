@@ -3,7 +3,7 @@ CRC32算法。
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/crypto/gcrc32"
+import "github.com/gogf/gf/crypto/gcrc32"
 ```
 
 **接口文档**：

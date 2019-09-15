@@ -31,8 +31,8 @@ s.BindObjectMethod("POST:/api/user/{id}", user, "Edit")
 package demo
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 type Object struct {}
@@ -73,8 +73,8 @@ panic: interface conversion: interface {} is xxx, not func(*ghttp.Request)
 package demo
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 type Order struct { }
@@ -106,8 +106,8 @@ NAME_TO_URI_TYPE_CAMEL    = 3      // 采用驼峰命名方式
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 type User struct {}
@@ -164,8 +164,8 @@ http://127.0.0.1:8300/user/showList
 package demo
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 type Object struct {}
@@ -201,8 +201,8 @@ func (o *Object) Show(r *ghttp.Request) {
 package demo
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 type ObjectMethod struct {}
@@ -239,7 +239,7 @@ func (o *ObjectMethod) Show3(r *ghttp.Request) {
 ```go
 package demo
 
-import "github.com/gogf/gf/g/net/ghttp"
+import "github.com/gogf/gf/net/ghttp"
 
 // 测试绑定对象
 type ObjectRest struct {}
@@ -309,9 +309,9 @@ func (c *ObjectRest) Hello(r *ghttp.Request) {
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/os/glog"
-    "github.com/gogf/gf/g/net/ghttp"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/os/glog"
+    "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {

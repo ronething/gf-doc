@@ -4,7 +4,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/os/gcron"
+import "github.com/gogf/gf/os/gcron"
 ```
 
 **接口文档**：
@@ -105,9 +105,9 @@ Entry                  | Description                                | Equivalent
 package main
 
 import (
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/os/gcron"
-    "github.com/gogf/gf/g/os/glog"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/os/gcron"
+    "github.com/gogf/gf/os/glog"
     "time"
 )
 
@@ -178,8 +178,8 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g/os/gcron"
-    "github.com/gogf/gf/g/os/glog"
+    "github.com/gogf/gf/os/gcron"
+    "github.com/gogf/gf/os/glog"
     "time"
 )
 
@@ -215,8 +215,8 @@ func GetLogLevel() int
 package main
 
 import (
-	"github.com/gogf/gf/g/os/gcron"
-	"github.com/gogf/gf/g/os/glog"
+	"github.com/gogf/gf/os/gcron"
+	"github.com/gogf/gf/os/glog"
 	"time"
 )
 

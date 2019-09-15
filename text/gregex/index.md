@@ -4,7 +4,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/text/gregex"
+import "github.com/gogf/gf/text/gregex"
 ```
 
 **接口文档**： 
@@ -19,7 +19,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/text/gregex"
+    "github.com/gogf/gf/text/gregex"
 )
 
 func main() {

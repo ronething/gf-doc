@@ -22,7 +22,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/util/gconv"
+    "github.com/gogf/gf/util/gconv"
 )
 
 func main() {
@@ -61,7 +61,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/util/gconv"
+    "github.com/gogf/gf/util/gconv"
 )
 
 func main() {
@@ -92,8 +92,8 @@ map[Uid:100 password1:123 password2:456]
 package main
 
 import (
-	"github.com/gogf/gf/g"
-	"github.com/gogf/gf/g/util/gconv"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/util/gconv"
 )
 
 func main() {
@@ -129,8 +129,8 @@ func main() {
 package main
 
 import (
-	"github.com/gogf/gf/g"
-	"github.com/gogf/gf/g/util/gconv"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/util/gconv"
 )
 
 func main() {

@@ -5,7 +5,7 @@ gf框架针对常用的数据格式编码解析，提供了**异常强大灵活*
 **使用方式**：
 
 ```go
-import "github.com/gogf/gf/g/encoding/gparser"
+import "github.com/gogf/gf/encoding/gparser"
 ```
 
 

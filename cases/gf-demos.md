@@ -9,17 +9,17 @@
 
 #### 1. 使用到的模块
 ```go
-"github.com/gogf/gf/g/container/garray"
-"github.com/gogf/gf/g/container/gmap"
-"github.com/gogf/gf/g/container/gset"
-"github.com/gogf/gf/g/encoding/ghtml"
-"github.com/gogf/gf/g/encoding/gjson"
-"github.com/gogf/gf/g/frame/gmvc"
-"github.com/gogf/gf/g/net/ghttp"
-"github.com/gogf/gf/g/os/gcache"
-"github.com/gogf/gf/g/os/glog"
-"github.com/gogf/gf/g/util/gconv"
-"github.com/gogf/gf/g/util/gvalid"
+"github.com/gogf/gf/container/garray"
+"github.com/gogf/gf/container/gmap"
+"github.com/gogf/gf/container/gset"
+"github.com/gogf/gf/encoding/ghtml"
+"github.com/gogf/gf/encoding/gjson"
+"github.com/gogf/gf/frame/gmvc"
+"github.com/gogf/gf/net/ghttp"
+"github.com/gogf/gf/os/gcache"
+"github.com/gogf/gf/os/glog"
+"github.com/gogf/gf/util/gconv"
+"github.com/gogf/gf/util/gvalid"
 ```
 
 #### 2. 你能从这个项目了解什么？

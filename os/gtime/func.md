@@ -17,7 +17,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/os/gtime"
+    "github.com/gogf/gf/os/gtime"
 )
 
 func main() {
@@ -45,7 +45,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g/os/gtime"
+    "github.com/gogf/gf/os/gtime"
     "time"
 )
 
@@ -99,8 +99,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/g/os/glog"
-	"github.com/gogf/gf/g/os/gtime"
+	"github.com/gogf/gf/os/glog"
+	"github.com/gogf/gf/os/gtime"
 	"time"
 )
 

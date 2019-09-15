@@ -21,7 +21,7 @@ LEVEL_CRIT
 package main
 
 import (
-    "github.com/gogf/gf/g/os/glog"
+    "github.com/gogf/gf/os/glog"
 )
 
 // 设置日志等级，过滤掉Info日志信息

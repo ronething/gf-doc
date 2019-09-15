@@ -4,7 +4,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/os/gfsnotify"
+import "github.com/gogf/gf/os/gfsnotify"
 ```
 
 **接口文档**：
@@ -23,8 +23,8 @@ https://godoc.org/github.com/gogf/gf/os/gfsnotify
 package main
 
 import (
-    "github.com/gogf/gf/g/os/gfsnotify"
-    "github.com/gogf/gf/g/os/glog"
+    "github.com/gogf/gf/os/gfsnotify"
+    "github.com/gogf/gf/os/glog"
 )
 
 func main() {
@@ -74,9 +74,9 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g/os/gfsnotify"
-    "github.com/gogf/gf/g/os/glog"
-    "github.com/gogf/gf/g/os/gtime"
+    "github.com/gogf/gf/os/gfsnotify"
+    "github.com/gogf/gf/os/glog"
+    "github.com/gogf/gf/os/gtime"
     "time"
 )
 
@@ -114,9 +114,9 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/g/os/gfsnotify"
-    "github.com/gogf/gf/g/os/glog"
-    "github.com/gogf/gf/g/os/gtime"
+    "github.com/gogf/gf/os/gfsnotify"
+    "github.com/gogf/gf/os/glog"
+    "github.com/gogf/gf/os/gtime"
     "time"
 )
 

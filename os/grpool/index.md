@@ -7,7 +7,7 @@ Go语言中的goroutine虽然相对于系统线程来说比较轻量级，但是
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/os/grpool"
+import "github.com/gogf/gf/os/grpool"
 ```
 
 **使用场景**：
@@ -36,8 +36,8 @@ package main
 import (
     "time"
     "fmt"
-    "github.com/gogf/gf/g/os/grpool"
-    "github.com/gogf/gf/g/os/gtime"
+    "github.com/gogf/gf/os/grpool"
+    "github.com/gogf/gf/os/gtime"
 )
 
 func job() {
@@ -73,7 +73,7 @@ package main
 import (
     "fmt"
     "sync"
-    "github.com/gogf/gf/g/os/grpool"
+    "github.com/gogf/gf/os/grpool"
 )
 
 func main() {
@@ -155,7 +155,7 @@ package main
 import (
     "fmt"
     "sync"
-    "github.com/gogf/gf/g/os/grpool"
+    "github.com/gogf/gf/os/grpool"
 )
 
 func main() {
@@ -199,8 +199,8 @@ import (
     "fmt"
     "sync"
     "time"
-    "github.com/gogf/gf/g/os/gtime"
-    "github.com/gogf/gf/g/os/grpool"
+    "github.com/gogf/gf/os/gtime"
+    "github.com/gogf/gf/os/grpool"
 )
 
 func main() {
@@ -227,7 +227,7 @@ import (
     "fmt"
     "sync"
     "time"
-    "github.com/gogf/gf/g/os/gtime"
+    "github.com/gogf/gf/os/gtime"
 )
 
 

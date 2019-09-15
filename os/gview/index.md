@@ -42,8 +42,8 @@ https://godoc.org/github.com/gogf/gf/os/gview
 package main
 
 import (
-	"github.com/gogf/gf/g"
-	"github.com/gogf/gf/g/net/ghttp"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
@@ -63,8 +63,8 @@ func main() {
 package main
 
 import (
-	"github.com/gogf/gf/g"
-	"github.com/gogf/gf/g/net/ghttp"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
@@ -91,7 +91,7 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/frame/g"
 )
 
 func main() {

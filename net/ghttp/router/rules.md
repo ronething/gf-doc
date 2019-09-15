@@ -10,8 +10,8 @@
 package main
 
 import (
-    "github.com/gogf/gf/g/net/ghttp"
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/net/ghttp"
+    "github.com/gogf/gf/frame/g"
 )
 
 func main() {
@@ -63,8 +63,8 @@ func (s *Server) BindHandler(pattern string, handler HandlerFunc) error
 package main
 
 import (
-    "github.com/gogf/gf/g/net/ghttp"
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/net/ghttp"
+    "github.com/gogf/gf/frame/g"
 )
 
 func main() {
@@ -242,8 +242,8 @@ rule: /{obj}-{act}/*param
 package main
 
 import (
-    "github.com/gogf/gf/g/net/ghttp"
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/net/ghttp"
+    "github.com/gogf/gf/frame/g"
 )
 
 func main() {

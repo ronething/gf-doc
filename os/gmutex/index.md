@@ -10,7 +10,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/os/gmutex"
+import "github.com/gogf/gf/os/gmutex"
 ```
 
 **接口文档**：
@@ -63,8 +63,8 @@ package main
 import (
     "time"
 
-    "github.com/gogf/gf/g/os/glog"
-    "github.com/gogf/gf/g/os/gmutex"
+    "github.com/gogf/gf/os/glog"
+    "github.com/gogf/gf/os/gmutex"
 )
 
 func main() {
@@ -121,9 +121,9 @@ package main
 import (
     "time"
 
-    "github.com/gogf/gf/g/os/glog"
+    "github.com/gogf/gf/os/glog"
 
-    "github.com/gogf/gf/g/os/gmutex"
+    "github.com/gogf/gf/os/gmutex"
 )
 
 func main() {

@@ -4,7 +4,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/test/gtest"
+import "github.com/gogf/gf/test/gtest"
 ```
 
 **接口文档**： 
@@ -39,8 +39,8 @@ func Fatal(message ...interface{})
 package gstr_test
 
 import (
-    "github.com/gogf/gf/g/test/gtest"
-    "github.com/gogf/gf/g/text/gstr"
+    "github.com/gogf/gf/test/gtest"
+    "github.com/gogf/gf/text/gstr"
     "testing"
 )
 
@@ -57,8 +57,8 @@ func Test_Trim(t *testing.T) {
 package gstr_test
 
 import (
-    . "github.com/gogf/gf/g/test/gtest"
-    "github.com/gogf/gf/g/text/gstr"
+    . "github.com/gogf/gf/test/gtest"
+    "github.com/gogf/gf/text/gstr"
     "testing"
 )
 

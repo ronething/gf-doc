@@ -7,8 +7,8 @@ package main
 
 import (
     "time"
-    "github.com/gogf/gf/g/os/glog"
-    "github.com/gogf/gf/g/os/gtime"
+    "github.com/gogf/gf/os/glog"
+    "github.com/gogf/gf/os/gtime"
 )
 
 func main() {

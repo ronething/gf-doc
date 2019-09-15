@@ -8,7 +8,7 @@ Redis客户端由`gredis`模块实现，底层采用了链接池设计。
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/database/gredis"
+import "github.com/gogf/gf/database/gredis"
 ```
 
 **接口文档**：
@@ -55,8 +55,8 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/util/gconv"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/util/gconv"
 )
 
 func main() {
@@ -91,8 +91,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/g/database/gredis"
-	"github.com/gogf/gf/g/util/gconv"
+	"github.com/gogf/gf/database/gredis"
+	"github.com/gogf/gf/util/gconv"
 )
 
 var (
@@ -134,8 +134,8 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/util/gconv"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/util/gconv"
 )
 
 func main() {
@@ -159,8 +159,8 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/util/gconv"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/util/gconv"
 )
 
 func main() {
@@ -187,8 +187,8 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/util/gconv"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/util/gconv"
 )
 
 func main() {
@@ -237,8 +237,8 @@ package main
 
 import (
     "fmt"
-    "github.com/gogf/gf/g"
-    "github.com/gogf/gf/g/util/gconv"
+    "github.com/gogf/gf/frame/g"
+    "github.com/gogf/gf/util/gconv"
 )
 
 func main() {
@@ -261,7 +261,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/g"
+	"github.com/gogf/gf/frame/g"
 )
 
 func main() {

@@ -12,7 +12,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/container/gset"
+import "github.com/gogf/gf/container/gset"
 ```
 
 **接口文档**：
@@ -26,7 +26,7 @@ https://godoc.org/github.com/gogf/gf/container/gset
 package main
 
 import (
-	"github.com/gogf/gf/g/container/gset"
+	"github.com/gogf/gf/container/gset"
 	"fmt"
 )
 
@@ -109,8 +109,8 @@ package main
 
 import (
 	"fmt"
-	"github.com/gogf/gf/g"
-	"github.com/gogf/gf/g/container/gset"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/container/gset"
 )
 
 func main() {

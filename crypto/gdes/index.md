@@ -4,7 +4,7 @@ DES算法。
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/crypto/gdes"
+import "github.com/gogf/gf/crypto/gdes"
 ```
 
 **关于`gdes`包中的补位说明：

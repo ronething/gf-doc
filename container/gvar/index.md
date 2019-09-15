@@ -10,7 +10,7 @@
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/g/container/gvar"
+import "github.com/gogf/gf/container/gvar"
 ```
 
 **接口文档**：
@@ -25,7 +25,7 @@ https://godoc.org/github.com/gogf/gf/container/gvar
 package main
 
 import (
-    "github.com/gogf/gf/g"
+    "github.com/gogf/gf/frame/g"
     "fmt"
 )
 
