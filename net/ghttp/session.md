@@ -15,7 +15,7 @@ https://godoc.org/github.com/gogf/gf/os/gsession
 
 # `gsession`模块
 
-从`GF v2.0`开始，`Session`的管理功能单独解耦出来作为一个单独的模块，由`gsession`实现，并已完美整合到了`ghttp.Server`中。由于该模块是解耦独立的，因此可以使用到更多不同的场景中，例如：`TCP`通信、`gRPC`接口服务等等。
+从`GF v1.9`开始，`Session`的管理功能单独解耦出来作为一个单独的模块，由`gsession`实现，并已完美整合到了`ghttp.Server`中。由于该模块是解耦独立的，因此可以使用到更多不同的场景中，例如：`TCP`通信、`gRPC`接口服务等等。
 
 `gsession`模块中有三个对象/接口：
 1. `gsession.Manager`：管理`Session`对象、`Storage`持久化存储对象、以及过期时间控制。
