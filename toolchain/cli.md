@@ -54,126 +54,25 @@ ADDITIONAL
 
 使用方式：`gf build FILE [OPTION]`
 
-具体介绍：
-```
-USAGE
-    gf build FILE [OPTION]
-
-ARGUMENT
-    FILE  building file path.
-
-OPTION
-    -n, --name       output binary name
-    -v, --version    output binary version
-    -a, --arch       output binary architecture, multiple arch separated with ','
-    -o, --os         output binary system, multiple os separated with ','
-    -p, --path       output binary directory path, default is './bin'
-
-EXAMPLES
-    gf build main.go
-    gf build main.go -n=my-app -a=all -o=all
-    gf build main.go -n=my-app -a=amd64,386 -o=linux -p=.
-    gf build main.go -n=my-app -v=1.0 -a=amd64,386 -o=linux,windows,darwin -p=./bin
-
-PLATFORMS
-    darwin    386
-    darwin    amd64
-    dragonfly amd64
-    freebsd   386
-    freebsd   amd64
-    freebsd   arm
-    linux     386
-    linux     amd64
-    linux     arm
-    linux     arm64
-    linux     ppc64
-    linux     ppc64le
-    linux     mips
-    linux     mipsle
-    linux     mips64
-    linux     mips64le
-    netbsd    386
-    netbsd    amd64
-    netbsd    arm
-    openbsd   386
-    openbsd   amd64
-    openbsd   arm
-    windows   386
-    windows   amd64
-```
 目前支持绝大部分常见系统的直接交叉编译。
 
 ## `pack` 二进制打包
 
-该命令用以将任意的文件打包为二进制文件，或者`Go`代码文件，可将任意文件打包后随着可执行文件一同发布。
-
 使用方式：`gf pack SRC DST`
 
-具体介绍：
-```
-USAGE
-    gf pack SRC DST
-
-ARGUMENT
-    SRC  source path for packing, which can be multiple source paths.
-    DST  destination file path for packed file. if extension of the filename is ".go" and "-n" option is given,
-         it enables packing SRC to go file, or else it packs SRC into a binary file.
-
-OPTION
-    -n, --name      package name for output go file
-    -p, --prefix    prefix for each file packed into the resource file
-
-EXAMPLES
-    gf pack public data.bin
-    gf pack public,template data.bin
-    gf pack public,template data/data.go -n=data
-    gf pack public,template,config resource/resource.go -n=resource
-    gf pack public,template,config resource/resource.go -n=resource -p=/var/www/my-app
-    gf pack /var/www/public resource/resource.go -n=resource
-```
+该命令用以将任意的文件打包为二进制文件，或者`Go`代码文件，可将任意文件打包后随着可执行文件一同发布。
 
 ## `gen` 代码生成命令
 
-`gen`命令用以自动化生成模板代码，目前支持从数据库直接生成模型文件。
-
 使用方式：`gf gen model [PATH] [OPTION]`
 
-具体介绍：
-```
-USAGE
-    gf gen model [PATH] [OPTION]
-
-ARGUMENT
-    PATH  the destination for storing generated files, not necessary, default is "./api/model"
-
-OPTION
-    -n, --name    package name for generated go files, it's the configuration group name in default
-    -l, --link    database configuration, please refer to: https://goframe.org/database/gdb/config
-    -g, --group   used with "-c" option, specifying the configuration group name for database,
-                  it's not necessary and the default value is "default"
-    -c, --config  used to specify the configuration file for database, it's commonly not necessary,
-                  if "-l" is not passed, it will search "./config.toml" and "./config/config.toml"
-                  in current working directory
-
-EXAMPLES
-    gf gen model
-    gf gen model -n=dao
-    gf gen model -l="mysql:root:12345678@tcp(127.0.0.1:3306)/test"
-    gf gen model ./model -l=mssql:sqlserver://sa:12345678@127.0.0.1:1433?database=test
-    gf gen model ./model -c=config.yaml -g=user-center
-
-DESCRIPTION
-    The "gen" command is designed for multiple generating purposes.
-    It's currently supporting generating go files for ORM models.
-```
+`gen`命令用以自动化生成模板代码，目前支持从数据库直接生成模型文件。
 
 ## `get` 依赖包下载
 
 使用方式：`gf get PACKAGE`
 
 `gf get`命令和`go get`命令类似，内部自动提供了代理设置功能，并智能识别并设置最快的下载代理地址。
-
-
 
 
 
