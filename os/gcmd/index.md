@@ -1,3 +1,5 @@
+[TOC]
+
 # gcmd
 
 `gcmd`模块提供了对命令行参数、选项的读取功能，以及对应参数的回调函数绑定功能。
@@ -27,19 +29,21 @@ func Scanf(format string, info ...interface{}) string
 func ContainsOpt(name string, def ...string) bool
 func AutoRun() error
 func BindHandle(cmd string, f func()) error
+func BindHandleMap(m map[string]func()) error
 func RunHandle(cmd string) error
 type Parser
     func Parse(supportedOptions map[string]bool) (*Parser, error)
     func ParseWithArgs(args []string, supportedOptions map[string]bool) (*Parser, error)
-    func (p *Parser) AutoRun() error
-    func (p *Parser) BindHandle(cmd string, f func()) error
-    func (p *Parser) ContainsOpt(name string, def ...string) bool
     func (p *Parser) GetArg(index int, def ...string) string
     func (p *Parser) GetArgAll() []string
     func (p *Parser) GetArgVar(index int, def ...string) *gvar.Var
     func (p *Parser) GetOpt(name string, def ...string) string
     func (p *Parser) GetOptAll() map[string]string
     func (p *Parser) GetOptVar(name string, def ...string) *gvar.Var
+    func (p *Parser) ContainsOpt(name string, def ...string) bool
+    func (p *Parser) AutoRun() error
+    func (p *Parser) BindHandle(cmd string, f func()) error
+    func (p *Parser) BindHandleMap(m map[string]func()) error
     func (p *Parser) RunHandle(cmd string) error
 ```
 主要方法介绍：
@@ -156,7 +160,8 @@ $ ./main
 $ 
 ```
 
-
+## 更多的实战示例
+由于`gf`的命令行工具多大量使用了`gcmd`模块，因此该模块的示例非常丰富，具体请参考源码：https://github.com/gogf/gf-cli
 
 
 
