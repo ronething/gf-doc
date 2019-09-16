@@ -161,7 +161,7 @@ $
 ```
 
 ## 更多的实战示例
-由于`gf`的命令行工具多大量使用了`gcmd`模块，因此该模块的示例非常丰富，具体请参考源码：https://github.com/gogf/gf-cli
+由于`gf`的命令行工具中大量使用了`gcmd`模块，因此该示例非常丰富，具体请参考源码：https://github.com/gogf/gf-cli
 
 
 
