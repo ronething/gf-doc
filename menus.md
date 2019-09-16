@@ -193,6 +193,8 @@
         * [gtest (单元测试)](test/gtest/index.md)
     * [错误处理模块](#)
         * [gerror (错误处理)](errors/gerror/index2.md)
+    * [功能调试模块](#)
+        * [gdebug (调试功能)](debug/gdebug/index.md)
     * [I18N国际化模块](#)
         * [gi18n (国际化处理)](i18n/gi18n/index.md)
     * [其他模块介绍](other.md)
