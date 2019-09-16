@@ -25,4 +25,4 @@ func StackWithFilter(filter string, skip ...int) string
 func StackWithFilters(filters []string, skip ...int) string
 ```
 
-> 熟悉`PHP`的同学可能比较好理解，这里某些方法其实和`PHP`的部分`魔术常量`( https://www.php.net/manual/en/language.constants.predefined.php )功能一致。`CallerDirectory`对应的是`__DIR__`，`CallerFilePath`对应的是`__FILE__`，`CallerFunction`对应的是`__FUNCTION__`。
+> 熟悉`PHP`的同学可能比较好理解，这里某些方法其实和`PHP`的部分[魔术常量]( https://www.php.net/manual/en/language.constants.predefined.php )功能一致。`CallerDirectory`对应`__DIR__`，`CallerFilePath`对应`__FILE__`，`CallerFunction`对应`__FUNCTION__`。
