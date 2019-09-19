@@ -125,7 +125,7 @@ func main() {
     s.Run()
 }
 ```
-当访问```http://127.0.0.1:8199/john/info/10000```时，运行Web Server进程的终端将会按照事件的执行流程打印出对应的事件名称。
+当访问 http://127.0.0.1:8199/john/info/10000 时，运行Web Server进程的终端将会按照事件的执行流程打印出对应的事件名称。
 
 ## 示例2，相同事件注册
 ```go
@@ -261,7 +261,7 @@ func main() {
 ```
 在这个示例中，我们往注册了3个路由规则的事件回调，并且都匹配路由注册的地址```/priority/show```，这样我们便可以通过访问这个地址来看看路由执行的顺序是怎么样的。
 
-执行后我们访问```http://127.0.0.1:8199/priority/show```，随后我们可以在服务端的终端上看到以下输出信息：
+执行后我们访问 http://127.0.0.1:8199/priority/show ，随后我们可以在服务端的终端上看到以下输出信息：
 ```html
 2018-08-03 15:16:25.971 27391: http server started listening on [:8199]
 2018-08-03 15:16:28.385 /priority/show
@@ -295,7 +295,7 @@ func main() {
     s.Run()
 }
 ```
-接口地址是```http://localhost/api.v1/order```，当然这个接口是不允许跨域的。我们打开一个不同的域名，例如：百度首页(正好用了jQuery，方便调试)，然后按```F12```打开开发者面板，在```console```下执行以下AJAX请求：
+接口地址是 http://localhost/api.v1/order ，当然这个接口是不允许跨域的。我们打开一个不同的域名，例如：百度首页(正好用了jQuery，方便调试)，然后按```F12```打开开发者面板，在```console```下执行以下AJAX请求：
 ```javascript
 $.get("http://localhost:8199/api.v1/order", function(result){
     console.log(result)

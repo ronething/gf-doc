@@ -72,7 +72,7 @@ func main() {
 	s.Run()
 }
 ```
-接口地址是`http://localhost/api.v1/order`，当然这个接口是不允许跨域的。我们打开一个不同的域名，例如：百度首页(正好用了jQuery，方便调试)，然后按`F12`打开开发者面板，在`console`下执行以下AJAX请求：
+接口地址是 http://localhost/api.v1/order ，当然这个接口是不允许跨域的。我们打开一个不同的域名，例如：百度首页(正好用了jQuery，方便调试)，然后按`F12`打开开发者面板，在`console`下执行以下AJAX请求：
 ```javascript
 $.get("http://localhost:8199/api.v1/order", function(result){
     console.log(result)

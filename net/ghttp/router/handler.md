@@ -100,7 +100,7 @@ func main() {
 
 如果是其他方式提交参数，如果Json/Xml等等，由于设计到自定义参数格式的解析再绑定，请参考```gconv```模块map转换struct的标签名称```gconv```的[用法示例](util/gconv/index.md)。
 
-以上示例执行后，我们手动访问地址```http://127.0.0.1:8199/user?uid=1&name=john&password1=123&userpass2=123```，输出结果为：
+以上示例执行后，我们手动访问地址 http://127.0.0.1:8199/user?uid=1&name=john&password1=123&userpass2=123 ，输出结果为：
 ```json
 {"name":"john","pass1":"123","pass2":"123","uid":1}
 ```

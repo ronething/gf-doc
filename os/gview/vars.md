@@ -79,7 +79,7 @@ func main() {
     cache = "127.0.0.1:6379,1"
 ```
 
-执行后，访问`http://127.0.0.1:8199/?name=john`，输出结果为：
+执行后，访问 http://127.0.0.1:8199/?name=john ，输出结果为：
 ```html
 Config:127.0.0.1:6379,1, Cookie:default, Session:john, Get:john
 ```

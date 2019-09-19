@@ -31,7 +31,7 @@ func (s *Server) EnableAdmin(pattern ...string)
 
 1. **EnableAdmin**
 	* 首先，该方法为用户管理Web Server提供了简便的页面和接口，在单Web Server下管理非常方便，直接访问管理页面点击对应链接即可。需要注意的是，由于带有管理功能，如果是在生产环境上，建议自定义该管理地址为一个私密地址。
-	* 同时，```EnableaAdmim```提供的restart接口也支持自定义可执行文件路径，直接通过GET参数往restart接口传递```newExeFilePath```变量即可，例如：```http://127.0.0.1/debug/admin/restart?newExeFilePath=xxxxxxx```
+	* 同时，```EnableaAdmim```提供的restart接口也支持自定义可执行文件路径，直接通过GET参数往restart接口传递```newExeFilePath```变量即可，例如： http://127.0.0.1/debug/admin/restart?newExeFilePath=xxxxxxx 
 	* 此外，在大多数时候，Web Server往往不只有1个节点，因此大多数服务管理运维中，例如：重启操作，当然不是直接访问每个Web Server的admin页面手动执行重启操作。而是充分利用admin页面提供的功能接口，通过接口控制来实现统一的Web Server管理控制。
 
 ### 示例1：基本使用

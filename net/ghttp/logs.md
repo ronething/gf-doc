@@ -63,7 +63,7 @@ func main() {
 }
 ```
 
-我们在任何地方(包括运行时)可以调用`SetAccessLogEnabled(true)`开启`access log`的记录功能(并可通过`SetAccessLogEnabled(false)`随时动态关闭日志记录功能)，默认情况下，日志内容将会输出到终端界面。如以上示例程序执行后，访问`http://127.0.0.1:8199/log/access`，日志内容将会输出到终端上，如下：
+我们在任何地方(包括运行时)可以调用`SetAccessLogEnabled(true)`开启`access log`的记录功能(并可通过`SetAccessLogEnabled(false)`随时动态关闭日志记录功能)，默认情况下，日志内容将会输出到终端界面。如以上示例程序执行后，访问 http://127.0.0.1:8199/log/access ，日志内容将会输出到终端上，如下：
 ```shell
 2018-04-20 18:11:57.344 200 "GET http 127.0.0.1:8199 /log/access HTTP/1.1" 0.120, 127.0.0.1, "", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36"
 ```

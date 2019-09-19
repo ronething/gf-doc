@@ -57,7 +57,7 @@ func(r *ghttp.Request)
 ```shell
 panic: interface conversion: interface {} is xxx, not func(*ghttp.Request)
 ```
-该示例执行后可以通过，可以通过```http://127.0.0.1:8199/object/show```查看效果。
+该示例执行后可以通过，可以通过 http://127.0.0.1:8199/object/show 查看效果。
 
 ### 默认路由方法
 
@@ -87,7 +87,7 @@ func (o *Order) List(r *ghttp.Request) {
     r.Response.Write("List")
 }
 ```
-启动外层的```main.go```，我们尝试着访问```http://127.0.0.1:8199/order-list```，可以看到页面输出```List```。如果路由规则中不使用内置变量，那么默认的情况下，方法将会被追加到指定的路由规则末尾。
+启动外层的```main.go```，我们尝试着访问 http://127.0.0.1:8199/order-list ，可以看到页面输出```List```。如果路由规则中不使用内置变量，那么默认的情况下，方法将会被追加到指定的路由规则末尾。
 
 ### 命名风格规则
 
@@ -336,7 +336,7 @@ func main() {
 ```
 其中我们使用了两个回调注册`ghttp.HOOK_BEFORE_SERVE`和`ghttp.HOOK_AFTER_SERVE`，以测试`Exit`方法是否会对回调方法产生影响。
 
-执行后访问`http://127.0.0.1:8199`，可以看到页面输出了以下内容：
+执行后访问 http://127.0.0.1:8199 ，可以看到页面输出了以下内容：
 ```
 2018-11-06 18:57:52.153 BeforeServe
 start

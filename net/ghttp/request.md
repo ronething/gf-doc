@@ -107,7 +107,7 @@ type Request
 6. `SetParam`/`GetParam`: 用于设置/获取请求流程中得共享变量，该共享变量只在该请求流程中有效，请求结束则销毁；
 1. `Exit*`: 用于请求流程退出控制，详见本章后续说明；
 
-其中，获取的参数方法可以对指定键名的数据进行自动类型转换，例如：`http://127.0.0.1:8199/?amount=19.66`，通过`Get`/`GetQueryString`将会返回`19.66`的字符串类型，`GetQueryFloat32`/`GetQueryFloat64`将会分别返回`float32`和`float64`类型的数值`19.66`。但是，`GetQueryInt`/`GetQueryUint`将会返回`19`（如果参数为float类型的字符串，将会按照**向下取整**进行整型转换）。
+其中，获取的参数方法可以对指定键名的数据进行自动类型转换，例如： http://127.0.0.1:8199/?amount=19.66 ，通过`Get`/`GetQueryString`将会返回`19.66`的字符串类型，`GetQueryFloat32`/`GetQueryFloat64`将会分别返回`float32`和`float64`类型的数值`19.66`。但是，`GetQueryInt`/`GetQueryUint`将会返回`19`（如果参数为float类型的字符串，将会按照**向下取整**进行整型转换）。
 
 ## `Request.URL`与`Request.Router`
 
