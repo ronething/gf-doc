@@ -21,8 +21,26 @@ func MiddlewareCORS(r *ghttp.Request) {
 ```
 可以看到在该中间件中执行完成跨域请求处理的逻辑后，使用`r.Middleware.Next()`方法进一步执行下一个流程；如果这个时候直接退出不调用`r.Middleware.Next()`方法的话，将会退出后续的执行流程（例如可以用于请求的鉴权处理）。
 
-## 中间件与事件回调
+## 中间件类型
+中间件的类型分为两种：前置中间件和后置中间件。前置即在路由服务函数调用之前调用，后置即在其后调用。
 
+1. 前置中间件。其定义类似于：
+	```go
+	func Middleware(r *ghttp.Request) {
+		// 中间件处理逻辑
+		r.Middleware.Next()
+	}
+	```
+1. 前后置中间件。其定义类似于：
+	```go
+	func Middleware(r *ghttp.Request) {
+		r.Middleware.Next()
+		// 中间件处理逻辑
+	}
+	```
+
+
+## 中间件与事件回调
 中间件（`Middleware`）与事件回调（`HOOK`）是`GF`框架的两大流程控制特性，两者都可用于控制请求流程，并且也都支持绑定特定的路由规则。但两者区别也是非常明显的。
 1. 首先，中间件侧重于应用层的流程控制，而事件回调侧重于服务层流程控制；也就是说中间件的作用域仅限于应用层，而事件回调的“权限”更强大，属于`WebServer`级别。
 1. 其次，中间件仅在路由匹配到服务方法时才会生效，无法独立使用；而事件回调可以抛开服务方法单独使用。
@@ -108,7 +126,124 @@ func main() {
 随后我们可以通过请求 http://127.0.0.1:8199/api.v2/user/list 和 http://127.0.0.1:8199/api.v2/user/list?token=123456 对比来查看效果。
 
 
-## 使用示例3，自定义日志处理
+## 使用示例3，鉴权例外处理
+中间件是绑定到特定的路由规则下才会生效，并且该路由规则往往是模糊匹配规则。假如我们在鉴权的中间件中需要添加例外的路由该怎么办？有两个思路供参考：
+1. 在路由设计规划的时候，将不需要鉴权的路由规则注册到鉴权中间件路由规则之外；
+1. 在鉴权中间件中添加对特定路由的例外，或者通过闭包的方式来封装中间件添加鉴权例外；
+
+以下我们通过第2种方式来演示以下如何添加例外：
+```go
+package main
+
+import (
+	"net/http"
+
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
+)
+
+func MiddlewareAuth(r *ghttp.Request) {
+	token := r.Get("token")
+	if token == "123456" {
+		r.Middleware.Next()
+	} else {
+		r.Response.WriteStatus(http.StatusForbidden)
+	}
+}
+
+func main() {
+	s := g.Server()
+	s.Group("/admin", func(g *ghttp.RouterGroup) {
+		g.MiddlewarePattern("/*action", func(r *ghttp.Request) {
+			if action := r.GetRouterString("action"); action != "" {
+				switch action {
+				case "login":
+					r.Middleware.Next()
+					return
+				}
+			}
+			MiddlewareAuth(r)
+		})
+		g.ALL("/login", func(r *ghttp.Request) {
+			r.Response.Write("login")
+		})
+		g.ALL("/dashboard", func(r *ghttp.Request) {
+			r.Response.Write("dashboard")
+		})
+	})
+	s.SetPort(8199)
+	s.Run()
+}
+```
+其中，我们通过注册`/admin/*action`的路由的方式，目的是为了获取URL中的操作路径（`action`），便于更好地判断路由规则。当然也可以直接判断完整的路由规则`/admin/login`来判断例外（对比`r.URL.Path`属性值）。执行后，注册的路由列表如下：
+```
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P |      ROUTE       |      HANDLER      | MIDDLEWARE  
+|---------|---------|---------|--------|---|------------------|-------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /admin/*action   | main.main.func1.1 | MIDDLEWARE  
+|---------|---------|---------|--------|---|------------------|-------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /admin/dashboard | main.main.func1.3 |             
+|---------|---------|---------|--------|---|------------------|-------------------|------------|
+  default |  :8199  | default | ALL    | 2 | /admin/login     | main.main.func1.2 |             
+|---------|---------|---------|--------|---|------------------|-------------------|------------|
+```
+随后我们访问以下URL查看效果：
+1. http://127.0.0.1:8199/admin/login
+1. http://127.0.0.1:8199/admin/dashboard
+1. http://127.0.0.1:8199/admin/dashboard?token=123456
+
+## 使用示例4，统一的错误处理
+基于中间件，我们可以在服务函数执行完成后做一些后置判断的工作，特别是统一数据格式返回、结果处理、错误判断等等。这种需求我们可以使用后置中间件类型来实现。我们使用一个简单的例子，用来演示如何使用中间件对所有的接口请求做后置判断处理，作为一个抛砖引玉作用。
+```go
+package main
+
+import (
+	"net/http"
+
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
+)
+
+func MiddlewareAuth(r *ghttp.Request) {
+	token := r.Get("token")
+	if token == "123456" {
+		r.Middleware.Next()
+	} else {
+		r.Response.WriteStatus(http.StatusForbidden)
+	}
+}
+
+func MiddlewareCORS(r *ghttp.Request) {
+	r.Response.CORSDefault()
+	r.Middleware.Next()
+}
+
+func MiddlewareError(r *ghttp.Request) {
+	r.Middleware.Next()
+	if r.Response.Status >= http.StatusInternalServerError {
+		r.Response.ClearBuffer()
+		r.Response.Write("Internal error occurred, please try again later.")
+	}
+}
+
+func main() {
+	s := g.Server()
+	s.Group("/api.v2", func(g *ghttp.RouterGroup) {
+		g.Middleware(MiddlewareAuth, MiddlewareCORS, MiddlewareError)
+		g.ALL("/user/list", func(r *ghttp.Request) {
+			panic("db error: sql is xxxxxxx")
+		})
+	})
+	s.SetPort(8199)
+	s.Run()
+}
+```
+在该示例中，我们在后置中间件中判断有无系统错误，如果有则返回固定的提示信息，而不是把敏感的报错信息展示给用户。当然，在真实的项目场景中，往往还有是需要解析返回缓冲区的数据，例如JSON数据，根据当前的执行结果进行封装返回固定的数据格式等等。
+
+执行该示例后，访问 https://127.0.0.1:8199/api.v2/user/list?token=123456 查看效果。
+
+
+
+## 使用示例5，自定义日志处理
 
 我们来更进一步完善一下以上示例，当请求成功后，我们将请求日志包括状态码输出到终端。
 

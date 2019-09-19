@@ -2,125 +2,54 @@
 
 # 请求输入
 
-请求输入依靠 `ghttp.Request` 对象实现，`ghttp.Request`继承了底层的`http.Request`对象，并且包含了会话相关的`Cookie`和`Session`对象(每个请求都会有两个**独立**的`Cookie`和`Session对象`)。此外，每个请求有一个`唯一的Id`（请求Id，全局唯一），用以标识每一个请求。此外，成员对象包含一个与当前请求对应的返回输出对象指针Response，用于数据的返回。
+请求输入依靠 `ghttp.Request` 对象实现，`ghttp.Request`继承了底层的`http.Request`对象，并且包含了会话相关的`Cookie`和`Session`对象(每个请求都会有两个**独立**的`Cookie`和`Session对象`)。此外，每个请求有一个`唯一的Id`（请求`Id`，全局唯一），用以标识每一个请求。此外，成员对象包含一个与当前请求对应的返回输出对象指针`Response`，用于数据的返回。
 
 相关方法：
 https://godoc.org/github.com/gogf/gf/net/ghttp
-```go
-type Request
-    func (r *Request) AddPost(key string, value string)
-    func (r *Request) AddQuery(key string, value string)
-    func (r *Request) AddRouterString(key, value string)
-    func (r *Request) BasicAuth(user, pass string, tips ...string) bool
-    func (r *Request) IsAjaxRequest() bool
-    func (r *Request) IsExited() bool
-    func (r *Request) IsFileRequest() bool
-    func (r *Request) SetPost(key string, value string)
-    func (r *Request) SetQuery(key string, value string)
-    func (r *Request) SetRouterString(key, value string)
-    func (r *Request) WebSocket() (*WebSocket, error)
 
-    func (r *Request) Exit()
-    func (r *Request) ExitAll()
-    func (r *Request) ExitHook()
-
-    func (r *Request) SetParam(key string, value interface{})
-    func (r *Request) GetParam(key string) gvar.VarRead
-
-    func (r *Request) Get(key string, def ...string) string
-    func (r *Request) GetVar(key string, def ...interface{}) gvar.VarRead
-    func (r *Request) GetArray(key string, def ...[]string) []string
-    func (r *Request) GetClientIp() string
-    func (r *Request) GetFloat32(key string, def ...float32) float32
-    func (r *Request) GetFloat64(key string, def ...float64) float64
-    func (r *Request) GetFloats(key string, def ...[]float64) []float64
-    func (r *Request) GetHost() string
-    func (r *Request) GetInt(key string, def ...int) int
-    func (r *Request) GetInterfaces(key string, def ...[]interface{}) []interface{}
-    func (r *Request) GetInts(key string, def ...[]int) []int
-    func (r *Request) GetJson() *gjson.Json
-    func (r *Request) GetMap(def ...map[string]string) map[string]string
-    func (r *Request) GetRaw() []byte
-    func (r *Request) GetReferer() string
-    func (r *Request) GetString(key string, def ...string) string
-    func (r *Request) GetStrings(key string, def ...[]string) []string
-    func (r *Request) GetToStruct(object interface{}, mapping ...map[string]string)
-    func (r *Request) GetUint(key string, def ...uint) uint
-    
-    func (r *Request) GetPost(key string, def ...[]string) []string
-    func (r *Request) GetPostArray(key string, def ...[]string) []string
-    func (r *Request) GetPostBool(key string, def ...bool) bool
-    func (r *Request) GetPostFloat32(key string, def ...float32) float32
-    func (r *Request) GetPostFloat64(key string, def ...float64) float64
-    func (r *Request) GetPostFloats(key string, def ...[]float64) []float64
-    func (r *Request) GetPostInt(key string, def ...int) int
-    func (r *Request) GetPostInterfaces(key string, def ...[]interface{}) []interface{}
-    func (r *Request) GetPostInts(key string, def ...[]int) []int
-    func (r *Request) GetPostMap(def ...map[string]string) map[string]string
-    func (r *Request) GetPostString(key string, def ...string) string
-    func (r *Request) GetPostStrings(key string, def ...[]string) []string
-    func (r *Request) GetPostToStruct(object interface{}, mapping ...map[string]string)
-    func (r *Request) GetPostUint(key string, def ...uint) uint
-
-    func (r *Request) GetQuery(key string, def ...[]string) []string
-    func (r *Request) GetQueryArray(key string, def ...[]string) []string
-    func (r *Request) GetQueryBool(key string, def ...bool) bool
-    func (r *Request) GetQueryFloat32(key string, def ...float32) float32
-    func (r *Request) GetQueryFloat64(key string, def ...float64) float64
-    func (r *Request) GetQueryFloats(key string, def ...[]float64) []float64
-    func (r *Request) GetQueryInt(key string, def ...int) int
-    func (r *Request) GetQueryInterfaces(key string, def ...[]interface{}) []interface{}
-    func (r *Request) GetQueryInts(key string, def ...[]int) []int
-    func (r *Request) GetQueryMap(def ...map[string]string) map[string]string
-    func (r *Request) GetQueryString(key string, def ...string) string
-    func (r *Request) GetQueryStrings(key string, def ...[]string) []string
-    func (r *Request) GetQueryToStruct(object interface{}, mapping ...map[string]string)
-    func (r *Request) GetQueryUint(key string, def ...uint) uint
-
-    func (r *Request) GetRequest(key string, def ...[]string) []string
-    func (r *Request) GetRequestArray(key string, def ...[]string) []string
-    func (r *Request) GetRequestBool(key string, def ...bool) bool
-    func (r *Request) GetRequestFloat32(key string, def ...float32) float32
-    func (r *Request) GetRequestFloat64(key string, def ...float64) float64
-    func (r *Request) GetRequestFloats(key string, def ...[]float64) []float64
-    func (r *Request) GetRequestInt(key string, def ...int) int
-    func (r *Request) GetRequestInterfaces(key string, def ...[]interface{}) []interface{}
-    func (r *Request) GetRequestInts(key string, def ...[]int) []int
-    func (r *Request) GetRequestMap(def ...map[string]string) map[string]string
-    func (r *Request) GetRequestString(key string, def ...string) string
-    func (r *Request) GetRequestStrings(key string, def ...[]string) []string
-    func (r *Request) GetRequestToStruct(object interface{}, mapping ...map[string]string)
-    func (r *Request) GetRequestUint(key string, def ...uint) uint
-    func (r *Request) GetRequestVar(key string, def ...interface{}) *gvar.Var
-
-    func (r *Request) GetRouterArray(key string) []string
-    func (r *Request) GetRouterString(key string) string
-```
 以上方法可以分为以下几类：
 1. `Get*`: 常用方法，简化参数获取，```GetRequest*```的别名；
 1. `GetQuery*`: 获取GET方式传递过来的Key-Value查询参数；
 2. `GetPost*`: 获取POST方式传递过来的Key-Value表单参数；
-3. `GetRequest*`: 优先查找Router路由参数中是否有指定键名的参数，如果没有则查找GET参数，如果没有则查找POST参数，如果都不存在则返回空或者默认值；
-4. `GetRaw`: 获取客户端提交的原始数据(二进制`[]byte`类型)，与HTTP Method无关，例如客户端提交JSON/XML数据格式时可以通过该方法获取原始的提交数据；
+3. `GetRequest*`: 优先查找`Router`路由参数中是否有指定键名的参数，如果没有则查找`GET`参数，如果没有则查找`POST`参数，最后解析查找`GetRaw`方法返回的数据，如果都不存在则返回空或者默认值；
+4. `GetRaw`: 获取客户端提交的原始数据(二进制`[]byte`类型)，与`HTTP Method`无关，例如客户端提交`JSON/XML`数据格式时可以通过该方法获取原始的提交数据；
 5. `GetJson`: 自动将原始请求信息解析为`gjson.Json`对象指针返回，`gjson.Json`对象指针具体在【[gjson模块](encoding/gjson/index.md)】章节中介绍；
-1. `GetToStruct`: 将请求参数绑定到指定的struct对象上，注意给定的参数为对象指针；
+1. `GetToStruct*`: 将请求参数绑定到指定的`struct`对象上，注意给定的参数为对象指针；
 6. `SetParam`/`GetParam`: 用于设置/获取请求流程中得共享变量，该共享变量只在该请求流程中有效，请求结束则销毁；
 1. `Exit*`: 用于请求流程退出控制，详见本章后续说明；
 
-其中，获取的参数方法可以对指定键名的数据进行自动类型转换，例如： http://127.0.0.1:8199/?amount=19.66 ，通过`Get`/`GetQueryString`将会返回`19.66`的字符串类型，`GetQueryFloat32`/`GetQueryFloat64`将会分别返回`float32`和`float64`类型的数值`19.66`。但是，`GetQueryInt`/`GetQueryUint`将会返回`19`（如果参数为float类型的字符串，将会按照**向下取整**进行整型转换）。
+其中，获取的参数方法可以对指定键名的数据进行自动类型转换，例如： http://127.0.0.1:8199/?amount=19.66 ，通过`Get`/`GetQueryString`将会返回`19.66`的字符串类型，`GetQueryFloat32`/`GetQueryFloat64`将会分别返回`float32`和`float64`类型的数值`19.66`。但是，`GetQueryInt`/`GetQueryUint`将会返回`19`（如果参数为`float`类型的字符串，将会按照**向下取整**进行整型转换）。
+
+## 请求参数解析
+`ghttp.Request`对象支持智能的参数类型解析（不区分请求提交方式及请求提交类型），以下为提交参数示例以及服务端对应解析的变量类型：
+
+Parameter | Variable
+---|---
+`v=m&v=n` | `map[v:n]`
+`v1=m&v2=n` | `map[v1:m v2:n]`
+`v[]=m&v[]=n` | `map[v:[m n]]`
+`v[a][]=m&v[a][]=n` | `map[v:map[a:[m n]]]`
+`v[a]=m&v[b]=n` | `map[v:map[a:m b:n]]`
+`v[a][a]=m&v[a][b]=n` | `map[v:map[a:map[a:m b:n]]]`
+`v=m&v[a]=n` | `error`
+
+
 
 ## `Request.URL`与`Request.Router`
 
-`Request.Router`是匹配到的路由对象，包含路由注册信息，一般来说开发者不会用得到。
-`Request.URL`是底层请求的URL对象（继承自标准库`http.Request`），包含请求的URL地址信息，特别是`Request.URL.Path`表示请求的URI地址。
+`Request.Router`是当前匹配到的路由对象，包含路由注册信息，一般来说开发者不会用得到。该对象在请求没有匹配到注册的服务函数时，可能为`nil`。
+`Request.URL`是底层请求的URL对象（继承自标准库`http.Request`），包含请求的URL地址信息，特别是`Request.URL.Path`表示请求的URI地址，该对象必定有值。
 
-因此，假如在服务回调函数中使用的话，`Request.Router`是有值的，因为只有匹配到了路由才会调用服务回调方法。但是在事件回调函数中，该对象可能为`nil`（表示没有匹配到服务回调函数路由）。特别是在使用事件回调对请求接口鉴权的时候，应当使用`Request.URL`对象获取请求的URL信息，而不是`Request.Router`。
+因此，假如在服务函数中使用的话，`Request.Router`是有值的，因为只有匹配到了路由才会调用服务回调方法。但是在HOOK事件回调函数中，该对象可能为`nil`（表示没有匹配到服务回调函数路由）。特别是在使用事件回调对请求接口鉴权的时候，应当使用`Request.URL`对象获取请求的URL信息，而不是`Request.Router`。
+
+此外，根据中间件的特性，因此在中间件处理函数中`Request.Router`是必定有值的。
 
 ## `Exit`, `ExitAll`与`ExitHook`
 
 1. `Exit`: 仅退出当前执行的逻辑方法，如: 当前HOOK方法、服务方法，不退出后续的逻辑处理，可用于替代`return`；
 1. `ExitAll`: 强行退出当前执行流程，当前执行方法的后续逻辑以及后续所有的逻辑方法将不再执行，常用于权限控制；
 1. `ExitHook`: 当路由匹配到多个HOOK方法时，默认是按照路由匹配优先级顺序执行HOOK方法。当在HOOK方法中调用`ExitHook`方法后，后续的HOOK方法将不会被继续执行，作用类似HOOK方法覆盖；
+1. 这三个退出函数仅在服务函数和HOOK事件回调函数中有效，无法控制中间件的执行流程；
 
 
 # 使用示例
@@ -160,8 +89,6 @@ func main() {
     s.Run()
 }
 ```
-
-> 从`v1.8.0`开始，参数标签支持`params/param/p`三种标签。
 
 其中，
 1. 这里使用了`r.GetToStruct(user)`方法将请求参数绑定到指定的`user`对象上，注意这里的`user`是`User`的结构体实例化指针；在`struct tag`中，使用`params`标签来指定参数名称与结构体属性名称对应关系；
