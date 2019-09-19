@@ -74,6 +74,63 @@ type Resource
 > 可以通过`Pack`方法直接生成打包后的`[]byte`内容，开发者可以对该内容进行自定义加密以额外增加文件内容的安全性。随后可以在程序中对该`[]byte`解密后，并通过`UnpackContent`方法可以对该内容进行解包，使用该打包内容。
 
 
+## 打包生成`Go`文件
+
+这种是比较常用的方式，我们这里直接使用`gf`工具来进行打包，不添加自定义的加密。
+
+### 1. `gf pack`生成`Go`文件
+
+比较推荐的方式是将`Go`文件直接生成到`boot`启动目录，并设置生成`Go`文件的包名为`boot`，这样该资源文件将会被自动引入到项目中。我们将项目的`config,public,template`三个目录的文件打包到`Go`文件，打包命令为：`gf pack config,public,template boot/data.go -n boot`
+
+生成的`Go`文件内容类似于：
+```go
+import "github.com/gogf/gf/os/gres"
+
+func init() {
+	if err := gres.Add([]byte("\x50\x4b\x03\x04\x14\x00\x08...")); err != nil {
+		panic(err)
+	}
+}
+```
+
+### 2. 使用打包的`Go`资源文件
+
+由于项目的`main`入口程序文件会引入`boot`包，例如像这样（`module`名称为`my-app`）：
+```go
+import (
+	_ "my-app/boot"
+)
+```
+随后可以在项目的任何地方使用`gres`模块来访问打包的资源文件。
+
+### 3. 打印资源管理文件列表
+可以通过`gres.Dump()`打印资源管理器中所有的文件列表，输出内容类似于：
+```html
+2019-09-15T13:36:28+00:00   0.00B config
+2019-07-27T07:26:12+00:00   1.34K config/config.toml
+2019-09-15T13:36:28+00:00   0.00B public
+2019-06-25T17:03:56+00:00   0.00B public/resource
+2018-12-04T12:50:16+00:00   0.00B public/resource/css
+2018-12-17T12:54:26+00:00   0.00B public/resource/css/document
+2018-12-17T12:54:26+00:00   4.20K public/resource/css/document/style.css
+2018-08-24T01:46:58+00:00  32.00B public/resource/css/index.css
+2019-05-23T03:51:24+00:00   0.00B public/resource/image
+2018-08-20T05:02:08+00:00  24.01K public/resource/image/cover.png
+2019-05-23T03:51:24+00:00   4.19K public/resource/image/favicon.ico
+2018-08-23T01:44:50+00:00   4.19K public/resource/image/gf.ico
+2018-12-04T13:04:34+00:00   0.00B public/resource/js
+2019-06-27T11:06:12+00:00   0.00B public/resource/js/document
+2019-06-27T11:06:12+00:00  11.67K public/resource/js/document/index.js
+2019-09-15T13:36:28+00:00   0.00B template
+2019-02-02T09:08:56+00:00   0.00B template/document
+2018-12-04T12:49:08+00:00   0.00B template/document/include
+2018-12-04T12:49:08+00:00 329.00B template/document/include/404.html
+2019-03-06T01:52:56+00:00   3.42K template/document/index.html
+...
+```
+
+## 自定义打包/解包
+
 ### 打包使用示例
 
 我们将项目根目录下的`public`和`config`目录打包为`data.bin`二进制文件，并通过`gaes`加密算法对生成的二进制内容进行加密。
@@ -137,60 +194,6 @@ func main() {
 ```
 
 
-## 打包生成`Go`文件
-
-这种是比较常用的方式，我们这里直接使用`gf`工具来进行打包，不添加自定义的加密。
-
-### 1. `gf pack`生成`Go`文件
-
-比较推荐的方式是将`Go`文件直接生成到`boot`启动目录，并设置生成`Go`文件的包名为`boot`，这样该资源文件将会被自动引入到项目中。我们将项目的`config,public,template`三个目录的文件打包到`Go`文件，打包命令为：`gf pack config,public,template boot/data.go -n boot`
-
-生成的`Go`文件内容类似于：
-```go
-import "github.com/gogf/gf/os/gres"
-
-func init() {
-	if err := gres.Add([]byte("\x50\x4b\x03\x04\x14\x00\x08...")); err != nil {
-		panic(err)
-	}
-}
-```
-
-### 2. 使用打包的`Go`资源文件
-
-由于项目的`main`入口程序文件会引入`boot`包，例如像这样（`module`名称为`my-app`）：
-```go
-import (
-	_ "my-app/boot"
-)
-```
-随后可以在项目的任何地方使用`gres`模块来访问打包的资源文件。
-
-### 3. 打印资源管理文件列表
-可以通过`gres.Dump()`打印资源管理器中所有的文件列表，输出内容类似于：
-```html
-2019-09-15T13:36:28+00:00   0.00B config
-2019-07-27T07:26:12+00:00   1.34K config/config.toml
-2019-09-15T13:36:28+00:00   0.00B public
-2019-06-25T17:03:56+00:00   0.00B public/resource
-2018-12-04T12:50:16+00:00   0.00B public/resource/css
-2018-12-17T12:54:26+00:00   0.00B public/resource/css/document
-2018-12-17T12:54:26+00:00   4.20K public/resource/css/document/style.css
-2018-08-24T01:46:58+00:00  32.00B public/resource/css/index.css
-2019-05-23T03:51:24+00:00   0.00B public/resource/image
-2018-08-20T05:02:08+00:00  24.01K public/resource/image/cover.png
-2019-05-23T03:51:24+00:00   4.19K public/resource/image/favicon.ico
-2018-08-23T01:44:50+00:00   4.19K public/resource/image/gf.ico
-2018-12-04T13:04:34+00:00   0.00B public/resource/js
-2019-06-27T11:06:12+00:00   0.00B public/resource/js/document
-2019-06-27T11:06:12+00:00  11.67K public/resource/js/document/index.js
-2019-09-15T13:36:28+00:00   0.00B template
-2019-02-02T09:08:56+00:00   0.00B template/document
-2018-12-04T12:49:08+00:00   0.00B template/document/include
-2018-12-04T12:49:08+00:00 329.00B template/document/include/404.html
-2019-03-06T01:52:56+00:00   3.42K template/document/index.html
-...
-```
 
 
 
