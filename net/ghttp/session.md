@@ -9,9 +9,11 @@ https://godoc.org/github.com/gogf/gf/os/gsession
 
 任何时候都可以通过`ghttp.Request`获取`Session`对象，因为`Cookie`和`Session`都是和请求会话相关，因此都属于`Request`的成员对象，并对外公开。`gf`框架的`Session`处理是存放在内存中的，因此处理效率非常高，默认过期时间是`24小时`。
 
-此外，需要说明的是，`Session`的操作是支持`并发安全`的，这也是框架在对`Session`的设计上不采用直接以`map`的形式操作数据的原因。
+`SessionId`默认通过`Cookie`来传递，并且也支持客户端通过`Header`传递`SessionId`，`SessionId`的名称通过`ghttp.Server`的`SetSessionIdName`进行修改。
 
-在任何时候，我们都可以通过`ghttp.Request`对象来修改和获取`Session`的全局相关属性。
+此外，需要说明的是，`Session`的操作是支持`并发安全`的，这也是框架在对`Session`的设计上不采用直接以`map`的形式操作数据的原因。在任何时候，我们都可以通过`ghttp.Request`对象来修改和获取`Session`的全局相关属性。
+
+
 
 # `gsession`模块
 
