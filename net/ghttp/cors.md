@@ -2,54 +2,59 @@
 
 # 允许跨域访问
 
-允许接口跨域往往是需要结合[事件回调](net/ghttp/router/hook.md)一起使用，来统一设置某些路由规则下的接口可以跨域访问。同时，针对允许`WebSocket`的跨域请求访问，也是通过该方式来实现。
+允许接口跨域往往是需要结合[中间件](net/ghttp/router/middleware.md)一起使用，来统一设置某些路由规则下的接口可以跨域访问。同时，针对允许`WebSocket`的跨域请求访问，也是通过该方式来实现。
 
 相关方法：
 https://godoc.org/github.com/gogf/gf/net/ghttp#Response
 ```go
 // 默认的CORS配置
 func (r *Response) DefaultCORSOptions() CORSOptions
+
+// CORS sets custom CORS options.
 // See https://www.w3.org/TR/cors/ .
-// 允许请求跨域访问.
 func (r *Response) CORS(options CORSOptions)
-// 允许请求跨域访问(使用默认配置).
+// DefaultCORSOptions returns the default CORS options,
+// which allows any cross-domain request.
 func (r *Response) CORSDefault()
+// CORSAllowed checks whether the current request origin is allowed CORS.
+func (r *Response) CORSAllowedOrigin(options CORSOptions) bool 
 ```
 
-## CORS对象
+## `CORS`对象
 `CORS`是`W3`互联网标准组织对HTTP跨域请求的标准，在`ghttp`模块中，我们可以通过`CORSOptions`对象来管理对应的跨域请求选项。定义如下：
 ```go
 // See https://www.w3.org/TR/cors/ .
 // 服务端允许跨域请求选项
 type CORSOptions struct {
-    AllowOrigin      string // Access-Control-Allow-Origin
-    AllowCredentials string // Access-Control-Allow-Credentials
-    ExposeHeaders    string // Access-Control-Expose-Headers
-    MaxAge           int    // Access-Control-Max-Age
-    AllowMethods     string // Access-Control-Allow-Methods
-    AllowHeaders     string // Access-Control-Allow-Headers
+	AllowDomain      []string // Used for allowing requests from custom domains
+	AllowOrigin      string   // Access-Control-Allow-Origin
+	AllowCredentials string   // Access-Control-Allow-Credentials
+	ExposeHeaders    string   // Access-Control-Expose-Headers
+	MaxAge           int      // Access-Control-Max-Age
+	AllowMethods     string   // Access-Control-Allow-Methods
+	AllowHeaders     string   // Access-Control-Allow-Headers
 }
 ```
 具体参数的介绍请查看W3组织[官网手册](https://www.w3.org/TR/cors/)。
 
-## 默认CORSOptions
+## `CORS`配置
+### 默认`CORSOptions`
+当然，为方便跨域设置，在`ghttp`模块中也提供了默认的跨域请求选项，通过`DefaultCORSOptions`方法获取。大多数情况下，我们在需要允许跨域请求的接口中（一般情况下使用中间件）可以直接使用`CORSDefault()`允许该接口跨域访问。
 
-当然，为方便跨域设置，在`ghttp`模块中也提供了默认的跨域请求选项，通过`ghttp.Response.DefaultCORSOptions`获取。
+### 限制`Origin`来源
+大多数时候，我们需要限制请求来源为我们受信任的域名列表，我们可以使用`AllowDomain`配置，使用方式：
 ```go
-// 默认的CORS配置
-func (r *Response) DefaultCORSOptions() CORSOptions {
-    return CORSOptions {
-        AllowOrigin      : gstr.TrimRight(r.request.Referer(), "/"),
-        AllowMethods     : HTTP_METHODS,
-        AllowCredentials : "true",
-        MaxAge           : 3628800,
-    }
+// 允许跨域请求中间件
+func Middleware(r *ghttp.Request) {
+	corsOptions := r.Response.DefaultCORSOptions()
+	corsOptions.AllowDomain = []string{"goframe.org", "johng.cn"}
+	r.Response.CORS(corsOptions)
+	r.Middleware.Next()
 }
 ```
-大多数情况下，我们在需要允许跨域请求的接口中（一般情况下使用HOOK）可以直接使用`CORSDefault()`允许该接口跨域访问。
 
-## 使用示例
-我们来看一个简单的`REST`接口示例：
+## 使用示例1，基本使用
+我们来看一个简单的接口示例：
 ```go
 package main
 
@@ -58,21 +63,20 @@ import (
 	"github.com/gogf/gf/net/ghttp"
 )
 
-type Order struct {
-}
-
-func (order *Order) Get(r *ghttp.Request) {
+func Order(r *ghttp.Request) {
 	r.Response.Write("GET")
 }
 
 func main() {
 	s := g.Server()
-	s.BindObjectRest("/api.v1/{.struct}", new(Order))
+	s.Group("/api.v1", func(g *ghttp.RouterGroup) {
+		g.GET("/order", Order)
+	})
 	s.SetPort(8199)
 	s.Run()
 }
 ```
-接口地址是 http://localhost/api.v1/order ，当然这个接口是不允许跨域的。我们打开一个不同的域名，例如：百度首页(正好用了jQuery，方便调试)，然后按`F12`打开开发者面板，在`console`下执行以下AJAX请求：
+接口地址是 http://localhost/api.v1/order ，当然这个接口是不允许跨域的。我们打开一个不同的域名，例如：百度首页(正好用了`jQuery`，方便调试)，然后按`F12`打开开发者面板，在`console`下执行以下`AJAX`请求：
 ```javascript
 $.get("http://localhost:8199/api.v1/order", function(result){
     console.log(result)
@@ -90,27 +94,100 @@ import (
 	"github.com/gogf/gf/net/ghttp"
 )
 
-type Order struct{}
+func MiddlewareCORS(r *ghttp.Request) {
+	r.Response.CORSDefault()
+	r.Middleware.Next()
+}
 
-func (order *Order) Get(r *ghttp.Request) {
+func Order(r *ghttp.Request) {
 	r.Response.Write("GET")
 }
 
 func main() {
 	s := g.Server()
-	s.BindHookHandlerByMap("/api.v1/*any", map[string]ghttp.HandlerFunc{
-		"BeforeServe": func(r *ghttp.Request) {
-			r.Response.CORSDefault()
-		},
+	s.Group("/api.v1", func(g *ghttp.RouterGroup) {
+		g.Middleware(MiddlewareCORS)
+		g.GET("/order", Order)
 	})
-	s.BindObjectRest("/api.v1/{.struct}", new(Order))
 	s.SetPort(8199)
 	s.Run()
 }
 ```
-我们增加了针对于路由`/api.v1/*any`的绑定事件`BeforeServe`，该事件将会在所有服务执行之前调用，该事件的回调方法中，我们通过调用`CORSDefault`方法使用默认的跨域设置允许跨域请求。该绑定的事件路由规则使用了模糊匹配规则，表示所有`/api.v1`开头的接口地址都允许跨域请求。
+我们增加了针对于路由`/api.v1`的前置中间件`MiddlewareCORS`，该事件将会在所有服务执行之前调用。我们通过调用`CORSDefault`方法使用默认的跨域设置允许跨域请求。该绑定的事件路由规则使用了模糊匹配规则，表示所有`/api.v1`开头的接口地址都允许跨域请求。
 
 返回刚才的百度首页，再次执行请求`AJAX`请求，这次便成功了：
 ![](/images/Selection_155.png)
 
 当然我们也可以通过`CORSOptions`对象以及`CORS`方法对跨域请求做更多的设置。
+
+
+## 使用示例2，授权跨域`Origin`
+在大多数场景中，我们是需要自定义授权跨域的`Origin`，那么我们可以将以上的例子改进如下，在该示例中，我们仅允许`goframe.org`及`baidu.com`跨域请求访问。
+```go
+package main
+
+import (
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
+)
+
+func MiddlewareCORS(r *ghttp.Request) {
+	corsOptions := r.Response.DefaultCORSOptions()
+	corsOptions.AllowDomain = []string{"goframe.org", "baidu.com"}
+	r.Response.CORS(corsOptions)
+	r.Middleware.Next()
+}
+
+func Order(r *ghttp.Request) {
+	r.Response.Write("GET")
+}
+
+func main() {
+	s := g.Server()
+	s.Group("/api.v1", func(g *ghttp.RouterGroup) {
+		g.Middleware(MiddlewareCORS)
+		g.GET("/order", Order)
+	})
+	s.SetPort(8199)
+	s.Run()
+}
+```
+## 使用示例3，自定义检测授权
+不知大家是否有注意，在以上的示例中有个细节，即使当前接口不允许跨域访问，但是只要接口被调用，接口仍然会被调用，在服务端其实也已经走完了一次请求流程。针对于这个问题，我们可以通过自定义授权`Origin`并通过`CORSAllowedOrigin`来做判断，如果当前请求的`Origin`在服务端是被允许执行的，那么才会执行后续流程，否则便会终止执行。
+
+在以下示例中，仅允许来自`goframe.org`域名的跨域请求，而来自其他域名的请求将会失败并返回`403`：
+```go
+package main
+
+import (
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
+)
+
+func MiddlewareCORS(r *ghttp.Request) {
+	corsOptions := r.Response.DefaultCORSOptions()
+	corsOptions.AllowDomain = []string{"goframe.org"}
+	if !r.Response.CORSAllowedOrigin(corsOptions) {
+		r.Response.WriteStatus(http.StatusForbidden)
+		return
+	}
+	r.Response.CORS(corsOptions)
+	r.Middleware.Next()
+}
+
+func Order(r *ghttp.Request) {
+	r.Response.Write("GET")
+}
+
+func main() {
+	s := g.Server()
+	s.Group("/api.v1", func(g *ghttp.RouterGroup) {
+		g.Middleware(MiddlewareCORS)
+		g.GET("/order", Order)
+	})
+	s.SetPort(8199)
+	s.Run()
+}
+```
+
+
