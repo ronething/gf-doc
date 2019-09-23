@@ -95,10 +95,10 @@ func (o *Order) List(r *ghttp.Request) {
 
 此外，我们可以通过```ghttp.Server.SetNameToUriType```方法来设置`struct/method`名称与uri的转换方式。支持的方式目前有`4`种，对应`4`个常量定义：
 ```go
-NAME_TO_URI_TYPE_DEFAULT  = 0      // 路由注册时对象和方法名称转换为URI时，全部转为小写，单词以'-'连接符号连接
-NAME_TO_URI_TYPE_FULLNAME = 1      // 不处理名称，以原有名称构建成URI
-NAME_TO_URI_TYPE_ALLLOWER = 2      // 仅转为小写，单词间不使用连接符号
-NAME_TO_URI_TYPE_CAMEL    = 3      // 采用驼峰命名方式
+URI_TYPE_DEFAULT  = 0      // 路由注册时对象和方法名称转换为URI时，全部转为小写，单词以'-'连接符号连接
+URI_TYPE_FULLNAME = 1      // 不处理名称，以原有名称构建成URI
+URI_TYPE_ALLLOWER = 2      // 仅转为小写，单词间不使用连接符号
+URI_TYPE_CAMEL    = 3      // 采用驼峰命名方式
 ```
 我们来看一个示例：
 [github.com/gogf/gf/blob/master/.example/net/ghttp/server/name.go](https://github.com/gogf/gf/blob/master/.example/net/ghttp/server/name.go)
@@ -122,10 +122,10 @@ func main() {
     s3 := g.Server(3)
     s4 := g.Server(4)
 
-    s1.SetNameToUriType(ghttp.NAME_TO_URI_TYPE_DEFAULT)
-    s2.SetNameToUriType(ghttp.NAME_TO_URI_TYPE_FULLNAME)
-    s3.SetNameToUriType(ghttp.NAME_TO_URI_TYPE_ALLLOWER)
-    s4.SetNameToUriType(ghttp.NAME_TO_URI_TYPE_CAMEL)
+    s1.SetNameToUriType(ghttp.URI_TYPE_DEFAULT)
+    s2.SetNameToUriType(ghttp.URI_TYPE_FULLNAME)
+    s3.SetNameToUriType(ghttp.URI_TYPE_ALLLOWER)
+    s4.SetNameToUriType(ghttp.URI_TYPE_CAMEL)
 
     s1.BindObject("/{.struct}/{.method}", new(User))
     s2.BindObject("/{.struct}/{.method}", new(User))
