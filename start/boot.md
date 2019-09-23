@@ -12,7 +12,6 @@ require github.com/gogf/gf latest
 ```
 其中注意`module`名称设置为`github.com/gogf/gf-demos`。
 
-> 在实际项目的包依赖管理中会遇到很多细节问题，因此我们为您准备了[《项目依赖管理》](prepare/vendor.md)章节。
 
 
 ## 配置文件
