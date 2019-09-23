@@ -22,7 +22,7 @@ module my-hello
 
 # 使用go.mod
 
-使用`go.mod`意即用`go.mod`进行项目依赖管理。我们有两种`go.mod`的**使用方式**：IDE-vgo和命令行方式。以下我们通过下载使用`GoFrame`框架来演示如何使用这两种方式来管理依赖。
+使用`go.mod`意即用`go.mod`进行项目依赖管理。我们有两种`go.mod`的**使用方式**：`IDE-vgo`和命令行方式。以下我们通过下载使用`GoFrame`框架来演示如何使用这两种方式来管理依赖。
 
 > 如果需要`Goland` IDE支持`go.mod`，必须要打开`vgo`的支持（包括代码依赖检测）。这两种使用方式的区别仅仅是下载依赖包的方式不同。
 
@@ -37,7 +37,7 @@ module my-hello
 
     ![](/images/gomodule2.png)
 
-    其中`Proxy`请选择 `direct` 直连下载依赖包。如果需要有翻墙下载的第三方包，这里请设置反向代理地址如：`https://goproxy.io`或者`https://mirrors.aliyun.com/goproxy/`。
+    其中`Proxy`请输入代理地址下载依赖包，如果选择`direct`表示不使用代理。可选择的反向代理地址有：`https://goproxy.io`、`https://goproxy.cn`、`https://mirrors.aliyun.com/goproxy/`，详见Go官网说明：https://github.com/golang/go/wiki/Modules#are-there-always-on-module-repositories-and-enterprise-proxies
 
 1. 手动修改`go.mod`文件如下：
     ```

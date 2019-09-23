@@ -1,1 +1,1 @@
-数据库ORM功能由`gdb`模块实现，具体请参考【[数据库ORM](database/gdb/index)】章节。
+数据库ORM功能由`gdb`模块实现，具体请参考【[数据库ORM](database/gdb/index.md)】章节。
