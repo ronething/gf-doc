@@ -4,15 +4,19 @@
 
 > 注意文件锁是针对于多进程互斥操作，而不是单进程多协程互斥。在多进程需要控制业务互斥操作的时候特别有用，例如多进程的定时任务管理场景。
 
+**安装模块**：
+```go
+go get -u github.com/gogf/gflock
+```
 
 **使用方式**：
 ```go
-import "github.com/gogf/gf/os/gflock"
+import "github.com/gogf/gflock"
 ```
 
 **接口文档**：
 
-https://godoc.org/github.com/gogf/gf/os/gflock
+https://godoc.org/github.com/gogf/gflock
 
 
 方法比较实用也很简单，我们这里来展示一个`Lock/Unlock`的示例。
@@ -24,7 +28,7 @@ import (
     "time"
     "github.com/gogf/gf/os/glog"
     "github.com/gogf/gf/os/gproc"
-    "github.com/gogf/gf/os/gflock"
+    "github.com/gogf/gflock"
 )
 
 func main() {
