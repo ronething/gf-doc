@@ -2,8 +2,9 @@
 # 加入我们
 <div align=center>
 <img src="images/weneedyou.jpeg" width="300"/>
-<div>We need you!</div>
+<div>We Need You!</div>
 </div>
+
 `GF`是开源的、免费的软件，这意味着任何人都可以为其开发和进步贡献力量。`GF`的项目源代码目前同时托管在 `github`（主库）和 `gitee`（国内）平台上，两个平台的仓库保持即时的同步，代码贡献统一使用`github`主库。我们非常欢迎有更多的朋友加入到`GF`框架的开发中来，你为`GF`所做出的任何贡献都将会被记录到`GF`的史册中。
 
 # 参与开源
