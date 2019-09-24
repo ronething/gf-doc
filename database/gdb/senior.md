@@ -57,12 +57,12 @@ func main() {
 2018-08-31 13:54:32.915 [DEBU] SELECT * FROM user WHERE uid=?, [3], 2018-08-31 13:54:32.915, 2018-08-31 13:54:32.915, 0 ms, DB:Query
 2018-08-31 13:54:32.915 [ERRO] SELECT * FROM user WHERE no_such_field=?, [just_test], 2018-08-31 13:54:32.915, 2018-08-31 13:54:32.915, 0 ms, DB:Query
 Error: Error 1054: Unknown column 'no_such_field' in 'where clause'
-1.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/database/gdb/gdb_base.go:120
-2.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/database/gdb/gdb_base.go:174
-3.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/database/gdb/gdb_model.go:378
-4.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/database/gdb/gdb_model.go:301
-5.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/database/gdb/gdb_model.go:306
-6.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/database/gdb/gdb_model.go:311
+1.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/database/gdb/gdb_base.go:120
+2.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/database/gdb/gdb_base.go:174
+3.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/database/gdb/gdb_model.go:378
+4.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/database/gdb/gdb_model.go:301
+5.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/database/gdb/gdb_model.go:306
+6.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/database/gdb/gdb_model.go:311
 7.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/geg/database/gdb/mysql/gdb_debug.go:30
 ```
 

@@ -27,10 +27,10 @@ https://godoc.org/github.com/gogf/gf/container/gtype
 
 基准测试结果如下:
 ```shell
-john@john-B85M:~/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/container/gtype$ go test -bench=".*"  -benchmem
+john@john-B85M:~/Workspace/Go/GOPATH/src/github.com/gogf/gf/container/gtype$ go test -bench=".*"  -benchmem
 goos: linux
 goarch: amd64
-pkg: github.com/gogf/gf/g/container/gtype
+pkg: github.com/gogf/gf/container/gtype
 BenchmarkInt_Set-4            300000000           5.87 ns/op        0 B/op        0 allocs/op
 BenchmarkInt_Val-4            2000000000          0.46 ns/op        0 B/op        0 allocs/op
 BenchmarkInt_Add-4            300000000           5.86 ns/op        0 B/op        0 allocs/op
@@ -60,7 +60,7 @@ BenchmarkInterface_Val-4      2000000000          0.74 ns/op        0 B/op      
 BenchmarkAtomicValue_Store-4  50000000            27.3 ns/op        8 B/op        0 allocs/op
 BenchmarkAtomicValue_Load-4   2000000000          0.73 ns/op        0 B/op        0 allocs/op
 PASS
-ok   github.com/gogf/gf/g/container/gtype 49.454s
+ok   github.com/gogf/gf/container/gtype 49.454s
 ```
 
 

@@ -63,7 +63,7 @@ Entering interactive mode (type "help" for commands, "o" for options)
 Showing nodes accounting for 80ms, 100% of 80ms total
 Showing top 10 nodes out of 49
       flat  flat%   sum%        cum   cum%
-      10ms 12.50% 12.50%       10ms 12.50%  github.com/gogf/gf/g/net/ghttp.(*Cookie).Get /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/net/ghttp/http_server_cookie.go
+      10ms 12.50% 12.50%       10ms 12.50%  github.com/gogf/gf/net/ghttp.(*Cookie).Get /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/net/ghttp/http_server_cookie.go
       10ms 12.50% 25.00%       10ms 12.50%  internal/poll.runtime_pollReset /home/john/Softs/go1.9.2/src/runtime/netpoll.go
       10ms 12.50% 37.50%       10ms 12.50%  runtime.futex /home/john/Softs/go1.9.2/src/runtime/sys_linux_amd64.s
       10ms 12.50% 50.00%       10ms 12.50%  runtime.getitab /home/john/Softs/go1.9.2/src/runtime/iface.go
@@ -72,7 +72,7 @@ Showing top 10 nodes out of 49
       10ms 12.50% 87.50%       10ms 12.50%  runtime.usleep /home/john/Softs/go1.9.2/src/runtime/sys_linux_amd64.s
       10ms 12.50%   100%       10ms 12.50%  sync.(*RWMutex).Lock /home/john/Softs/go1.9.2/src/sync/rwmutex.go
          0     0%   100%       10ms 12.50%  bufio.(*Writer).Flush /home/john/Softs/go1.9.2/src/bufio/bufio.go
-         0     0%   100%       10ms 12.50%  github.com/gogf/gf/g/container/gqueue.(*Queue).PopFront /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/container/gqueue/gqueue.go
+         0     0%   100%       10ms 12.50%  github.com/gogf/gf/container/gqueue.(*Queue).PopFront /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/container/gqueue/gqueue.go
 (pprof) web
 Failed to execute dot. Is Graphviz installed? Error: exec: "dot": executable file not found in $PATH
 (pprof) web

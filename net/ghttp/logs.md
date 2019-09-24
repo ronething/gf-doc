@@ -98,10 +98,10 @@ func main() {
 2018-04-20 18:31:03.484 [ERRO] "GET http 127.0.0.1:8199 /log/error HTTP/1.1" 0.098, 127.0.0.1, "", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36", 异常信息
 Trace:
 1. /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/geg/net/ghttp/log.go:10
-2. /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/net/ghttp/http_server_handler.go:83
-3. /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/net/ghttp/http_server_handler.go:52
-4. /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/net/ghttp/http_server_handler.go:25
-5. /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/net/ghttp/http_server.go:137
+2. /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/net/ghttp/http_server_handler.go:83
+3. /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/net/ghttp/http_server_handler.go:52
+4. /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/net/ghttp/http_server_handler.go:25
+5. /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/net/ghttp/http_server.go:137
 ```
 错误信息会打印出对应错误产生的```caller backtrace```，以便于错误定位以及开发者分析问题原因。
 

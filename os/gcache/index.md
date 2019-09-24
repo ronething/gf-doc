@@ -210,7 +210,7 @@ SYS: Ubuntu 16.04 amd64
 ### 测试结果
 
 ```html
-john@john-B85M:~/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/os/gcache$ go test *.go -bench=".*" -benchmem
+john@john-B85M:~/Workspace/Go/GOPATH/src/github.com/gogf/gf/os/gcache$ go test *.go -bench=".*" -benchmem
 goos: linux
 goarch: amd64
 Benchmark_CacheSet-4                       2000000        897 ns/op      249 B/op        4 allocs/op

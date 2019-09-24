@@ -18,7 +18,7 @@ https://godoc.org/github.com/gogf/gf/container/gchan
 
 `gchan`与原生`channel`的性能测试：
 ```html
-john@johnstation:~/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/container/gchan$ go test *.go -bench=".*"
+john@johnstation:~/Workspace/Go/GOPATH/src/github.com/gogf/gf/container/gchan$ go test *.go -bench=".*"
 goos: linux
 goarch: amd64
 BenchmarkGchanPushAndPop-8    	20000000	        71.9 ns/op

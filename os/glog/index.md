@@ -8,7 +8,7 @@ import "github.com/gogf/gf/os/glog"
 
 **接口文档**：
 
-http://godoc.org/github.com/gogf/gf/g/os/glog
+http://godoc.org/github.com/gogf/gf/os/glog
 
 重要的几点说明：
 1. `glog`采用了无锁设计，性能高效；

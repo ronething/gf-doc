@@ -24,7 +24,7 @@ https://github.com/gogf/gf/blob/master/container/glist/glist_z_bench_test.go
 ```
 goos: darwin
 goarch: amd64
-pkg: github.com/gogf/gf/g/container/glist
+pkg: github.com/gogf/gf/container/glist
 Benchmark_PushBack-4             5000000               268 ns/op              56 B/op          2 allocs/op
 Benchmark_PushFront-4           10000000               435 ns/op              56 B/op          2 allocs/op
 Benchmark_Len-4                 30000000              44.5 ns/op               0 B/op          0 allocs/op

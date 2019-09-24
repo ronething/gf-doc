@@ -89,7 +89,7 @@ https://godoc.org/github.com/gogf/gf/os/gtimer
 ```
 goos: darwin
 goarch: amd64
-pkg: github.com/gogf/gf/g/os/gtimer
+pkg: github.com/gogf/gf/os/gtimer
 Benchmark_Add-4               3000000             484 ns/op         152 B/op           5 allocs/op
 Benchmark_StartStop-4       100000000            10.1 ns/op           0 B/op           0 allocs/op
 PASS

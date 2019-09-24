@@ -45,7 +45,7 @@ type Mutex
 ```html
 goos: darwin
 goarch: amd64
-pkg: github.com/gogf/gf/g/os/gmutex
+pkg: github.com/gogf/gf/os/gmutex
 Benchmark_Mutex_LockUnlock-4           50000000            31.5 ns/op
 Benchmark_RWMutex_LockUnlock-4         30000000            54.1 ns/op
 Benchmark_RWMutex_RLockRUnlock-4       50000000            27.9 ns/op

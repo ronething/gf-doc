@@ -15,7 +15,7 @@ https://godoc.org/github.com/gogf/gf/encoding/ghash
 ```html
 goos: darwin
 goarch: amd64
-pkg: github.com/gogf/gf/g/encoding/ghash
+pkg: github.com/gogf/gf/encoding/ghash
 BenchmarkBKDRHash-4     	50000000	        30.2 ns/op
 BenchmarkBKDRHash64-4   	50000000	        27.2 ns/op
 BenchmarkSDBMHash-4     	30000000	        40.5 ns/op

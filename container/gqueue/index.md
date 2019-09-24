@@ -121,7 +121,7 @@ func main() {
 ```html
 goos: darwin
 goarch: amd64
-pkg: github.com/gogf/gf/g/container/gqueue
+pkg: github.com/gogf/gf/container/gqueue
 Benchmark_Gqueue_StaticPushAndPop-4       20000000            84.2 ns/op
 Benchmark_Gqueue_DynamicPush-4            20000000             164 ns/op
 Benchmark_Gqueue_DynamicPop-4             20000000             121 ns/op

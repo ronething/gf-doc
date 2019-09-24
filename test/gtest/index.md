@@ -74,8 +74,8 @@ func Test_Trim(t *testing.T) {
 ```html
 === RUN   Test_Trim
 [ASSERT] EXPECT 123456#; == 123456
-1. /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/text/gstr/gstr_z_unit_trim_test.go:20
-2. /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/text/gstr/gstr_z_unit_trim_test.go:18
+1. /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/text/gstr/gstr_z_unit_trim_test.go:20
+2. /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/text/gstr/gstr_z_unit_trim_test.go:18
 --- FAIL: Test_Trim (0.00s)
 FAIL
 ```

@@ -58,7 +58,7 @@ func Convert(i interface{}, t string, extraParams ...interface{}) interface{}
 测试转换变量值为`123456789`，类型`int`。
 
 ```shell
-john@john-B85M:~/Workspace/Go/GOPATH/src/github.com/gogf/gf/g/util/gconv$ go test *.go -bench=".*" -benchmem
+john@john-B85M:~/Workspace/Go/GOPATH/src/github.com/gogf/gf/util/gconv$ go test *.go -bench=".*" -benchmem
 goos: linux
 goarch: amd64
 BenchmarkString-4               20000000                71.8 ns/op            24 B/op          2 allocs/op
