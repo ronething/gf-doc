@@ -19,7 +19,7 @@ https://godoc.org/github.com/gogf/gf/container/glist
 
 ## 性能测试
 
-https://github.com/gogf/gf/blob/master/g/container/glist/glist_z_bench_test.go
+https://github.com/gogf/gf/blob/master/container/glist/glist_z_bench_test.go
 
 ```
 goos: darwin

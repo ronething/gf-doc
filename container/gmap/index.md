@@ -188,7 +188,7 @@ m := gmap.New(true)
 
 ### 并发安全
 
-https://github.com/gogf/gf/blob/master/g/container/gmap/gmap_z_bench_safe_test.go
+https://github.com/gogf/gf/blob/master/container/gmap/gmap_z_bench_safe_test.go
 
 ```shell
 goos: darwin
@@ -210,7 +210,7 @@ Benchmark_StrStrMap_Get-4               20000000              91.9 ns/op        
 ```
 ### 非并发安全
 
-https://github.com/gogf/gf/blob/master/g/container/gmap/gmap_z_bench_unsafe_test.go
+https://github.com/gogf/gf/blob/master/container/gmap/gmap_z_bench_unsafe_test.go
 
 ```shell
 goos: darwin
@@ -233,7 +233,7 @@ Benchmark_Unsafe_StrStrMap_Get-4         5000000               229 ns/op        
 
 ### 不同类型map性能
 
-https://github.com/gogf/gf/blob/master/g/container/gmap/gmap_z_bench_maps_test.go
+https://github.com/gogf/gf/blob/master/container/gmap/gmap_z_bench_maps_test.go
 
 ```shell
 goos: darwin
@@ -251,7 +251,7 @@ Benchmark_TreeMap_Get-4                 20000000               189 ns/op        
 
 go语言从`1.9`版本开始引入了并发安全的`sync.Map`，但`gmap`比较于标准库的`sync.Map`性能更加优异，并且功能更加丰富。 
 
-我们来看看基准测试对比结果：https://github.com/gogf/gf/blob/master/g/container/gmap/gmap_z_bench_syncmap_test.go
+我们来看看基准测试对比结果：https://github.com/gogf/gf/blob/master/container/gmap/gmap_z_bench_syncmap_test.go
 ```shell
 goos: darwin
 goarch: amd64

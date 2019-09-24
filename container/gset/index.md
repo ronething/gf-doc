@@ -138,7 +138,7 @@ func main() {
 
 ## 性能测试
 
-https://github.com/gogf/gf/blob/master/g/container/gset/gset_z_bench_test.go
+https://github.com/gogf/gf/blob/master/container/gset/gset_z_bench_test.go
 
 ```html
 goos: darwin

@@ -6,7 +6,7 @@
 
 `gmutex.Mutex`互斥锁对象支持读写控制，互斥锁功能逻辑与标准库`sync.RWMutex`类似，可并发读但不可并发写。
 
-> 互斥锁的设计细节，推荐阅读轻量级高清版的实现源码：https://github.com/gogf/gf/blob/master/g/os/gmutex/gmutex.go
+> 互斥锁的设计细节，推荐阅读轻量级高清版的实现源码：https://github.com/gogf/gf/blob/master/os/gmutex/gmutex.go
 
 **使用方式**：
 ```go
@@ -41,7 +41,7 @@ type Mutex
 ## 基准测试
 
 `gmutex.Mutex`与标准库的`sync.Mutex`及`sync.RWMutex`的基准测试对比结果：
-[gmutex_bench_test.go](https://github.com/gogf/gf/blob/master/g/os/gmutex/gmutex_bench_test.go)
+[gmutex_bench_test.go](https://github.com/gogf/gf/blob/master/os/gmutex/gmutex_bench_test.go)
 ```html
 goos: darwin
 goarch: amd64
