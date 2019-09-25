@@ -40,7 +40,7 @@
         * [文件上传](net/ghttp/upload-server.md)
         * [HTTP客户端](#)
             * [http.Client](net/ghttp/client/index.md)
-            * [http.ClientResponse](net/ghttp/rclient/response.md)
+            * [http.ClientResponse](net/ghttp/client/response.md)
             * [复杂参数](net/ghttp/client/params.md)
             * [工具方法](net/ghttp/client/function.md)
             * [使用示例](net/ghttp/client/example.md)

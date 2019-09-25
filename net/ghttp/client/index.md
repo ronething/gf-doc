@@ -5,7 +5,7 @@
 `gf`框架提供了强大易用的HTTP客户端，同样由`ghttp`模块实现。
 
 方法列表：
-https://godoc.org/github.com/gogf/gf/net/ghttp#Client
+https://godoc.org/github.com/gogf/gf/net/ghttp
 ```go
 type Client
     func NewClient() *Client
