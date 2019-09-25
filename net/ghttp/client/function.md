@@ -1,6 +1,6 @@
 
 # 工具方法
-`ghttp`模块也提供了独立的包函数来实现HTTP请求，函数列表如下：
+`ghttp`模块也提供了独立的包函数来实现HTTP请求，用于短连接请求，方法如下：
 
 ```go
 func Get(url string) (*ClientResponse, error)
