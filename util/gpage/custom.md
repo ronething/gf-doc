@@ -55,6 +55,7 @@ func main() {
 }
 ```
 执行后，页面输出结果为：
+
 ![](/images/Selection_015.png)
 
 **示例2，使用第二种方式实现分页自定义：**
@@ -108,6 +109,7 @@ func main() {
 ```
 
 执行后，页面输出结果为：
+
 ![](/images/Selection_014.png)
 
 
