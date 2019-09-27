@@ -201,7 +201,6 @@
         * [gdebug (调试功能)](debug/gdebug/index.md)
     * [I18N国际化模块](#)
         * [gi18n (国际化处理)](i18n/gi18n/index.md)
-    * [其他模块介绍](other.md)
 * [框架开发案例](#)
     * [GoFrame官网项目](cases/gf-home.md)
     * [GoFrame开发示例](cases/gf-demos.md)

@@ -5,6 +5,8 @@
 
 ![](/images/QQ图片20180417140149.png)
 
+> 事件回调机制不同于中间件机制，详情请参考【[中间件](net/ghttp/router/middleware.md)】章节。
+
 `ghttp.Server`提供了事件回调注册功能，类似于其他框架的`中间件`功能，相比较于`中间件`，事件回调的特性更加简单。
 
 `ghttp.Server`支持用户对于某一事件进行自定义监听处理，按照```pattern```方式进行绑定注册(```pattern```格式与路由注册一致)。**支持多个方法对同一事件进行监听**，```ghttp.Server```将会按照`路由优先级`及`回调注册顺序`进行回调方法调用。同一事件时先注册的HOOK回调函数优先级越高。
@@ -20,27 +22,27 @@ func (d *Domain) BindHookHandlerByMap(pattern string, hookmap map[string]Handler
 ```
 
 支持的Hook事件列表：
-1. `BeforeServe/ghttp.HOOK_BEFORE_SERVE`
+1. `ghttp.HOOK_BEFORE_SERVE`
 
 	在进入/初始化服务对象之前，该事件是最常用的事件，特别是针对于权限控制、跨域请求等处理。
 
-1. `AfterServe/ghttp.HOOK_AFTER_SERVE`
+1. `ghttp.HOOK_AFTER_SERVE`
 
 	在完成服务执行流程之后。
 
-1. `BeforeOutput/ghttp.HOOK_BEFORE_OUTPUT`
+1. `ghttp.HOOK_BEFORE_OUTPUT`
 
 	向客户端输出返回内容之前。
 
-1. `AfterOutput/ghttp.HOOK_AFTER_OUTPUT`
+1. `ghttp.HOOK_AFTER_OUTPUT`
 
 	向客户端输出返回内容之后。
 
-1. `BeforeClose/ghttp.HOOK_BEFORE_CLOSE`
+1. `ghttp.HOOK_BEFORE_CLOSE`
 
 	（已废弃）在http请求关闭之前。
 
-1. `AfterClose/ghttp.HOOK_AFTER_CLOSE`
+1. `ghttp.HOOK_AFTER_CLOSE`
 
 	（已废弃）在http请求关闭之后。
 
@@ -115,8 +117,6 @@ func main() {
         ghttp.HOOK_AFTER_SERVE   : func(r *ghttp.Request){ glog.Println(ghttp.HOOK_AFTER_SERVE) },
         ghttp.HOOK_BEFORE_OUTPUT : func(r *ghttp.Request){ glog.Println(ghttp.HOOK_BEFORE_OUTPUT) },
         ghttp.HOOK_AFTER_OUTPUT  : func(r *ghttp.Request){ glog.Println(ghttp.HOOK_AFTER_OUTPUT) },
-        ghttp.HOOK_BEFORE_CLOSE  : func(r *ghttp.Request){ glog.Println(ghttp.HOOK_BEFORE_CLOSE) },
-        ghttp.HOOK_AFTER_CLOSE   : func(r *ghttp.Request){ glog.Println(ghttp.HOOK_AFTER_CLOSE) },
     })
     s.BindHandler(p, func(r *ghttp.Request) {
        r.Response.Write("用户:", r.Get("name"), ", uid:", r.Get("uid"))
@@ -132,46 +132,46 @@ func main() {
 package main
 
 import (
-    "github.com/gogf/gf/frame/g"
-    "github.com/gogf/gf/net/ghttp"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
 )
 
 // 优先调用的HOOK
 func beforeServeHook1(r *ghttp.Request) {
-    r.SetParam("name", "GoFrame")
-    r.Response.Writeln("set name")
+	r.SetParam("name", "GoFrame")
+	r.Response.Writeln("set name")
 }
 
 // 随后调用的HOOK
 func beforeServeHook2(r *ghttp.Request) {
-    r.SetParam("site", "https://goframe.org")
-    r.Response.Writeln("set site")
+	r.SetParam("site", "https://goframe.org")
+	r.Response.Writeln("set site")
 }
 
 // 允许对同一个路由同一个事件注册多个回调函数，按照注册顺序进行优先级调用。
 // 为便于在路由表中对比查看优先级，这里讲HOOK回调函数单独定义为了两个函数。
 func main() {
-    s := g.Server()
-    s.BindHandler("/", func(r *ghttp.Request) {
-        r.Response.Writeln(r.GetParam("name").String())
-        r.Response.Writeln(r.GetParam("site").String())
-    })
-    s.BindHookHandler("/", ghttp.HOOK_BEFORE_SERVE, beforeServeHook1)
-    s.BindHookHandler("/", ghttp.HOOK_BEFORE_SERVE, beforeServeHook2)
-    s.SetPort(8199)
-    s.Run()
+	s := g.Server()
+	s.BindHandler("/", func(r *ghttp.Request) {
+		r.Response.Writeln(r.Get("name"))
+		r.Response.Writeln(r.Get("site"))
+	})
+	s.BindHookHandler("/", ghttp.HOOK_BEFORE_SERVE, beforeServeHook1)
+	s.BindHookHandler("/", ghttp.HOOK_BEFORE_SERVE, beforeServeHook2)
+	s.SetPort(8199)
+	s.Run()
 }
 ```
 执行后，终端输出的路由表信息如下：
 ```
-  SERVER  | ADDRESS | DOMAIN  | METHOD | P | ROUTE |        HANDLER        |    HOOK      
-|---------|---------|---------|--------|---|-------|-----------------------|-------------|
-  default | :8199   | default | ALL    | 1 | /     | main.main.func1       |              
-|---------|---------|---------|--------|---|-------|-----------------------|-------------|
-  default | :8199   | default | ALL    | 2 | /     | main.beforeServeHook1 | BeforeServe  
-|---------|---------|---------|--------|---|-------|-----------------------|-------------|
-  default | :8199   | default | ALL    | 1 | /     | main.beforeServeHook2 | BeforeServe  
-|---------|---------|---------|--------|---|-------|-----------------------|-------------|
+  SERVER  | ADDRESS | DOMAIN  | METHOD | P | ROUTE |        HANDLER        |    MIDDLEWARE      
+|---------|---------|---------|--------|---|-------|-----------------------|-------------------|
+  default |  :8199  | default | ALL    | 1 | /     | main.main.func1       |                    
+|---------|---------|---------|--------|---|-------|-----------------------|-------------------|
+  default |  :8199  | default | ALL    | 2 | /     | main.beforeServeHook1 | HOOK_BEFORE_SERVE  
+|---------|---------|---------|--------|---|-------|-----------------------|-------------------|
+  default |  :8199  | default | ALL    | 1 | /     | main.beforeServeHook2 | HOOK_BEFORE_SERVE  
+|---------|---------|---------|--------|---|-------|-----------------------|-------------------|
 ```
 手动访问 [http://127.0.0.1:8199/](http://127.0.0.1:8199/) 后，页面输出内容为：
 ```
@@ -186,116 +186,117 @@ https://goframe.org
 package main
 
 import (
-    "fmt"
-    "github.com/gogf/gf/frame/g"
-    "github.com/gogf/gf/net/ghttp"
+	"fmt"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
-    s := g.Server()
+	s := g.Server()
+	// 多事件回调示例，事件1
+	pattern1 := "/:name/info"
+	s.BindHookHandlerByMap(pattern1, map[string]ghttp.HandlerFunc{
+		ghttp.HOOK_BEFORE_SERVE: func(r *ghttp.Request) {
+			r.SetParam("uid", 1000)
+		},
+	})
+	s.BindHandler(pattern1, func(r *ghttp.Request) {
+		r.Response.Write("用户:", r.Get("name"), ", uid:", r.Get("uid"))
+	})
 
-    // 多事件回调示例，事件1
-    pattern1 := "/:name/info"
-    s.BindHookHandlerByMap(pattern1, map[string]ghttp.HandlerFunc {
-        "BeforeServe"  : func(r *ghttp.Request) {
-            r.SetQuery("uid", "1000")
-        },
-    })
-    s.BindHandler(pattern1, func(r *ghttp.Request) {
-        r.Response.Write("用户:", r.Get("name"), ", uid:", r.GetQueryString("uid"))
-    })
-
-    // 多事件回调示例，事件2
-    pattern2 := "/{object}/list/{page}.java"
-    s.BindHookHandlerByMap(pattern2, map[string]ghttp.HandlerFunc {
-        "BeforeOutput" : func(r *ghttp.Request){
-            r.Response.SetBuffer([]byte(
-                fmt.Sprintf("通过事件修改输出内容, object:%s, page:%s", r.Get("object"), r.GetRouterString("page"))),
-            )
-        },
-    })
-    s.BindHandler(pattern2, func(r *ghttp.Request) {
-        r.Response.Write(r.Router.Uri)
-    })
-    s.SetPort(8199)
-    s.Run()
+	// 多事件回调示例，事件2
+	pattern2 := "/{object}/list/{page}.java"
+	s.BindHookHandlerByMap(pattern2, map[string]ghttp.HandlerFunc{
+		ghttp.HOOK_BEFORE_OUTPUT: func(r *ghttp.Request) {
+			r.Response.SetBuffer([]byte(
+				fmt.Sprintf("通过事件修改输出内容, object:%s, page:%s", r.Get("object"), r.GetRouterString("page"))),
+			)
+		},
+	})
+	s.BindHandler(pattern2, func(r *ghttp.Request) {
+		r.Response.Write(r.Router.Uri)
+	})
+	s.SetPort(8199)
+	s.Run()
 }
 ```
 
-通过事件1设置了访问```/:name/info```路由规则时的GET参数；通过事件2，改变了当访问的路径匹配路由```/{object}/list/{page}.java```时的输出结果。
+通过事件1设置了访问`/:name/info`路由规则时的GET参数；通过事件2，改变了当访问的路径匹配路由`/{object}/list/{page}.java`时的输出结果。执行之后，访问以下URL查看效果：
+- http://127.0.0.1:8199/user/info
+- http://127.0.0.1:8199/user/list/1.java
+- http://127.0.0.1:8199/user/list/2.java
 
 ## 示例4，事件回调注册优先级
 ```go
 package main
 
 import (
-    "github.com/gogf/gf/frame/g"
-    "github.com/gogf/gf/net/ghttp"
-    "github.com/gogf/gf/os/glog"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
-    s := g.Server()
-    s.BindHandler("/priority/show", func(r *ghttp.Request) {
-        r.Response.Write("priority test")
-    })
+	s := g.Server()
+	s.BindHandler("/priority/show", func(r *ghttp.Request) {
+		r.Response.Writeln("priority service")
+	})
 
-    s.BindHookHandlerByMap("/priority/:name", map[string]ghttp.HandlerFunc {
-        "BeforeServe"  : func(r *ghttp.Request) {
-            glog.Println(r.Router.Uri)
-        },
-    })
-    s.BindHookHandlerByMap("/priority/*any", map[string]ghttp.HandlerFunc {
-        "BeforeServe"  : func(r *ghttp.Request) {
-            glog.Println(r.Router.Uri)
-        },
-    })
-    s.BindHookHandlerByMap("/priority/show", map[string]ghttp.HandlerFunc {
-        "BeforeServe"  : func(r *ghttp.Request) {
-            glog.Println(r.Router.Uri)
-        },
-    })
-    s.SetPort(8199)
-    s.Run()
+	s.BindHookHandlerByMap("/priority/:name", map[string]ghttp.HandlerFunc{
+		ghttp.HOOK_BEFORE_SERVE: func(r *ghttp.Request) {
+			r.Response.Writeln("/priority/:name")
+		},
+	})
+	s.BindHookHandlerByMap("/priority/*any", map[string]ghttp.HandlerFunc{
+		ghttp.HOOK_BEFORE_SERVE: func(r *ghttp.Request) {
+			r.Response.Writeln("/priority/*any")
+		},
+	})
+	s.BindHookHandlerByMap("/priority/show", map[string]ghttp.HandlerFunc{
+		ghttp.HOOK_BEFORE_SERVE: func(r *ghttp.Request) {
+			r.Response.Writeln("/priority/show")
+		},
+	})
+	s.SetPort(8199)
+	s.Run()
 }
 ```
-在这个示例中，我们往注册了3个路由规则的事件回调，并且都匹配路由注册的地址```/priority/show```，这样我们便可以通过访问这个地址来看看路由执行的顺序是怎么样的。
+在这个示例中，我们往注册了3个路由规则的事件回调，并且都能够匹配到路由注册的地址`/priority/show`，这样我们便可以通过访问这个地址来看看路由执行的顺序是怎么样的。
 
-执行后我们访问 http://127.0.0.1:8199/priority/show ，随后我们可以在服务端的终端上看到以下输出信息：
+执行后我们访问 http://127.0.0.1:8199/priority/show ，随后我们看到页面输出以下信息：
 ```html
-2018-08-03 15:16:25.971 27391: http server started listening on [:8199]
-2018-08-03 15:16:28.385 /priority/show
-2018-08-03 15:16:28.385 /priority/:name
-2018-08-03 15:16:28.385 /priority/*any
+/priority/show
+/priority/:name
+/priority/*any
+priority service
 ```
 
 ## 示例5，使用事件回调允许跨域请求
-首先我们来看一个简单的`REST`接口示例：
+> 在【[中间件](net/ghttp/router/middleware.md)】和【[CORS跨域处理](net/ghttp/cors.md)】章节也有介绍跨域处理的示例，大多数情况下，我们使用中间件来处理跨域请求的实现居多。
+
+HOOK和中间件都能实现跨域请求处理，我们这里使用HOOK来实现简单的跨域处理。
+首先我们来看一个简单的接口示例：
 ```go
 package main
 
 import (
     "github.com/gogf/gf/frame/g"
-    "github.com/gogf/gf/frame/gmvc"
     "github.com/gogf/gf/net/ghttp"
 )
 
-type Order struct {
-    gmvc.Controller
-}
-
-func (o *Order) Get() {
-    o.Response.Write("GET")
+func Order(r *ghttp.Request) {
+    r.Response.Write("GET")
 }
 
 func main() {
     s := g.Server()
-    s.BindControllerRest("/api.v1/{.struct}", new(Order))
+    s.Group("/api.v1", func(g *ghttp.RouterGroup) {
+        g.GET("/order", Order)
+    })
     s.SetPort(8199)
     s.Run()
 }
 ```
-接口地址是 http://localhost/api.v1/order ，当然这个接口是不允许跨域的。我们打开一个不同的域名，例如：百度首页(正好用了jQuery，方便调试)，然后按```F12```打开开发者面板，在```console```下执行以下AJAX请求：
+接口地址是 http://localhost:8199/api.v1/order ，当然这个接口是不允许跨域的。我们打开一个不同的域名，例如：百度首页(正好用了`jQuery`，方便调试)，然后按`F12`打开开发者面板，在`console`下执行以下`AJAX`请求：
 ```javascript
 $.get("http://localhost:8199/api.v1/order", function(result){
     console.log(result)
@@ -309,32 +310,27 @@ $.get("http://localhost:8199/api.v1/order", function(result){
 package main
 
 import (
-    "github.com/gogf/gf/frame/g"
-    "github.com/gogf/gf/frame/gmvc"
-    "github.com/gogf/gf/net/ghttp"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
 )
 
-type Order struct {
-    gmvc.Controller
-}
-
-func (o *Order) Get() {
-    o.Response.Write("GET")
+func Order(r *ghttp.Request) {
+	r.Response.Write("GET")
 }
 
 func main() {
-    s := g.Server()
-    s.BindHookHandlerByMap("/api.v1/*any", map[string]ghttp.HandlerFunc {
-       "BeforeServe"  : func(r *ghttp.Request) {
-           r.Response.CORSDefault()
-       },
-    })
-    s.BindControllerRest("/api.v1/{.struct}", new(Order))
-    s.SetPort(8199)
-    s.Run()
+	s := g.Server()
+	s.Group("/api.v1", func(g *ghttp.RouterGroup) {
+		g.Hook("/*any", ghttp.HOOK_BEFORE_SERVE, func(r *ghttp.Request) {
+			r.Response.CORSDefault()
+		})
+		g.GET("/order", Order)
+	})
+	s.SetPort(8199)
+	s.Run()
 }
 ```
-我们增加了针对于路由```/api.v1/*any```的绑定事件```BeforeServe```，该事件将会在所有服务执行之前调用，该事件的回调方法中，我们通过调用```CORSDefault```方法使用默认的跨域设置允许跨域请求。该绑定的事件路由规则使用了模糊匹配规则，表示所有```/api.v1```开头的接口地址都允许跨域请求。
+我们增加了针对于路由`/api.v1/*any`的绑定事件`ghttp.HOOK_BEFORE_SERVE`，该事件将会在所有服务执行之前调用，该事件的回调方法中，我们通过调用`CORSDefault`方法使用默认的跨域设置允许跨域请求。该绑定的事件路由规则使用了模糊匹配规则，表示所有`/api.v1`开头的接口地址都允许跨域请求。
 
 返回刚才的百度首页，再次执行请求`AJAX`请求，这次便成功了：
 ![](/images/Selection_155.png)
