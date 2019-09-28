@@ -60,7 +60,7 @@ https://godoc.org/github.com/gogf/gf/os/gsession
 1. 使用文件存储持久化存储管理`Session`数据；
 1. 当且仅有当`Session`被标记为`dirty`时才会执行`Session`序列化并执行文件持久化存储；
 1. 当且仅当内存中的`Session`不存在时，才会从文件存储中反序列化恢复`Session`数据到内存中；
-1. 序列化/反序列化使用的是`json.Marshal/UnMarshal`；
+1. 序列化/反序列化使用的是标准库的`json.Marshal/UnMarshal`方法；
 
 从原理可知，当`Session`为读多写少的场景中，`Session`的数据操作非常高效。
 
