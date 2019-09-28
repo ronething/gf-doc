@@ -7,7 +7,7 @@
 https://godoc.org/github.com/gogf/gf/os/gsession
 
 
-任何时候都可以通过`ghttp.Request`获取`Session`对象，因为`Cookie`和`Session`都是和请求会话相关，因此都属于`Request`的成员对象，并对外公开。`gf`框架的`Session`处理是存放在内存中的，因此处理效率非常高，默认过期时间是`24小时`。
+任何时候都可以通过`ghttp.Request`获取`Session`对象，因为`Cookie`和`Session`都是和请求会话相关，因此都属于`Request`的成员对象，并对外公开。`gf`框架的`Session`默认过期时间是`24小时`。
 
 `SessionId`默认通过`Cookie`来传递，并且也支持客户端通过`Header`传递`SessionId`，`SessionId`的名称通过`ghttp.Server`的`SetSessionIdName`进行修改。
 
@@ -64,7 +64,7 @@ https://godoc.org/github.com/gogf/gf/os/gsession
 
 从原理可知，当`Session`为读多写少的场景中，`Session`的数据操作非常高效。
 
-> 有个注意的细节，由于文件存储涉及到文件操作，为便于降低`IO`开销并提高`Session`操作性能，并不是每一次`Session`请求结束后都即时地去更新存储的文件`TTL`时间。只有当涉及到写入操作时（被标记为`dirty`），这种情况下，每一次`Session`请求结束后会即时地更新对应`Session`存储文件的TTL时间；而针对于读取请求，将会每隔`一分钟`更新前一分钟内读取操作对应的`Session`文件`TTL`时间，以便于`Session`自动续活。
+> 有个注意的细节，由于文件存储涉及到文件操作，为便于降低`IO`开销并提高`Session`操作性能，并不是每一次`Session`请求结束后都即时地去更新存储的文件`TTL`时间。只有当涉及到写入操作时（被标记为`dirty`），这种情况下，每一次`Session`请求结束后会即时地更新对应`Session`存储文件的`TTL`时间；而针对于读取请求，将会每隔`一分钟`更新前一分钟内读取操作对应的`Session`文件`TTL`时间，以便于`Session`自动续活。
 
 
 ## 使用示例1，基本使用
