@@ -136,6 +136,66 @@ func main() {
 [7 4 5 6]
 ```
 
+### 示例3，JSON序列化/反序列
+`gset`模块下的所有`set`容器均实现了标准库`json`数据格式的序列化/反序列化接口。
+1. `Marshal`
+    ```go
+	package main
+
+	import (
+		"encoding/json"
+		"fmt"
+		"github.com/gogf/gf/container/gset"
+	)
+
+	func main() {
+		type Student struct {
+			Id     int
+			Name   string
+			Scores *gset.IntSet
+		}
+		s := Student{
+			Id:     1,
+			Name:   "john",
+			Scores: gset.NewIntSetFrom([]int{100, 99, 98}),
+		}
+		b, _ := json.Marshal(s)
+		fmt.Println(string(b))
+	}
+    ```
+    执行后，输出结果：
+    ```
+    {"Id":1,"Name":"john","Scores":[100,99,98]}
+    ```
+1. `Unmarshal`
+    ```go
+	package main
+
+	import (
+		"encoding/json"
+		"fmt"
+		"github.com/gogf/gf/container/gset"
+	)
+
+	func main() {
+		b := []byte(`{"Id":1,"Name":"john","Scores":[100,99,98]}`)
+		type Student struct {
+			Id     int
+			Name   string
+			Scores *gset.IntSet
+		}
+		s := Student{}
+		json.Unmarshal(b, &s)
+		fmt.Println(s)
+	}
+    ```
+    执行后，输出结果：
+    ```
+    {1 john [100,99,98]}
+    ```
+
+
+
 ## 性能测试
 
 https://github.com/gogf/gf/blob/master/container/gset/gset_z_bench_test.go
