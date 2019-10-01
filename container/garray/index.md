@@ -153,7 +153,7 @@ func main () {
 
 
 ## 示例3，JSON序列化/反序列
-`garray`模块下的所有`array`容器均实现了标准库`json`数据格式的序列化/反序列化接口。
+`garray`模块下的所有容器类型均实现了标准库`json`数据格式的序列化/反序列化接口。
 1. `Marshal`
     ```go
     package main

@@ -171,7 +171,7 @@ TreeMap Values: [1 2 3 4 5 6 7 8 9]
 ```
 
 ### 示例3，JSON序列化/反序列
-`gmap`模块下的所有`map`容器均实现了标准库`json`数据格式的序列化/反序列化接口。
+`gmap`模块下的所有容器类型均实现了标准库`json`数据格式的序列化/反序列化接口。
 1. `Marshal`
     ```go
     package main
