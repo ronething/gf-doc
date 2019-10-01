@@ -6,12 +6,11 @@
 
 当 `map`/`struct` 中存在空值如 `nil`,`""`,`0` 时，默认情况下，`gdb`将会将其当做正常的输入参数，因此这些参数也会被更新到数据表。如以下操作（以`map`为例，`struct`同理）：
 ```go
-// UPDATE `user` SET `name`='john',update_time=null WHERE 
+// UPDATE `user` SET `name`='john',update_time=null WHERE `id`=1
 g.DB("user").Data(g.Map{
     "name"        : "john",
     "update_time" : nil,
 }).Where("id", 1).Update()
-`id`=1
 ```
 
 ## Option方法
