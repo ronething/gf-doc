@@ -23,6 +23,25 @@ g.DB("user").Option(gdb.OPTION_OMITEMPTY).Data(g.Map{
 }).Where("id", 1).Update()
 ```
 
+对于`struct`的空值过滤操作示例：
+```go
+type User struct {
+    Id         int    `orm:"id"`
+    Passport   string `orm:"passport"`
+    Password   string `orm:"password"`
+    NickName   string `orm:"nickname"`
+    CreateTime string `orm:"create_time"`
+    UpdateTime string `orm:"update_time"`
+}
+user := User{
+    Id        : 1,
+    NickName  : "john",
+    UpdateTime: gtime.Now().String(),
+}
+g.DB("user").Option(gdb.OPTION_OMITEMPTY).Data(user).Save()
+// INSERT INTO `user`(`id`,`nickname`,`update_time`) VALUES(1,'john','2019-10-01 12:00:00') ON DUPLICATE KEY UPDATE `id`=VALUES(`id`) `nickname`=VALUES(`nickname`) `update_time`=VALUES(`update_time`)
+```
+
 > 注意，批量写入/更新操作中`Option`方法将会失效，因为在批量操作中，必须保证每个写入记录的字段是统一的。
 
 ## 更新特定字段
@@ -37,3 +56,21 @@ db.Table("user").Fields("id, passport").Data(g.Map{
 }).Insert()
 ```
 
+对于`struct`的空值过滤及特定字段更新操作示例：
+```go
+type User struct {
+    Id         int    `orm:"id"`
+    Passport   string `orm:"passport"`
+    Password   string `orm:"password"`
+    NickName   string `orm:"nickname"`
+    CreateTime string `orm:"create_time"`
+    UpdateTime string `orm:"update_time"`
+}
+user := User{
+    Id        : 1,
+    NickName  : "john",
+    UpdateTime: gtime.Now().String(),
+}
+g.DB("user").Option(gdb.OPTION_OMITEMPTY).Fields("id,nickname").Data(user).Save()
+// INSERT INTO `user`(`id`,`nickname`) VALUES(1,'john') ON DUPLICATE KEY UPDATE `id`=VALUES(`id`) `nickname`=VALUES(`nickname`)
+```
