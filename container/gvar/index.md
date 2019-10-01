@@ -1,3 +1,5 @@
+[TOC]
+
 # gvar
 
 `通用动态变量`，支持各种内置的数据类型转换，可以作为`interface{}`类型的替代数据类型，并且该类型支持`并发安全`。
@@ -19,7 +21,7 @@ https://godoc.org/github.com/gogf/gf/container/gvar
 
  
 
-## 使用示例
+## 示例1，基本使用
 
 ```go
 package main
@@ -69,3 +71,60 @@ func main() {
 &{123}
 ```
 
+## 示例2，JSON序列化/反序列
+`gvar.Var`容器实现了标准库`json`数据格式的序列化/反序列化接口。
+1. `Marshal`
+    ```go
+    package main
+
+    import (
+        "encoding/json"
+        "fmt"
+        "github.com/gogf/gf/frame/g"
+    )
+
+    func main() {
+        type Student struct {
+            Id     *g.Var
+            Name   *g.Var
+            Scores *g.Var
+        }
+        s := Student{
+            Id:     g.NewVar(1),
+            Name:   g.NewVar("john"),
+            Scores: g.NewVar([]int{100, 99, 98}),
+        }
+        b, _ := json.Marshal(s)
+        fmt.Println(string(b))
+    }
+    ```
+    执行后，输出结果：
+    ```
+    {"Id":1,"Name":"john","Scores":[100,99,98]}
+    ```
+1. `Unmarshal`
+    ```go
+    package main
+
+    import (
+        "encoding/json"
+        "fmt"
+        "github.com/gogf/gf/frame/g"
+    )
+
+    func main() {
+        b := []byte(`{"Id":1,"Name":"john","Scores":[100,99,98]}`)
+        type Student struct {
+            Id     *g.Var
+            Name   *g.Var
+            Scores *g.Var
+        }
+        s := Student{}
+        json.Unmarshal(b, &s)
+        fmt.Println(s)
+    }
+    ```
+    执行后，输出结果：
+    ```
+    {1 john [100,99,98]}
+    ```
