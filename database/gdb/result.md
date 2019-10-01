@@ -7,22 +7,26 @@ https://godoc.org/github.com/gogf/gf/database/gdb
 
 查询结果的数据结构如下：
 ```go
-type Value       []byte                 // 返回数据表记录值
-type Result      []Record               // 返回数据表记录列表
-type Record      map[string]Value       // 返回数据表记录键值对
+type Value  = *gvar.Var              // 返回数据表记录值
+type Record   map[string]Value       // 返回数据表记录键值对
+type Result   []Record               // 返回数据表记录列表
 ```
 
-`Value/Record/Result`用于ORM操作的结果数据类型，其中`Result`表示数据表记录列表，`Record`表示一条数据表记录，`Value`表示记录中的一条键值数据。
+1. `Value/Record/Result`用于ORM操作的结果数据类型。
+1. `Result`表示数据表记录列表，`Record`表示一条数据表记录，`Value`表示记录中的一条键值数据。
+1. `Value`是`*gvar.Var`类型的别名类型，方便于后续的数据类型转换。
 
 # Record记录处理
 
 ```go
 // 数据表记录
 type Record
-    func (r Record) ToMap() Map
-    func (r Record) ToJson() string
-    func (r Record) ToXml(rootTag ...string) string
-    func (r Record) ToStruct(objPointer interface{}) error
+    func (r Record) Xml(rootTag ...string) string
+    func (r Record) Json() string
+    func (r Record) Map() Map
+    func (r Record) GMap() *gmap.StrAnyMap
+    func (r Record) Struct(pointer interface{}) error
+
 ```
 
 `gdb`为数据表记录操作提供了极高的灵活性和简便性，除了支持以`map`的形式访问/操作数据表记录以外，也支持将数据表记录转换为`struct`进行处理。我们以下使用一个简单的示例来演示该特性。
@@ -108,19 +112,18 @@ Nick-Name  Nick_Name      match
 ```go
 // 数据表记录列表
 type Result
-    func (r Result) ToList() List
-	func (r Result) ToJson() string
-    func (r Result) ToXml(rootTag ...string) string
-    func (r Result) ToStringMap(key string) map[string]Map
-    func (r Result) ToIntMap(key string) map[int]Map
-	func (r Result) ToUintMap(key string) map[uint]Map
-
-    func (r Result) ToStringRecord(key string) map[string]Record
-    func (r Result) ToIntRecord(key string) map[int]Record
-    func (r Result) ToUintRecord(key string) map[uint]Record
-    func (r Record) ToStructs(objPointerSlice interface{}) error
+    func (r Result) Xml(rootTag ...string) string
+    func (r Result) Json() string
+    func (r Result) List() List
+    func (r Result) MapKeyInt(key string) map[int]Map
+    func (r Result) MapKeyStr(key string) map[string]Map
+    func (r Result) MapKeyUint(key string) map[uint]Map
+    func (r Result) RecordKeyInt(key string) map[int]Record
+    func (r Result) RecordKeyStr(key string) map[string]Record
+    func (r Result) RecordKeyUint(key string) map[uint]Record
+    func (r Result) Structs(pointer interface{}) (err error)
 ```
-由于方法比较简单，这里便不再举例说明。需要注意的是两个方法`Record.ToMap`及`Result.ToList`，这两个方法也是使用比较频繁的方法，用以将ORM查询结果信息转换为可做展示的数据类型。由于结果集字段值底层为`[]byte`类型，虽然使用了新的`Value`类型做了封装，并且也提供了数十种常见的类型转换方法(具体请阅读【[gvar通用动态变量](container/gvar/index.md)】章节)，但是大多数时候需要直接将结果`Result`或者`Record`直接作为`json`或者`xml`数据结构返回，就需要做转换才行。
+由于方法比较简单，这里便不再举例说明。需要注意的是两个方法`Record.Map`及`Result.List`，这两个方法也是使用比较频繁的方法，用以将ORM查询结果信息转换为可做展示的数据类型。由于结果集字段值底层为`[]byte`类型，虽然使用了新的`Value`类型做了封装，并且也提供了数十种常见的类型转换方法(具体请阅读【[gvar通用动态变量](container/gvar/index.md)】章节)，但是大多数时候需要直接将结果`Result`或者`Record`直接作为`json`或者`xml`数据结构返回，就需要做转换才行。
 
 使用示例：
 ```go
@@ -144,11 +147,7 @@ func main() {
         fmt.Println(err)
     }
     if user != nil {
-        fmt.Println(users.ToList())
+        fmt.Println(users.List())
     }
 }
 ```
-
-
-
-
