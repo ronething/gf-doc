@@ -20,7 +20,7 @@ https://godoc.org/github.com/gogf/gf/container/garray
 
 由于`garray`模块下的对象及方法较多，支持`int`/`string`/`interface{}`三种数据类型，这里便不一一列举。`garray`下包含了多种数据类型的`slice`，可以使用 `garray.New*Array`/`garray.NewSorted*Array` 方法来创建，其中`garray.New*Array`为普通不排序数组，`garray.NewSorted*Array`为排序数组(当创建`interface{}`类型的数组时，创建时可以指定自定义的排序函数)。
 
-## 使用示例1，普通数组
+## 示例1，普通数组
 ```go
 package main
 
@@ -96,7 +96,7 @@ func main () {
 []
 ```
 
-## 使用示例2，排序数组
+## 示例2，排序数组
 
 排序数组的方法与普通数组类似，但是带有自动排序功能及唯一性过滤功能。
 
@@ -150,3 +150,62 @@ func main () {
 [3 2 1]
 [3 2 1]
 ```
+
+
+### 示例3，JSON序列化/反序列
+`garray`模块下的所有`array`容器均实现了标准库`json`数据格式的序列化/反序列化接口。
+1. `Marshal`
+    ```go
+    package main
+
+    import (
+        "encoding/json"
+        "fmt"
+        "github.com/gogf/gf/container/garray"
+    )
+
+    func main() {
+        type Student struct {
+            Id     int
+            Name   string
+            Scores *garray.IntArray
+        }
+        s := Student{
+            Id:     1,
+            Name:   "john",
+            Scores: garray.NewIntArrayFrom([]int{100, 99, 98}),
+        }
+        b, _ := json.Marshal(s)
+        fmt.Println(string(b))
+    }
+    ```
+    执行后，输出结果：
+    ```
+    {"Id":1,"Name":"john","Scores":[100,99,98]}
+    ```
+1. `Unmarshal`
+    ```go
+    package main
+
+    import (
+        "encoding/json"
+        "fmt"
+        "github.com/gogf/gf/container/garray"
+    )
+
+    func main() {
+        b := []byte(`{"Id":1,"Name":"john","Scores":[100,99,98]}`)
+        type Student struct {
+            Id     int
+            Name   string
+            Scores *garray.IntArray
+        }
+        s := Student{}
+        json.Unmarshal(b, &s)
+        fmt.Println(s)
+    }
+    ```
+    执行后，输出结果：
+    ```
+    {1 john [100,99,98]}
+    ```
