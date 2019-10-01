@@ -8,17 +8,21 @@
 https://godoc.org/github.com/gogf/gf/net/ghttp
 
 以上方法可以分为以下几类：
-1. `Get*`: 常用方法，简化参数获取，```GetRequest*```的别名；
-1. `GetQuery*`: 获取GET方式传递过来的Key-Value查询参数；
-2. `GetPost*`: 获取POST方式传递过来的Key-Value表单参数；
-3. `GetRequest*`: 优先查找`Router`路由参数中是否有指定键名的参数，如果没有则查找`GET`参数，如果没有则查找`POST`参数，最后解析查找`GetRaw`方法返回的数据，如果都不存在则返回空或者默认值；
+1. `Get*`: 常用方法，简化参数获取，`GetRequest*`的别名；
+1. `GetQuery*`: 获取`GET`方式传递过来的Key-Value查询参数；
+2. `GetPost*`: 获取`POST`方式传递过来的Key-Value表单参数；
+2. `GetPut*`: 获取`PUT`方式传递过来的Key-Value参数；
+2. `GetDelete*`: 获取`DELETE`方式传递过来的Key-Value参数；
+3. `GetRequest*`: 优先查找`Router`路由参数中是否有指定键名的参数，如果没有则查找`GET`参数，如果没有则查找`POST`参数，接着查找自定义`Param`参数，最后解析查找`GetRaw`方法返回的数据，如果都不存在则返回空或者默认值；该参数获取方式与`HTTPMethod`没有关系，只要有参数提交即可根据名称获取到参数值；
 4. `GetRaw`: 获取客户端提交的原始数据(二进制`[]byte`类型)，与`HTTP Method`无关，例如客户端提交`JSON/XML`数据格式时可以通过该方法获取原始的提交数据；
 5. `GetJson`: 自动将原始请求信息解析为`gjson.Json`对象指针返回，`gjson.Json`对象指针具体在【[gjson模块](encoding/gjson/index.md)】章节中介绍；
 1. `GetToStruct*`: 将请求参数绑定到指定的`struct`对象上，注意给定的参数为对象指针；
-6. `SetParam`/`GetParam`: 用于设置/获取请求流程中得共享变量，该共享变量只在该请求流程中有效，请求结束则销毁；
+6. `SetParam`/`GetParam*`: 用于设置/获取请求流程中得共享变量，该共享变量只在该请求流程中有效，请求结束则销毁；
 1. `Exit*`: 用于请求流程退出控制，详见本章后续说明；
 
-其中，获取的参数方法可以对指定键名的数据进行自动类型转换，例如： http://127.0.0.1:8199/?amount=19.66 ，通过`Get`/`GetQueryString`将会返回`19.66`的字符串类型，`GetQueryFloat32`/`GetQueryFloat64`将会分别返回`float32`和`float64`类型的数值`19.66`。但是，`GetQueryInt`/`GetQueryUint`将会返回`19`（如果参数为`float`类型的字符串，将会按照**向下取整**进行整型转换）。
+其中，获取的参数方法可以对指定键名的数据进行自动类型转换，例如： http://127.0.0.1:8199/?amount=19.66 ，通过`GetQueryString`将会返回`19.66`的字符串类型，`GetQueryFloat32`/`GetQueryFloat64`将会分别返回`float32`和`float64`类型的数值`19.66`。但是，`GetQueryInt`/`GetQueryUint`将会返回`19`（如果参数为`float`类型的字符串，将会按照**向下取整**进行整型转换）。
+
+> 需要注意的，从通用性及效率上考虑，服务端不会自动解析客户端提交的`JSON`参数，因此服务端无法通过例如`GetPost*`方法获得`JSON`数据中的特定字段参数。服务端开发者必须自行调用`GetRaw`方法获取提交数据后进行解析，或者通过`GetJson`获得`JSON`对象（注意判断解析错误`error`）。
 
 ## 请求参数解析
 `ghttp.Request`对象支持智能的参数类型解析（不区分请求提交方式及请求提交类型），以下为提交参数示例以及服务端对应解析的变量类型：
@@ -92,15 +96,15 @@ func main() {
 
 其中，
 1. 这里使用了`r.GetToStruct(user)`方法将请求参数绑定到指定的`user`对象上，注意这里的`user`是`User`的结构体实例化指针；在`struct tag`中，使用`params`标签来指定参数名称与结构体属性名称对应关系；
-1. `GetToStruct`方法支持自动对结构体对象初始化，注意此时参数类型为`**User`，如下：
+1. `GetToStruct`方法支持自动对结构体对象初始化，但是务必注意此时参数类型为`**User`（这样`GetToStruct`方法内部才能对`*User`进行初始化），如下：
     ```go
     user := (*User)(nil)
     r.GetToStruct(&user)
     ```
-1. 通过`gvalid`标签为`gavlid`数据校验包特定的校验规则标签，具体请参考【[数据校验](util/gvalid/index.md)】章节；其中，密码字段的校验规则为`password3`，表示: `密码格式为任意6-18位的可见字符，必须包含大小写字母、数字和特殊字符`；
+1. 通过`gvalid`标签为`gavlid`数据校验包特定的校验规则标签，详细请具体参考【[数据校验](util/gvalid/index.md)】章节；其中，密码字段的校验规则为`password3`，表示: `密码格式为任意6-18位的可见字符，必须包含大小写字母、数字和特殊字符`；
 1. 当校验染回结果非`nil`时，表示校验不通过，这里使用`r.Response.WriteJson`方法返回json结果；
 
-执行后，试着访问URL: [http://127.0.0.1:8199/user?uid=1&name=john&password1=123&password2=456](http://127.0.0.1:8199/user?uid=1&name=john&password1=123&password2=456)，输出结果为：
+执行后，试着访问URL: http://127.0.0.1:8199/user?uid=1&name=john&password1=123&password2=456 ，输出结果为：
 ```json
 {"password1":{"password3":"密码格式不合法，密码格式为任意6-18位的可见字符，必须包含大小写字母、数字和特殊字符"},"password2":{"password3":"密码格式不合法，密码格式为任意6-18位的可见字符，必须包含大小写字母、数字和特殊字符","same":"两次密码不一致，请重新输入"},"username":{"length":"字段长度为6到30个字符"}}
 ```
