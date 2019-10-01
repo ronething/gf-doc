@@ -81,7 +81,7 @@ func (t *Int) Val() int
 func (t *Int) Add(delta int) int {
 ```
 
-基本使用示例：
+### 示例1，基本使用
 
 ```go
 package main
@@ -112,3 +112,60 @@ func main() {
 10
 9
 ```
+### 示例2，JSON序列化/反序列
+`gtype`模块下的所有容器均实现了标准库`json`数据格式的序列化/反序列化接口。
+1. `Marshal`
+    ```go
+    package main
+
+    import (
+        "encoding/json"
+        "fmt"
+        "github.com/gogf/gf/container/gtype"
+    )
+
+    func main() {
+        type Student struct {
+            Id     *gtype.Int
+            Name   *gtype.String
+            Scores *gtype.Interface
+        }
+        s := Student{
+            Id:     gtype.NewInt(1),
+            Name:   gtype.NewString("john"),
+            Scores: gtype.NewInterface([]int{100, 99, 98}),
+        }
+        b, _ := json.Marshal(s)
+        fmt.Println(string(b))
+    }
+    ```
+    执行后，输出结果：
+    ```
+    {"Id":1,"Name":"john","Scores":[100,99,98]}
+    ```
+1. `Unmarshal`
+    ```go
+    package main
+
+    import (
+        "encoding/json"
+        "fmt"
+        "github.com/gogf/gf/container/gtype"
+    )
+
+    func main() {
+        b := []byte(`{"Id":1,"Name":"john","Scores":[100,99,98]}`)
+        type Student struct {
+            Id     *gtype.Int
+            Name   *gtype.String
+            Scores *gtype.Interface
+        }
+        s := Student{}
+        json.Unmarshal(b, &s)
+        fmt.Println(s)
+    }
+    ```
+    执行后，输出结果：
+    ```
+    {1 john [100,99,98]}
+    ```
