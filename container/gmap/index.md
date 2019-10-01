@@ -2,19 +2,15 @@
 
 # gmap
 
-支持可选并发安全特性的`map`容器，最常用的并发安全数据结构。
-
-该模块包含多个数据结构的`map`容器：`Map/HashMap`、`TreeMap`和`ListMap`。
+支持可选并发安全特性的`map`容器，最常用的并发安全数据结构。该模块包含多个数据结构的`map`容器：`HashMap`、`TreeMap`和`ListMap`。
 
 |类型|数据结构|平均复杂度|支持排序|有序遍历|说明
 |---|---|---|---|---|---
-|`Map/HashMap`|哈希表|O(1)|否|否|高性能读写操作，内存占用较高，随机遍历
+|`HashMap`|哈希表|O(1)|否|否|高性能读写操作，内存占用较高，随机遍历
 |`ListMap`|哈希表+双向链表|O(2)|否|是|支持按照写入顺序遍历，内存占用较高
 |`TreeMap`|红黑树|O(log N)|是|是|内存占用紧凑，支持键名排序及有序遍历
 
-> 其中`Map`为`HashMap`的别名，为方便开发调用，`gmap`模块支持多种以哈希表为基础数据结构的常见类型`map`定义：`IntIntMap`、`IntStrMap`、`IntAnyMap`、`StrIntMap`、`StrStrMap`、`StrAnyMap`。
-
-> 参考链接：https://en.wikipedia.org/wiki/Hash_table
+> 此外，`gmap`模块支持多种以哈希表为基础数据结构的常见类型`map`定义：`IntIntMap`、`IntStrMap`、`IntAnyMap`、`StrIntMap`、`StrStrMap`、`StrAnyMap`。
 
 **使用场景**：
 
@@ -173,6 +169,56 @@ ListMap Values: [2 3 1 5 4 6 8 7 9]
 TreeMap   Keys: [1 2 3 4 5 6 7 8 9]
 TreeMap Values: [1 2 3 4 5 6 7 8 9]
 ```
+
+### 示例3，JSON序列化/反序列
+`gmap`模块下的所有`map`容器均实现了标准库`json`数据格式的序列化/反序列化接口。
+1. `Marshal`
+    ```go
+    package main
+
+    import (
+        "encoding/json"
+        "fmt"
+        "github.com/gogf/gf/frame/g"
+
+        "github.com/gogf/gf/container/gmap"
+    )
+
+    func main() {
+        m := gmap.New()
+        m.Sets(g.MapAnyAny{
+            "name":  "john",
+            "score": 100,
+        })
+        b, _ := json.Marshal(m)
+        fmt.Println(string(b))
+    }
+    ```
+    执行后，输出结果：
+    ```
+    {"name":"john","score":100}
+    ```
+1. `Unmarshal`
+    ```go
+    package main
+
+    import (
+        "encoding/json"
+        "fmt"
+        "github.com/gogf/gf/container/gmap"
+    )
+
+    func main() {
+        m := gmap.Map{}
+        s := []byte(`{"name":"john","score":100}`)
+        json.Unmarshal(s, &m)
+        fmt.Println(m.Map())
+    }
+    ```
+    执行后，输出结果：
+    ```
+    map[name:john score:100]
+    ```
 
 ## 并发安全
 
