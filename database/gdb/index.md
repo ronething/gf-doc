@@ -67,16 +67,6 @@ _ "github.com/lib/pq"
 **限制**
 1. 不支持`Save/Replace`方法
 
-## Oracle
-
-使用时需导入第三方包 ([go-oci8](https://github.com/mattn/go-oci8) )：
-```go
-_ "github.com/mattn/go-oci8"
-```
-**限制**
-1. 不支持`LastInsertId`方法
-2. 不支持`Save/Replace`方法
-
 ## SQL Server
 
 使用时需导入第三方包 ([go-mssqldb](https://github.com/denisenkom/go-mssqldb) )：
@@ -88,6 +78,18 @@ _ "github.com/denisenkom/go-mssqldb"
 1. 不支持`LastInsertId`方法
 2. 不支持`Save/Replace`方法
 3. 仅支持`SQL Server 2005`及其后的版本
+
+## Oracle
+
+使用时需导入第三方包 ([go-oci8](https://github.com/mattn/go-oci8) )：
+```go
+_ "github.com/mattn/go-oci8"
+```
+**限制**
+1. 不支持`LastInsertId`方法
+2. 不支持`Save/Replace`方法
+
+
 
 
 
