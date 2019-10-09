@@ -210,62 +210,7 @@ func main() {
 
 ## 示例2，复杂类型
 
-### 1. `slice`类型属性
-
-```go
-package main
-
-import (
-    "github.com/gogf/gf/util/gconv"
-    "github.com/gogf/gf/frame/g"
-    "fmt"
-)
-
-// 演示slice类型属性的赋值
-func main() {
-    type User struct {
-        Scores []int
-    }
-
-    user   := new(User)
-    scores := []interface{}{99, 100, 60, 140}
-
-    // 通过map映射转换
-    if err := gconv.Struct(g.Map{"Scores" : scores}, user); err != nil {
-        fmt.Println(err)
-    } else {
-        g.Dump(user)
-    }
-
-    // 通过变量映射转换，直接slice赋值
-    if err := gconv.Struct(scores, user); err != nil {
-        fmt.Println(err)
-    } else {
-        g.Dump(user)
-    }
-}
-```
-执行后，输出结果为：
-```html
-{
-	"Scores": [
-		99,
-		100,
-		60,
-		140
-	]
-}
-{
-	"Scores": [
-		99,
-		100,
-		60,
-		140
-	]
-}
-```
-
-### 2. `struct`属性为`struct`/`*struct`
+### 1. `struct`属性为`struct`/`*struct`
 
 属性支持struct对象或者struct对象指针(目标为指针时，转换时会自动初始化)转换。
 
@@ -292,12 +237,12 @@ func main() {
 
     user1  := new(User1)
     user2  := new(User2)
-    scores := map[string]interface{}{
-        "Scores" : map[string]interface{}{
-            "Name"   : "john",
-            "Result" : 100,
-        },
-    }
+	scores := g.Map{
+		"Scores": g.Map{
+			"Name":   "john",
+			"Result": 100,
+		},
+	}
 
     if err := gconv.Struct(scores, user1); err != nil {
         fmt.Println(err)
@@ -331,7 +276,7 @@ func main() {
 
 
 
-### 3. `struct`属性为`slice`，数值为`slice`
+### 2. `struct`属性为`slice`，数值为`slice`
 
 ```go
 package main
@@ -352,18 +297,18 @@ func main() {
     }
 
     user   := new(User)
-    scores := map[string]interface{}{
-        "Scores" : []interface{}{
-            map[string]interface{}{
-                "Name"   : "john",
-                "Result" : 100,
-            },
-            map[string]interface{}{
-                "Name"   : "smith",
-                "Result" : 60,
-            },
-        },
-    }
+	scores := g.Map{
+		"Scores": g.Slice{
+			g.Map{
+				"Name":   "john",
+				"Result": 100,
+			},
+			g.Map{
+				"Name":   "smith",
+				"Result": 60,
+			},
+		},
+	}
 
     // 嵌套struct转换，属性为slice类型，数值为slice map类型
     if err := gconv.Struct(scores, user); err != nil {
@@ -391,7 +336,7 @@ func main() {
 }
 ```
 
-### 4. `struct`属性为`slice`，数值为`非slice`
+### 3. `struct`属性为`slice`，数值为`非slice`
 
 ```go
 package main
@@ -412,12 +357,12 @@ func main() {
     }
 
     user   := new(User)
-    scores := map[string]interface{}{
-        "Scores" : map[string]interface{}{
-            "Name"   : "john",
-            "Result" : 100,
-        },
-    }
+	scores := g.Map{
+		"Scores": g.Map{
+			"Name":   "john",
+			"Result": 100,
+		},
+	}
 
     // 嵌套struct转换，属性为slice类型，数值为map类型
     if err := gconv.Struct(scores, user); err != nil {
@@ -440,7 +385,7 @@ func main() {
 }
 ```
 
-### 5. `struct`属性为`[]*struct`
+### 4. `struct`属性为`[]*struct`
 
 ```go
 package main
@@ -461,18 +406,18 @@ func main() {
     }
 
     user   := new(User)
-    scores := map[string]interface{}{
-        "Scores" : []interface{}{
-            map[string]interface{}{
-                "Name"   : "john",
-                "Result" : 100,
-            },
-            map[string]interface{}{
-                "Name"   : "smith",
-                "Result" : 60,
-            },
-        },
-    }
+	scores := g.Map{
+		"Scores": g.Slice{
+			g.Map{
+				"Name":   "john",
+				"Result": 100,
+			},
+			g.Map{
+				"Name":   "smith",
+				"Result": 60,
+			},
+		},
+	}
 
     // 嵌套struct转换，属性为slice类型，数值为slice map类型
     if err := gconv.Struct(scores, user); err != nil {
