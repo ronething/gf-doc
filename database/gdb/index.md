@@ -55,7 +55,7 @@ type Result      []Record               // 返回数据表记录列表
 ```go
 _ "github.com/mattn/go-sqlite3"
 ```
-#### 限制
+**限制**
 1. 不支持`Save/Replace`方法
 
 ## PostgreSQL
@@ -64,7 +64,7 @@ _ "github.com/mattn/go-sqlite3"
 ```go
 _ "github.com/lib/pq"
 ```
-#### 限制
+**限制**
 1. 不支持`Save/Replace`方法
 
 ## Oracle
@@ -73,7 +73,7 @@ _ "github.com/lib/pq"
 ```go
 _ "github.com/mattn/go-oci8"
 ```
-#### 限制
+**限制**
 1. 不支持`LastInsertId`方法
 2. 不支持`Save/Replace`方法
 
@@ -84,13 +84,13 @@ _ "github.com/mattn/go-oci8"
 _ "github.com/denisenkom/go-mssqldb"
 ```
 
-#### 限制
+**限制**
 1. 不支持`LastInsertId`方法
 2. 不支持`Save/Replace`方法
 3. 仅支持`SQL Server 2005`及其后的版本
 
 
 
-## 其他数据库的支持
+## 其他数据库类型
 
 额外接入新的数据库相当方便，可参考源码中关于`PostgreSQL`、`SQLite`、`Oracle`、`SQL Server`的接入方式。
