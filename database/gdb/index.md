@@ -30,7 +30,7 @@ type Result      []Record               // 返回数据表记录列表
 
 
 
-# 使用`g.DB`与`gdb.New`、`gdb.Instance`的区别
+# `g.DB`与`gdb.New`、`gdb.Instance`
 
 获取数据库操作对象有三种方式，一种是使用`g.DB`方法（推荐），一种是使用原生`gdb.New`方法，还有一种是使用包原生单例方法`gdb.Instance`，而第一种是推荐的使用方式。这三种方式的区别如下：
 1. `g.DB`对象管理方式获取的是单例对象，整合了配置文件的管理功能，支持配置文件热更新；
@@ -39,3 +39,58 @@ type Result      []Record               // 返回数据表记录列表
 1. 其他使用无差别；
 
 > 有这么多对象获取方式原因在于`GF`是一个模块化设计的框架，每个模块皆可单独使用。为了方便开发者使用常用的一些模块，因此框架也提供了一个`g`模块，这是一个高度耦合的模块，封装了一些常用对象的单例获取方式，详见【[对象管理](frame/g/index.md)】章节。
+
+# 支持的数据库类型
+
+由于go标准库的数据库操作对象采用接口实现，因此提供了非常好的可扩展性和兼容性。
+
+## MySQL
+
+内置支持，无需额外扩展或第三方包接入，直接可用。
+依赖的第三方包：https://github.com/go-sql-driver/mysql
+
+## SQLite
+
+在使用时需要引入第三方包 ([ go-sqlite3](https://github.com/mattn/go-sqlite3) )：
+```go
+_ "github.com/mattn/go-sqlite3"
+```
+### 限制
+1. 不支持`Save/Replace`方法
+
+## PostgreSQL
+
+在使用时需要引入第三方包 ([pq](https://github.com/lib/pq) )：
+```go
+_ "github.com/lib/pq"
+```
+### 限制
+1. 不支持`Save/Replace`方法
+
+## Oracle
+
+使用时需导入第三方包 ([go-oci8](https://github.com/mattn/go-oci8) )：
+```go
+_ "github.com/mattn/go-oci8"
+```
+### 限制
+1. 不支持`LastInsertId`方法
+2. 不支持`Save/Replace`方法
+
+## SQL Server
+
+使用时需导入第三方包 ([go-mssqldb](https://github.com/denisenkom/go-mssqldb) )：
+```go
+_ "github.com/denisenkom/go-mssqldb"
+```
+
+### 限制
+1. 不支持`LastInsertId`方法
+2. 不支持`Save/Replace`方法
+3. 仅支持`SQL Server 2005`及其后的版本
+
+
+
+## 其他数据库的支持
+
+额外接入新的数据库相当方便，可参考源码中关于`PostgreSQL`、`SQLite`、`Oracle`、`SQL Server`的接入方式。

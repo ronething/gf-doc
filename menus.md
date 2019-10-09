@@ -127,7 +127,6 @@
         * [ORM错误处理](database/gdb/error.md)
         * [ORM结果处理](database/gdb/result.md)
         * [ORM高级特性](database/gdb/senior.md)
-        * [ORM数据库类型](database/gdb/database.md)
         * [FAQ常见问题](database/gdb/faq.md)
 * [功能模块设计](#)
     * [数据结构容器](#)
