@@ -16,9 +16,9 @@
 
 # 安装
 ```html
-go get -u github.com/gogf/gf
+go get -u -v github.com/gogf/gf
 ```
-或者
+推荐使用
 `go.mod`:
 ```
 require github.com/gogf/gf latest
@@ -38,11 +38,11 @@ golang版本 >= 1.10.0
 
 * 模块化、松耦合设计；
 * 模块丰富，开箱即用；
+* 简便及可维护性为宗旨；
 * 详尽的开发文档及示例；
 * 完善的本地中文化支持；
 * 致力于项目的通用方案；
 * 更适合企业及团队使用；
-* 更多请查阅文档及源码；
 
 开源项目地址：
 - **主库**: https://github.com/gogf/gf 

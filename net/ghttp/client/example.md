@@ -9,7 +9,7 @@
     if response, err := ghttp.Get("https://goframe.org"); err != nil {
         panic(err)
     } else {
-        defer responseClose()
+        defer response.Close()
         fmt.Println(response.ReadAllString())
     }
     ```
@@ -20,7 +20,7 @@
         panic(err)
     } else {
         defer response.Close()
-        gfile.PutBinContents("/Users/john/Temp/cover.png", response.ReadAll())
+        gfile.PutBytes("/Users/john/Temp/cover.png", response.ReadAll())
     }
     ```
     下载文件操作，小文件下载非常简单。需要注意的是，如果远程文件比较大时，服务端会分批返回数据，因此会需要客户端发多个`GET`请求，每一次通过`Header`来请求分批的文件范围长度，感兴趣的同学可自行研究相关细节。
@@ -123,7 +123,7 @@
             name   := gfile.Basename(h.Filename)
             buffer := make([]byte, h.Size)
             f.Read(buffer)
-            gfile.PutBinContents("/tmp/" + name, buffer)
+            gfile.PutBytes("/tmp/" + name, buffer)
             r.Response.Write(name + " uploaded successly")
         } else {
             r.Response.Write(e.Error())
