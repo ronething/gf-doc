@@ -43,7 +43,7 @@ nick name  Nick_Name      match
 
 ## 自动初始化
 
-当给定的`pointer`参数类型为`**struct`时，`Struct`方法内部将会自动进行初始化创建对象，并修改传递变量指向的指针地址。
+当给定的`pointer`参数类型为`**struct`时，`Struct`方法内部将会自动进行初始化创建对象，并修改传递变量指向的指针地址。这种自动对象初始化的方式，对于Golang的`GC`来说比较友好，防止开发者创建过多无意义的临时对象。
 
 ```go
 package main
