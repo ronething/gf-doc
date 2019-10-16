@@ -52,11 +52,11 @@ type Client
     func (c *Client) SetTimeOut(t time.Duration)
 ```
 简要说明：
-1. 我们可以使用`NewClient`创建一个自定义的HTTP客户端对象`Client`，随后可以使用该对象执行请求。
+1. 我们可以使用`NewClient`创建一个自定义的HTTP客户端对象`Client`，随后可以使用该对象执行请求，该对象底层使用了连接池设计，因此没有`Close`关闭方法。
 1. 客户端提供了一系列以`HTTP Method`命名的方法，调用这些方法将会发起对应的`HTTP Method`请求。常用的方法当然是`Get`和`Post`方法，同时`DoRequest`是核心的请求方法，用户可以调用该方法实现自定义的`HTTP Method`发送请求。
-1. 请求返回结果为`*ClientResponse`对象，可以通过该结果对象获取对应的返回结果，通过`ReadAll`方法可以获得返回的内容。以`*Content`命名的请求方法结果为字符串内容，如果请求失败时，得到的是空字符串。
-1. 可以看到，客户端的请求参数的数据参数`data`数据类型为`interface{}`类型，也就是说可以传递任意的数据类型，常见的参数数据类型为`string`/`map`，如果参数为`map`类型，参数值将会进行`urlencode`编码。
-1. `*Bytes`方法用于获得服务端返回的二进制数据，`*Content`方法用于请求获得字符串结果数据，`Set*`方法用于`Client`的参数设置。
+1. 请求返回结果为`*ClientResponse`对象，可以通过该结果对象获取对应的返回结果，通过`ReadAll`/`ReadAllString`方法可以获得返回的内容，该对象在使用完毕后需要通过`Close`方法关闭，防止内存溢出。
+1. `*Bytes`方法用于获得服务端返回的二进制数据，如果请求失败返回`nil`；`*Content`方法用于请求获得字符串结果数据，如果请求失败返回空字符串；`Set*`方法用于`Client`的参数设置。
+1. 可以看到，客户端的请求参数的数据参数`data`数据类型为`interface{}`类型，也就是说可以传递任意的数据类型，常见的参数数据类型为`string`/`map`，如果参数为`map`类型，参数值将会被自动`urlencode`编码。
 
 # ghttp.ClientResponse
 
@@ -67,13 +67,14 @@ func (r *ClientResponse) ReadAll() []byte
 func (r *ClientResponse) ReadAllString() string
 func (r *ClientResponse) Close()
 ```
-这里也要提醒的是，**ClientResponse需要手动调用`Close`方法关闭**，也就是说，不管你使用不使用返回的`ClientResponse`对象，你都需要将该返回对象赋值给一个变量，并且手动调用其`Close`方法进行关闭（往往使用`defer r.Close()`）。需要手动关闭返回对象这一点，与标准库的HTTP客户端请求对象操作相同。
+这里也要提醒的是，**ClientResponse需要手动调用`Close`方法关闭**，也就是说，不管你使用不使用返回的`ClientResponse`对象，你都需要将该返回对象赋值给一个变量，并且手动调用其`Close`方法进行关闭（往往使用`defer r.Close()`）。
 
 
 # 一些重要说明
 
-1. `ghttp`客户端默认关闭了`KeepAlive`功能以及对服务端`TLS`证书的校验功能，如果需要启用可自定义客户端的`Transport`属性；
-1. `Post`/`PostContent`方法提交的请求类型(`Content-Type`)默认为`application/x-www-form-urlencoded`，当`data`参数为`JSON`类型时，将会被自动识别此时请求的类型为`application/json`；
+1. `ghttp`客户端默认关闭了`KeepAlive`功能以及对服务端`TLS`证书的校验功能，如果需要启用可自定义客户端的`Transport`属性。
+1. 连接池参数设定、连接代理设置这些高级功能也可以通过自定义客户端的`Transport`属性实现，该数据继承于标准库的`http.Transport`对象。
+1. `Post`/`PostBytes`/`PostContent`方法提交的请求类型(`Content-Type`)默认为`application/x-www-form-urlencoded`，当`data`参数为`JSON`类型时，将会被自动识别此时请求的类型为`application/json`；
 
 
 
