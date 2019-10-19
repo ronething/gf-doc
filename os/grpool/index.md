@@ -34,31 +34,30 @@ https://godoc.org/github.com/gogf/gf/os/grpool
 package main
 
 import (
-    "time"
-    "fmt"
-    "github.com/gogf/gf/os/grpool"
-    "github.com/gogf/gf/os/gtime"
+	"time"
+	"fmt"
+	"github.com/gogf/gf/os/grpool"
+	"github.com/gogf/gf/os/gtimer"
 )
 
 func job() {
-    time.Sleep(1*time.Second)
+	time.Sleep(1*time.Second)
 }
 
 func main() {
-    pool := grpool.New(100)
-    for i := 0; i < 1000; i++ {
-        pool.Add(job)
-    }
-    fmt.Println("worker:", pool.Size())
-    fmt.Println("  jobs:", pool.Jobs())
-    gtime.SetInterval(time.Second, func() bool {
-       fmt.Println("worker:", pool.Size())
-       fmt.Println("  jobs:", pool.Jobs())
-       fmt.Println()
-       return true
-    })
+	pool := grpool.New(100)
+	for i := 0; i < 1000; i++ {
+		pool.Add(job)
+	}
+	fmt.Println("worker:", pool.Size())
+	fmt.Println("  jobs:", pool.Jobs())
+	gtimer.SetInterval(time.Second, func() {
+		fmt.Println("worker:", pool.Size())
+		fmt.Println("  jobs:", pool.Jobs())
+		fmt.Println()
+	})
 
-    select {}
+	select {}
 }
 ```
 这段程序中的任务函数的功能是```sleep 1秒钟```，这样便能充分展示出goroutine数量限制功能。其中，我们使用了```gtime.SetInterval```定时器每隔1秒钟打印出当前默认池中的工作goroutine数量以及待处理的任务数量。
