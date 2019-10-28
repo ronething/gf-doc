@@ -1,9 +1,14 @@
 
 # grpool
 
-Go语言中的goroutine虽然相对于系统线程来说比较轻量级，但是在高并发量下的goroutine频繁创建和销毁对于性能损耗以及GC来说压力也不小。充分将goroutine复用，减少goroutine的创建/销毁的性能损耗，这便是grpool对goroutine进行池化封装的目的。例如，针对于100W个执行任务，使用goroutine的话需要不停创建并销毁100W个goroutine，而使用grpool也许底层只需要几千个goroutine便能充分复用地执行完成所有任务。
+Go语言中的`goroutine`虽然相对于系统线程来说比较轻量级（初始栈大小仅`2KB`），但是在高并发量下的`goroutine`频繁创建和销毁对于性能损耗以及`GC`来说压力也不小。充分将`goroutine`复用，减少`goroutine`的创建/销毁的性能损耗，这便是`grpool`对`goroutine`进行池化封装的目的。例如，针对于`100W`个执行任务，使用`goroutine`的话需要不停创建并销毁`100W`个`goroutine`，而使用`grpool`也许底层只需要几万个`goroutine`便能充分复用地执行完成所有任务。
 
-经测试，goroutine池对于业务逻辑的执行效率(降低执行时间/CPU使用率)提升不大，甚至没有原生的goroutine执行快速(池化goroutine执行调度并没有底层go调度器高效，因为池化goroutine的执行调度也是基于底层go调度器)，但是由于采用了复用的设计，池化后对内存的使用率得到极大的降低。
+经测试，`goroutine`池对于业务逻辑的执行效率（降低执行时间/CPU使用率）提升不大，甚至没有原生的`goroutine`执行快速（池化`goroutine`执行调度并没有底层go调度器高效，因为池化`goroutine`的执行调度也是基于底层go调度器），但是由于采用了复用的设计，池化后对内存的使用率得到极大的降低。
+
+概念：
+1. `Pool`：`goroutine`池，用于管理若干可复用的`goroutine`协程资源；
+1. `Worker`：池对象中参与任务执行的`goroutine`，一个`Worker`可以执行若干个`Job`，直到队列中再无等待的`Job`；
+1. `Job`：添加到池对象的任务队列中等待执行的任务，是一个`func()`的方法，一个`Job`同时只能被一个`Worker`获取并执行；
 
 **使用方式**：
 ```go
@@ -18,17 +23,30 @@ import "github.com/gogf/gf/os/grpool"
 
 https://godoc.org/github.com/gogf/gf/os/grpool
 
+```go
+func Add(f func()) error
+func Jobs() int
+func Size() int
+type Pool
+    func New(limit ...int) *Pool
+    func (p *Pool) Add(f func()) error
+    func (p *Pool) Cap() int
+    func (p *Pool) Close()
+    func (p *Pool) IsClosed() bool
+    func (p *Pool) Jobs() int
+    func (p *Pool) Size() int
+```
 
 
-通过```grpool.New```方法创建一个```goroutine池```，参数为非必需参数，用于限定池中的工作goroutine数量，默认为不限制。需要注意的是，任务可以不停地往池中添加，没有限制，但是工作的goroutine是可以做限制的。我们可以通过```Size()```方法查询当前的工作goroutine数量，使用```Jobs()```方法查询当前池中待处理的任务数量。
+通过`grpool.New`方法创建一个`goroutine池`对象，参数`limit`为非必需参数，用于限定池中的工作`goroutine`数量，默认为不限制。需要注意的是，任务可以不停地往池中添加，没有限制，但是工作的`goroutine`是可以做限制的。我们可以通过`Size()`方法查询当前的工作`goroutine`数量，使用`Jobs()`方法查询当前池中待处理的任务数量。
 
-同时，为便于使用，grpool包提供了默认的goroutine池，直接通过```grpool.Add```即可往默认的池中添加任务，任务参数必须是一个 ```func()```类型的函数/方法。
+同时，为便于使用，`grpool`包提供了默认的`goroutine`池，默认的池对象不限制`goroutine`数量，直接通过`grpool.Add`即可往默认的池中添加任务，任务参数必须是一个 `func()`类型的函数/方法。
 
 ## 使用示例
 
 **1、使用默认的goroutine池，限制10个工作goroutine执行1000个任务**
 
-[github.com/gogf/gf/blob/master/.example/os/grpool/grpool1.go](https://github.com/gogf/gf/blob/master/.example/os/grpool/grpool1.go)
+https://github.com/gogf/gf/blob/master/.example/os/grpool/grpool1.go
 
 ```go
 package main
@@ -64,7 +82,7 @@ func main() {
 
 **2、我们再来看一个新手经常容易出错的例子**
 
-[github.com/gogf/gf/blob/master/.example/os/grpool/grpool2.go](https://github.com/gogf/gf/blob/master/.example/os/grpool/grpool2.go)
+https://github.com/gogf/gf/blob/master/.example/os/grpool/grpool2.go
 
 ```go
 package main
@@ -107,7 +125,7 @@ func main() {
 
 1)、使用go关键字
 
-[github.com/gogf/gf/blob/master/.example/os/grpool/grpool3.go](https://github.com/gogf/gf/blob/master/.example/os/grpool/grpool3.go)
+https://github.com/gogf/gf/blob/master/.example/os/grpool/grpool3.go
 
 ```go
 package main
@@ -146,7 +164,7 @@ func main() {
 
 2)、使用临时变量
 
-[github.com/gogf/gf/blob/master/.example/os/grpool/grpool4.go](https://github.com/gogf/gf/blob/master/.example/os/grpool/grpool4.go)
+https://github.com/gogf/gf/blob/master/.example/os/grpool/grpool4.go
 
 ```go
 package main
@@ -261,6 +279,6 @@ goroutine:
     time      spent: 27085 ms
 ```
 
-    
+可以看到池化过后，执行相同数量的任务，`goroutine`数量减少很多，相对的内存也降低了一倍以上，CPU时间耗时也勉强可以接受。
     
     
