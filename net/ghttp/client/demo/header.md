@@ -60,11 +60,11 @@ http客户端发起请求时可以自定义发送给服务端的Header内容，�
     ```go
     c := ghttp.NewClient()
     c.SetHeaderRaw(`
-    accept-encoding: gzip, deflate, br
-    accept-language: zh-CN,zh;q=0.9,en;q=0.8
-    referer: https://idonottell.you
-    cookie: name=john
-    user-agent: my test http client
+        accept-encoding: gzip, deflate, br
+        accept-language: zh-CN,zh;q=0.9,en;q=0.8
+        referer: https://idonottell.you
+        cookie: name=john
+        user-agent: my test http client
     `)
     if r, e := c.Get("http://127.0.0.1:8199/"); e != nil {
         panic(e)
