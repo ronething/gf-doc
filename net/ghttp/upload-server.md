@@ -68,5 +68,5 @@ func main() {
 1. 将上传文件转存到其他文件目录时，需要通过`gfile.Create`新建文件，并通过`io.Copy(file, f)`将文件内存写入到新文件中，这里使用的是流式读写方式，就算上传的文件容量有数G，也丝毫不会影响服务端的内存占用；
 1. 需要使用`defer file.Close()`关闭创建的文件指针；
 
-HTTP客户端上传文件的例子请参考后续的【[HTTP客户端-文件上传](net/ghttp/client.md)】章节
+HTTP客户端上传文件的例子请参考后续的【[HTTP客户端-使用示例](net/ghttp/client/example.md)】章节
 
