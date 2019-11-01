@@ -137,7 +137,7 @@ arg1==arg2 || arg1==arg3 || arg1==arg4 ...
 
 ### 对比函数改进
 
-`GF`框架模板引擎对标准库自带的对比模板函数`eq /ne/lt/le/gt/ge`做了必要的改进，以便支持任意数据类型的比较。例如，在标准库模板中的以下比较：
+`GF`框架模板引擎对标准库自带的对比模板函数`eq/ne/lt/le/gt/ge`做了必要的改进，以便支持任意数据类型的比较。例如，在标准库模板中的以下比较：
 ```go
 {{eq 1 "1"}}
 ```
@@ -267,7 +267,7 @@ ge "a" "a": true
 将`value`变量值进行html反转义。
 示例：
 ```go
-{{"&lt;div&gt;测试&lt;/div&gt;"|htmldecode}}
+{{"&lt;div&gt;测试&lt;/div&gt;" | htmldecode}}
 // 输出: <div>测试</div>
 ```
 
@@ -279,7 +279,7 @@ ge "a" "a": true
 将`url`变量值进行url转义。
 示例：
 ```go
-{{"https://goframe.org"|url}}
+{{"https://goframe.org" | url}}
 // 输出: https%3A%2F%2Fgoframe.org
 ```
 
@@ -301,8 +301,7 @@ ge "a" "a": true
 {{date .format .timestamp}}
 {{date .format}}
 ```
-将`timestamp`时间戳变量进行时间日期格式化，类似PHP的`date`方法，`format`参数支持PHP`date`方法格式。
-可参考【[gtime](os/gtime/index.md)】模块，及【[PHP date](http://php.net/manual/en/function.date.php)】。
+将`timestamp`时间戳变量进行时间日期格式化，类似PHP的`date`方法，`format`参数支持[PHP date](http://php.net/manual/en/function.date.php)方法格式，亦可参考【[gtime模块](os/gtime/index.md)】。
 
 当`timestamp`变量为`空`(或者`0`)时，表示以当前时间作为时间戳参数执行打印。
 
@@ -346,7 +345,7 @@ ge "a" "a": true
 {{.str | substr .start .length}}
 {{substr .start .length .str}}
 ```
-将`str`从`start`索引位置(索引从0开始)进行字符串截取`length`，支持中文，类似PHP的`substr`函数。
+将`str`从`start`索引位置（索引从0开始）进行字符串截取`length`，支持中文，类似PHP的`substr`函数。
 示例：
 ```go
 {{"我是中国人" | substr 2 -1}}
@@ -372,7 +371,7 @@ ge "a" "a": true
 ```go
 {{.str | hidestr .percent .hide}}
 ```
-将`str`字符串按照`percent`百分比从字符串中间向两边隐藏字符(主要用于姓名、手机号、邮箱地址、身份证号等的隐藏)，隐藏字符由`hide`变量定义。
+将`str`字符串按照`percent`百分比从字符串中间向两边隐藏字符（主要用于姓名、手机号、邮箱地址、身份证号等的隐藏），隐藏字符由`hide`变量定义。
 支持中文，支持email格式。
 示例：
 ```go
@@ -424,7 +423,7 @@ ge "a" "a": true
 
 # 自定义模板函数
 
-开发者可以自定义模板函数，全局绑定模板函数到当前视图对象中。
+开发者可以自定义模板函数，全局绑定模板函数到指定的视图对象中。
 
 使用示例：
 ```go
