@@ -1,5 +1,6 @@
 # 路由注册
-`/router/router.go`
+
+https://github.com/gogf/gf-demos/blob/master/router/router.go
 ```go
 package router
 

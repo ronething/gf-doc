@@ -1,6 +1,6 @@
 [TOC]
 
-我们使用`gf`框架来创建一个简单的API服务项目，该项目实现以下几个示例接口：
+我们使用`gf`框架来创建一个简单的`API`服务项目，该项目实现以下几个示例接口：
 1. 用户注册
 1. 用户登录
 1. 用户注销
@@ -24,6 +24,7 @@
 ├── boot
 ├── config
 ├── docfile
+├── i18n
 ├── library
 ├── public
 ├── router
@@ -41,6 +42,7 @@
 |`boot`          | 初始化包   | 用于项目初始化参数设置。
 |`config`        | 配置管理   | 所有的配置文件存放目录。
 |`docfile`       | 项目文档   | DOC项目文档，如: 设计文档、脚本文件等等。
+|`i18n`          | I18N国际化 | I18N国际化配置文件目录。
 |`library`       | 公共库包   | 公共的功能封装包，往往不包含业务需求实现。
 |`public`        | 静态目录   | 仅有该目录下的文件才能对外提供静态服务访问。
 |`router`        | 路由注册   | 用于路由统一的注册管理。
@@ -54,7 +56,7 @@
 # 数据库设计
 我们创建一个简单的用户表。
 
-`/docfile/sql/create.sql`
+https://github.com/gogf/gf-demos/blob/master/docfile/sql/create.sql
 ```sql
 CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '用户ID',
