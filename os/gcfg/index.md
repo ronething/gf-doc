@@ -19,7 +19,7 @@ https://godoc.org/github.com/gogf/gf/os/gcfg
 
 ## 配置文件
 
-默认读取的配置文件为`config.toml`，`toml`类型文件也是默认的、推荐的配置文件格式，如果想要自定义文件格式，可以通过`SetFileName`方法修改默认读取的配置文件名称（如：`config.json`, `cfg.yaml`, `cfg.xml`, `cfg.ini`等等）。
+默认读取的配置文件为`config.toml`，`toml`类型文件也是默认的、推荐的配置文件格式（语法参考【[TOML格式](os/gcfg/toml.md)】章节），如果想要自定义文件格式，可以通过`SetFileName`方法修改默认读取的配置文件名称（如：`config.json`, `cfg.yaml`, `cfg.xml`, `cfg.ini`等等）。
 
 例如，我们可以通过以下两种方式读取`config.json`配置文件中的数据库配置`database`。
 
