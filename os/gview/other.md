@@ -1,6 +1,39 @@
 [TOC]
 
 
+# I18N变量
+
+在模板引擎中内置了对`i18n`特性的支持，增加了`I18nLanguage`模板变量，当开发者为模板变量赋值该变量时，将会按照该变量指定的语言进行转译。该特性使得使用同一个模板引擎对象，针对于同一个页面，可以按照变量配置输出不同的国际化转译内容。例如：
+
+```go
+package main
+
+import (
+	"fmt"
+	"github.com/gogf/gf/frame/g"
+)
+
+func main() {
+	content := `{{.name}} says "a{#hello}{#world}!"`
+	result1, _ := g.View().ParseContent(content, g.Map{
+		"name":         "john",
+		"I18nLanguage": "zh-CN",
+	})
+	fmt.Println(result1)
+
+	result2, _ := g.View().ParseContent(content, g.Map{
+		"name":         "john",
+		"I18nLanguage": "ja",
+	})
+	fmt.Println(result2)
+}
+```
+执行后，输出结果为：（保证当前运行目录带有`i18n`转译配置文件）
+```
+john says "你好世界!"
+john says "こんにちは世界!"
+```
+
 # HTTP对象视图
 
 `gf`框架的`WebServer`的返回对象中提供了基础的模板解析方法，如下：
@@ -41,6 +74,9 @@ Cookie:default, Session:john
 # 控制器视图管理
 
 `gf`为路由控制器注册方式提供了良好的模板引擎支持，由`gmvc.View`视图对象进行管理，提供了良好的数据`隔离性`。控制器视图是并发安全设计的，允许在多线程中异步操作。
+
+> 控制器注册方式类似于PHP执行流程，相对来说性能比较低效，因此未来不再推荐使用控制器注册方式。
+
 ```go
 func (view *View) Assign(key string, value interface{})
 func (view *View) Assigns(data gview.Params)
@@ -97,11 +133,11 @@ func main() {
     </body>
 </html>
 ```
-执行后，访问 http://127.0.0.1:8199/template/info 可以看到模板被解析并展示到页面上。如果页面报错找不到模板文件，没有关系，因为这里并没有对模板目录做设置，默认是当前可行文件的执行目录（Linux&Mac下是```/tmp```目录，Windows下是```C:\Documents and Settings\用户名\Local Settings\Temp ```）。如何手动设置模板文件目录请查看后续章节，随后可回过头来手动修改目录后看到结果。
+执行后，访问 http://127.0.0.1:8199/template/info 可以看到模板被解析并展示到页面上。如果页面报错找不到模板文件，没有关系，因为这里并没有对模板目录做设置，默认是当前可行文件的执行目录（Linux&Mac下是`/tmp`目录，Windows下是`C:\Documents and Settings\用户名\Local Settings\Temp`）。
 
-其中，给定的模板文件file参数是需要带完整的文件名后缀，例如：```index.tpl```，```index.html```等等，模板引擎对模板文件后缀名没有要求，用户可完全自定义。此外，模板文件参数也支持文件的绝对路径(完整的文件路径)。
+其中，给定的模板文件file参数是需要带完整的文件名后缀，例如：`index.tpl`，`index.html`等等，模板引擎对模板文件后缀名没有要求，用户可完全自定义。此外，模板文件参数也支持文件的绝对路径(完整的文件路径)。
 
-当然，我们也可以直接解析模板内容，请看示例2：
+当然，我们也可以直接解析模板内容，例如：
 ```go
 package main
 
