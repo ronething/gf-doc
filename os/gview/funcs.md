@@ -340,6 +340,19 @@ ge "a" "a": true
 // 0
 ```
 
+## replace
+```go
+{{.str | replace .search .replace}}
+{{replace .search .replace .str}}
+```
+将`str`中的`search`替换为`replace`。
+示例：
+```go
+{{"I'm中国人" | replace "I'm" "我是"}}
+// 输出:
+// 我是中国人
+```
+
 ## substr
 ```go
 {{.str | substr .start .length}}
