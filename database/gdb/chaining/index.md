@@ -96,7 +96,7 @@ r, err := user.Select()
 user := g.DB().Table("user").Safe()
 ```
 ```go
-m := m.Where("status IN(?)", g.Slice{1,2,3})
+m := user.Where("status IN(?)", g.Slice{1,2,3})
 if vip {
     // 查询条件通过赋值叠加
     m = m.And("money>=?", 1000000)
