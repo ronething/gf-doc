@@ -65,7 +65,7 @@ RestartSec=5
 [Install]
 WantedBy=multi-user.target
 ```
-使用步骤如下：
+**使用方法**
 - 创建应用配置文件 `/etc/systemd/system/gfapp.service`, 内容如上;
 - 使用 `systemctl daemon-reload` 重新加载服务;
 - 执行 `systemctl start gfapp` 来启动服务;
@@ -77,13 +77,17 @@ WantedBy=multi-user.target
 ## 5. `screen`
 `Screen` 是一款由 `GNU` 计划开发的用于命令行终端切换的自由软件。用户可以通过该软件同时连接多个本地或远程的命令行会话，并在其间自由切换。`GNU Screen`可以看作是窗口管理器的命令行界面版本。它提供了统一的管理多个会话的界面和相应的功能。   
 安装方式: `sudo apt install -y screen`(debian 系列), `sudo yum install -y screen` (centos)   
-常用参数:
+
+**常用参数:**
 - `screen -S yourname` -> 新建一个叫 yourname 的 session
 - `screen -ls`         -> 列出当前所有的 session
 - `screen -r yourname` -> 回到 yourname 这个 session
 - `screen -d yourname` -> 远程detach某个 session
-- `screen -d -r yourname` -> 结束当前 session 并回到 yourname 这个 session
-使用方法:
-- 使用命令 `screen -S xxserver` 创建一个 session;
+- `screen -d -r yourname` -> 结束当前 session 并回到 yourname 这个 session   
+
+**使用方法:**
+- 使用命令 `screen -S gfapp` 创建一个 session;
 - 在新终端窗口中执行 `./gf-app` 即可；
 - 执行 `ctrl-a, ctrl-d` 暂时离开当前session;
+- 执行 `screen -r gfapp` 返回命令窗口; 若返回不成功, 可能是该窗口被占用了, 可以尝试使用 `screen -Dr gfapp`;
+- 执行 `screen -X -S gfapp quit` 结束程序;
