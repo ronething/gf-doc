@@ -16,12 +16,11 @@
 1. 一些自研开发的第三方包，特别是一些业务依赖包，是不允许公开下载的（私有库），并且版本库也可能不支持`HTTPS`协议，因此无法使用`go get`或者`go.mod`进行下载和管理；
 1. 等等；
 
-如果你遇到了上面所提到的问题，我们建议的解决方案如下：
-1. 充分利用`go.mod`和`vendor`的优点，结合两者进行依赖包管理；
-1. 开发环境中使用`go.mod`进行依赖包管理，该下载的下载，该翻墙的翻墙，由开发端负责维护更新第三方包依赖；
-1. 开发环境提交部署之前使用`go mod vendor`命令，将该项目依赖的第三方包自动复制到`vendor`目录下，并提交`vendor`目录代码；
-1. 在自动部署系统上（如`jenkins`）使用`go build -mod=vendor`命令优先使用`vendor`目录进行编译，生成二进制文件，例如编译生成Linux下的可部署二进制文件：`CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -mod=vendor -o main main.go`
-
-
-
-![](/images/project-vendor.png)
+如果你遇到了上面所提到的问题，我们建议的解决方案：通过`GitToken`+`GitReplace`的方式来下载私有包。例如以下命令行方式：
+```shell
+export GIT_TERMINAL_PROMPT=1
+git config --global url."https://oauth2:xxxxxxxx@git.xxx.com".insteadOf "https://git.xxx.com"
+export GOPROXY=https://goproxy.io,direct
+export GOPRIVATE=git.xxx.com
+CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main main.go
+```

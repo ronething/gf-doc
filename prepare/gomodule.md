@@ -22,7 +22,7 @@ module my-hello
 
 # 使用go.mod
 
-使用`go.mod`意即用`go.mod`进行项目依赖管理。我们有两种`go.mod`的**使用方式**：`IDE-vgo`和命令行方式。以下我们通过下载使用`GoFrame`框架来演示如何使用这两种方式来管理依赖。
+使用`go.mod`意即用`go.mod`进行项目依赖管理。我们有两种`go.mod`的**使用方式**：`IDE-vgo`和`命令行`方式。以下我们通过下载使用`GoFrame`框架来演示如何使用这两种方式来管理依赖。
 
 > 如果需要`Goland` IDE支持`go.mod`，必须要打开`vgo`的支持（包括代码依赖检测）。这两种使用方式的区别仅仅是下载依赖包的方式不同。
 
@@ -37,7 +37,14 @@ module my-hello
 
     ![](/images/gomodule2.png)
 
-    其中`Proxy`请输入代理地址下载依赖包，如果选择`direct`表示不使用代理。可选择的反向代理地址有：`https://goproxy.io`、`https://goproxy.cn`、`https://mirrors.aliyun.com/goproxy/`，详见Go官网说明：https://github.com/golang/go/wiki/Modules#are-there-always-on-module-repositories-and-enterprise-proxies
+    其中`Proxy`请输入代理地址下载依赖包，如果选择`direct`表示不使用代理。可选择的反向代理地址有：
+    - https://goproxy.io
+    - https://goproxy.cn
+    - https://mirrors.aliyun.com/goproxy/
+    
+    详见Go官网说明：https://github.com/golang/go/wiki/Modules#are-there-always-on-module-repositories-and-enterprise-proxies
+
+    这里请务必选择一个代理地址输入。
 
 1. 手动修改`go.mod`文件如下：
     ```
@@ -73,11 +80,12 @@ module my-hello
 
 1. 打开`Terminal`，在项目根目录下执行:
     ```
-    export GO111MODULE=on; go get -u github.com/gogf/gf
+    export GO111MODULE=on GOPROXY=https://goproxy.io; go get -u github.com/gogf/gf
     ```
-    该命令将会立即下载最新的`GoFrame`框架。其中 `export GO111MODULE=on;` 表示开启`Go Module`特性（Go `1.11.x`版本默认关闭，需要手动开启）。
-
-    > `GF`框架为开发者解决了所有框架内部的第三方包依赖，因此框架的下载安装非常方便。但是如果您有额外依赖的第三方包被墙下载不了，可以设置环境变量: `export GOPROXY=https://goproxy.io` 或者 `export GOPROXY=https://mirrors.aliyun.com/goproxy/`
+    该命令将会立即下载最新的`GoFrame`框架。其中 `export GO111MODULE=on;` 表示开启`Go Module`特性（Go `1.11.x`版本默认关闭，需要手动开启），`export GOPROXY=https://goproxy.io` 表示使用代理下载，原因你懂的，并且也能极大提高依赖包下载速度。代理地址也可使用：
+    - https://goproxy.io
+    - https://goproxy.cn
+    - https://mirrors.aliyun.com/goproxy
 
     ![](/images/gomodule1.png)
 
