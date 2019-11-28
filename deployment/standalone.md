@@ -89,5 +89,5 @@ WantedBy=multi-user.target
 - 使用命令 `screen -S gfapp` 创建一个 session;
 - 在新终端窗口中执行 `./gf-app` 即可；
 - 执行 `ctrl-a, ctrl-d` 暂时离开当前session;
-- 执行 `screen -r gfapp` 返回命令窗口; 若返回不成功, 可能是该窗口被占用了, 可以尝试使用 `screen -Dr gfapp`;
+- 执行 `screen -r gfapp` 返回命令窗口; 若返回不成功, 可能是该窗口被占用(`Attached`)了, 可以尝试使用 `screen -Dr gfapp`;
 - 执行 `screen -X -S gfapp quit` 结束程序;
