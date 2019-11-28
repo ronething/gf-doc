@@ -29,18 +29,21 @@ Go的开发包升级也是同样的过程。
 
 # IDE开发环境安装
 
-目前Go的IDE有两款比较流行，一款是国人开发的`LiteIDE`（免费），另一款是Jetbrains公司的`Goland`（收费），我们推荐使用`Goland`来作为开发IDE，下载及注册请参考网上教程（[百度](https://www.baidu.com/s?wd=goland%20安装) 或 [Google](https://www.google.com/search?q=goland+安装)）。
+目前`Go`的`IDE`有两款比较流行，一款是`VSCode+Plugins`（免费），另一款是`JetBrains`公司的`Goland`（收费）。由于`JetBrains`也是`GoFrame`框架的赞助商，因此我们优先推荐使用`Goland`来作为开发IDE，下载及注册请参考网上教程（[百度](https://www.baidu.com/s?wd=goland%20安装) 或 [Google](https://www.google.com/search?q=goland+安装)）。
+
+`JetBrains`的官方网站为：[https://www.jetbrains.com](https://www.jetbrains.com/?from=GoFrame)
+
 
 ## Goland的使用
 
-我们来创建第一个Go程序吧，老规矩，上`hello world`。
+我们来创建第一个`Go`程序吧，老规矩，上`hello world`。
 
 ### Step1. 打开IDE
 ![](/images/goland0.png)
 
 
 ### Step2. 创建项目
-这里需要注意的是Go安装文件的路径(`Sdk`)，[官方安装文档](https://golang.google.cn/doc/install)有详细说明，请仔细阅读。
+这里需要注意的是`Go`安装文件的路径(`SDK`)，[官方安装文档](https://golang.google.cn/doc/install)有详细说明，请仔细阅读。
 
 其中的`Location`随意选择一个本地路径即可。
 
@@ -48,7 +51,7 @@ Go的开发包升级也是同样的过程。
 
 
 ### Step3. 创建程序
-新建一个go文件，叫做`hello.go`，并输入以下代码:
+新建一个`go`文件，叫做`hello.go`，并输入以下代码:
 ```go
 package main
 
@@ -71,7 +74,7 @@ func main() {
 
 ![](/images/goland6.png)
 
-恭喜你，第一个Go程序便成功了！
+恭喜你，第一个`Go`程序便成功了！
 
 
 
