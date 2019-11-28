@@ -66,11 +66,11 @@ RestartSec=5
 WantedBy=multi-user.target
 ```
 **使用方法**
-- 创建应用配置文件 `/etc/systemd/system/gfapp.service`, 内容如上;
-- 使用 `systemctl daemon-reload` 重新加载服务;
-- 执行 `systemctl start gfapp` 来启动服务;
-- 最后执行 `systemctl status gfapp` 来查看服务运行的状态信息;
-- 执行 `systemctl enable gfapp` 将服务添加到开机启动项;
+1. 创建应用配置文件 `/etc/systemd/system/gfapp.service`, 内容如上;
+1. 使用 `systemctl daemon-reload` 重新加载服务;
+1. 执行 `systemctl start gfapp` 来启动服务;
+1. 最后执行 `systemctl status gfapp` 来查看服务运行的状态信息;
+1. 执行 `systemctl enable gfapp` 将服务添加到开机启动项;
 - 注意：执行的 `gfapp` 是使用文件名作为服务名;
 - 常见的命令有: `start(启动), stop(停止), restart(重启), status(查看运行状态), enable(添加到开机启动项), disable(将程序从开机启动中移除)`
 
@@ -86,8 +86,8 @@ WantedBy=multi-user.target
 - `screen -d -r yourname` -> 结束当前 session 并回到 yourname 这个 session   
 
 **使用方法:**
-- 使用命令 `screen -S gfapp` 创建一个 session;
-- 在新终端窗口中执行 `./gf-app` 即可；
-- 执行 `ctrl-a, ctrl-d` 暂时离开当前session;
-- 执行 `screen -r gfapp` 返回命令窗口; 若返回不成功, 可能是该窗口被占用(`Attached`)了, 可以尝试使用 `screen -Dr gfapp`;
-- 执行 `screen -X -S gfapp quit` 结束程序;
+1. 使用命令 `screen -S gfapp` 创建一个 session;
+1. 在新终端窗口中执行 `./gf-app` 即可；
+1. 执行 `ctrl-a, ctrl-d` 暂时离开当前session;
+1. 执行 `screen -r gfapp` 返回命令窗口; 若返回不成功, 可能是该窗口被占用(`Attached`)了, 可以尝试使用 `screen -Dr gfapp`;
+1. 执行 `screen -X -S gfapp quit` 结束程序;
