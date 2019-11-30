@@ -82,21 +82,21 @@ func main() {
 		rg.ALL("/user", func(r *ghttp.Request) {
 			user := new(User)
 			if err := r.GetToStruct(user); err != nil {
-				r.Response.WriteJson(g.Map{
+				r.Response.WriteJsonExit(g.Map{
 					"message": err,
 					"errcode": 1,
-				}, true)
+				})
 			}
 			if err := gvalid.CheckStruct(user, nil); err != nil {
-				r.Response.WriteJson(g.Map{
+				r.Response.WriteJsonExit(g.Map{
 					"message": err.Maps(),
 					"errcode": 1,
-				}, true)
+				})
 			}
-			r.Response.WriteJson(g.Map{
+			r.Response.WriteJsonExit(g.Map{
 				"message": "ok",
 				"errcode": 0,
-			}, true)
+			})
 		})
 	})
 	s.SetPort(8199)
