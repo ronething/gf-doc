@@ -14,7 +14,7 @@ https://godoc.org/github.com/gogf/gf/net/ghttp
 1. `GetQuery*`: 获取`GET`方式传递过来的参数，包括`Query String`及`Body`参数解析。
 2. `GetPost*`: 获取`POST`方式传递过来的参数，包括`Form`参数以及`Body`参数解析。
 2. `GetForm*`: 获取表单方式传递过来的参数，表单方式提交的参数`Content-Type`往往为`application/x-www-form-urlencoded`, `application/form-data`, `multipart/form-data`, `multipart/mixed`等等。
-3. `GetRequest*`: 获取客户端提交的参数，不区分提交方式。需要注意的是，当不同的方式包含相同名称的参数时，将会按照一定的优先级进行覆盖，优先级为：`router < query < form < body < custom`，也就是说自定义参数的优先级最高，其次是`Body`提交参数，再者是`Form`表单参数，以此类推。
+3. `GetRequest*`: 获取客户端提交的参数，不区分提交方式。
 4. `GetBody*`: 获取客户端提交的原始数据，与`HTTP Method`无关，例如客户端提交`JSON/XML`数据格式时可以通过该方法获取原始的提交数据。
 5. `GetJson`: 自动将原始请求信息解析为`gjson.Json`对象指针返回，`gjson.Json`对象具体在【[gjson模块](encoding/gjson/index.md)】章节中介绍。
 1. `Get*ToStruct`: 将请求参数绑定到指定的`struct`对象上，注意给定的参数为对象指针。
@@ -25,6 +25,20 @@ https://godoc.org/github.com/gogf/gf/net/ghttp
 获取的参数方法可以对指定键名的数据进行自动类型转换，例如： http://127.0.0.1:8199/?amount=19.66 ，通过`GetQueryString`将会返回`19.66`的字符串类型，`GetQueryFloat32`/`GetQueryFloat64`将会分别返回`float32`和`float64`类型的数值`19.66`。但是，`GetQueryInt`/`GetQueryUint`将会返回`19`（如果参数为`float`类型的字符串，将会按照**向下取整**进行整型转换）。
 
 变量类型的获取方法仅提供了常用类型的直接获取方法，如果有更多参数类型转换的需求，可以使用`Get*Var`参数获取方法，获得`*gvar.Var`变量再进行相应类型转换。例如，假如我们要获取一个`int8`类型的参数，我们可以这样`GetVar("id").Int8()`。
+
+## 参数优先级
+
+我们知道参数提交有多种方式，在`GF`框架下，有以下几种方式：
+1. `Router`: 路由参数，来源于路由规则匹配。
+1. `Query`: `URL`中的`query string`参数解析，如：`http://127.0.0.1/index?id=1&name=john` 中的`id=1&name=john`。
+1. `Form`: 表单提交参数，最常见的提交方式。
+1. `Body`: 原始提交内容，从`Body`中获取并解析得到的参数。
+1. `Custom`: 自定义参数。
+
+我们考虑一种场景，当不同的提交方式中存在同名的参数名称会怎么样？在`GF`框架下，我们根据不同的获取方法，将会按照不同的优先级进行获取，优先级高的方式提交的参数将会优先覆盖其他方式的同名参数。优先级规则如下：
+1. `GetRequset*`以及`Get*`别名方法：`Router < Query < Form < Body < Custom`，也就是说自定义参数的优先级最高，其次是`Body`提交参数，再者是`Form`表单参数，以此类推。例如，`Query`和`Form`中都提交了同样名称的参数`id`，参数值分别为`1`和`2`，那么`Get("id")`将会返回`2`，而`GetQuery("id")`将会返回`1`。
+1. `GetQuery*`方法：`Query > Body`，也就是说`query string`的参数将会覆盖`Body`中提交的同名参数。例如，`Query`和`Body`中都提交了同样名称的参数`id`，参数值分别为`1`和`2`，那么`Get("id")`将会返回`2`，而`GetQuery("id")`将会返回`1`。
+1. `GetForm*`方法：由于该类型的方法仅用于获取`Form`表单参数，因此没什么优先级的差别。
 
 ## JSON参数获取
 
