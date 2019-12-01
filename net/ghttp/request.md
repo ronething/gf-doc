@@ -22,7 +22,7 @@ https://godoc.org/github.com/gogf/gf/net/ghttp
 
 ## 参数类型
 
-获取的参数方法可以对指定键名的数据进行自动类型转换，例如： http://127.0.0.1:8199/?amount=19.66 ，通过`GetQueryString`将会返回`19.66`的字符串类型，`GetQueryFloat32`/`GetQueryFloat64`将会分别返回`float32`和`float64`类型的数值`19.66`。但是，`GetQueryInt`/`GetQueryUint`将会返回`19`（如果参数为`float`类型的字符串，将会按照**向下取整**进行整型转换）。
+获取的参数方法可以对指定键名的数据进行自动类型转换，例如：`http://127.0.0.1:8199/?amount=19.66`，通过`GetQueryString`将会返回`19.66`的字符串类型，`GetQueryFloat32`/`GetQueryFloat64`将会分别返回`float32`和`float64`类型的数值`19.66`。但是，`GetQueryInt`/`GetQueryUint`将会返回`19`（如果参数为`float`类型的字符串，将会按照**向下取整**进行整型转换）。
 
 变量类型的获取方法仅提供了常用类型的直接获取方法，如果有更多参数类型转换的需求，可以使用`Get*Var`参数获取方法，获得`*gvar.Var`变量再进行相应类型转换。例如，假如我们要获取一个`int8`类型的参数，我们可以这样`GetVar("id").Int8()`。
 
@@ -39,6 +39,7 @@ https://godoc.org/github.com/gogf/gf/net/ghttp
 1. `GetRequset*`以及`Get*`别名方法：`Router < Query < Form < Body < Custom`，也就是说自定义参数的优先级最高，其次是`Body`提交参数，再者是`Form`表单参数，以此类推。例如，`Query`和`Form`中都提交了同样名称的参数`id`，参数值分别为`1`和`2`，那么`Get("id")`将会返回`2`，而`GetQuery("id")`将会返回`1`。
 1. `GetQuery*`方法：`Query > Body`，也就是说`query string`的参数将会覆盖`Body`中提交的同名参数。例如，`Query`和`Body`中都提交了同样名称的参数`id`，参数值分别为`1`和`2`，那么`Get("id")`将会返回`2`，而`GetQuery("id")`将会返回`1`。
 1. `GetForm*`方法：由于该类型的方法仅用于获取`Form`表单参数，因此没什么优先级的差别。
+1. `GetPost*`方法：同上。
 
 ## JSON参数获取
 
