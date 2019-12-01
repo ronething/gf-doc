@@ -4,9 +4,9 @@
 
 # 全局对象
 
-`GF`框架封装了一些常用的数据类型以及对象，可以直接通过`g.*`方便获取。
+`GF`框架封装了一些常用的数据类型以及对象，通过`g.*`方法获取。
 
-> `g`是一个强耦合的模块，目的是为开发者在对频繁使用的对象调用时提供便利。
+> `g`是一个强耦合的模块，目的是为开发者在对频繁使用的类型/对象调用时提供便利。
 
 **使用方式**：
 ```go
@@ -14,6 +14,9 @@ import "github.com/gogf/gf/frame/g"
 ```
 
 ## 数据类型
+
+常用数据类型别名。
+
 ```go
 // 泛型
 type Var = gvar.Var
@@ -56,33 +59,55 @@ type ArrayInt = []int
 
 ## 常用对象
 
+常用对象通过`单例模式`进行管理，可以根据不同的单例名称获取对应的对象实例。并在对象初始化时会自动检索获取配置文件中的对应配置项，具体配置项请查看对应对象的章节介绍。
+
 1. **(单例) 配置管理对象**
 	```go
     func Config(name...string) *gcfg.Config
     ```
-3. **(单例) 模板引擎对象**
+    别名：
+    ```go
+    func Cfg(name ...string) *gcfg.Config
+    ```
+1. **(单例) 日志管理对象**
+	```go
+    func Log(name ...string) *glog.Logger
+    ```
+1. **(单例) 模板引擎对象**
 	```go
     func View(name ...string) *gview.View
     ```
-5. **(单例) WEB Server**
+1. **(单例) WEB Server**
 	```go
     func Server(name ...interface{}) *ghttp.Server
     ```
-7. **(单例) TCP Server**
+1. **(单例) TCP Server**
 	```go
     func TcpServer(name ...interface{}) *gtcp.Server
     ```
-9. **(单例) UDP Server**
+1. **(单例) UDP Server**
 	```go
     func UdpServer(name ...interface{}) *gudp.Server
     ```
-11. **(单例) 数据库ORM对象**
+1. **(单例) 数据库ORM对象**
 	```go
     func DB(name ...string) *gdb.Db
     ```
-13. **(单例) Redis客户端对象**
+1. **(单例) Redis客户端对象**
 	```go
     func Redis(name ...string) *gredis.Redis
+    ```
+1. **(单例) 资源管理对象**
+	```go
+    func Resource(name ...string) *gres.Resource
+    ```
+    别名：
+    ```go
+    func Res(name ...string) *gres.Resource
+    ```
+1. **(单例) 国际化管理对象**
+	```go
+    func I18n(name ...string) *gi18n.Manager
     ```
 
 
