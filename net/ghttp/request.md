@@ -2,25 +2,37 @@
 
 # 请求输入
 
-请求输入依靠 `ghttp.Request` 对象实现，`ghttp.Request`继承了底层的`http.Request`对象，并且包含了会话相关的`Cookie`和`Session`对象(每个请求都会有两个独立的`Cookie`和`Session对象`)。此外，成员对象包含一个与当前请求对应的返回输出对象指针`Response`，用于数据的返回。
+请求输入依靠 `ghttp.Request` 对象实现，`ghttp.Request`继承了底层的`http.Request`对象，并且包含了会话相关的`Cookie`和`Session`对象(每个请求都有独立的`Cookie`和`Session`对象)。此外，成员对象包含一个与当前请求对应的返回输出对象指针`Response`，用于数据的返回。
 
 相关方法：
 https://godoc.org/github.com/gogf/gf/net/ghttp
 
-以上方法可以分为以下几类：
+## 方法说明
+
+可以看到`Request`对象的参数获取方法非常丰富，可以分为以下几类：
 1. `Get*`: 常用方法，简化参数获取，`GetRequest*`的别名。
 1. `GetQuery*`: 获取`GET`方式传递过来的参数，包括`Query String`及`Body`参数解析。
 2. `GetPost*`: 获取`POST`方式传递过来的参数，包括`Form`参数以及`Body`参数解析。
 2. `GetForm*`: 获取表单方式传递过来的参数，表单方式提交的参数`Content-Type`往往为`application/x-www-form-urlencoded`, `application/form-data`, `multipart/form-data`, `multipart/mixed`等等。
-3. `GetRequest*`: 获取客户端提交的参数，不区分提交方式。需要注意的是，当不同的方式包含相同名称的参数时，将会按照一定的优先级进行覆盖。优先查找`Router`路由参数中是否有指定键名的参数，如果没有则查找`GET`/`Body`参数，如果没有则查找`POST`/`Body`参数，接着查找自定义`Param`参数，如果都不存在则返回空或者默认值。
-4. `GetBody`: 获取客户端提交的原始数据，与`HTTP Method`无关，例如客户端提交`JSON/XML`数据格式时可以通过该方法获取原始的提交数据。
+3. `GetRequest*`: 获取客户端提交的参数，不区分提交方式。需要注意的是，当不同的方式包含相同名称的参数时，将会按照一定的优先级进行覆盖，优先级为：`router < query < form < body < custom`，也就是说自定义参数的优先级最高，其次是`Body`提交参数，再者是`Form`表单参数，以此类推。
+4. `GetBody*`: 获取客户端提交的原始数据，与`HTTP Method`无关，例如客户端提交`JSON/XML`数据格式时可以通过该方法获取原始的提交数据。
 5. `GetJson`: 自动将原始请求信息解析为`gjson.Json`对象指针返回，`gjson.Json`对象具体在【[gjson模块](encoding/gjson/index.md)】章节中介绍。
 1. `Get*ToStruct`: 将请求参数绑定到指定的`struct`对象上，注意给定的参数为对象指针。
 1. `Exit*`: 用于请求流程退出控制，详见本章后续说明；
 
-其中，获取的参数方法可以对指定键名的数据进行自动类型转换，例如： http://127.0.0.1:8199/?amount=19.66 ，通过`GetQueryString`将会返回`19.66`的字符串类型，`GetQueryFloat32`/`GetQueryFloat64`将会分别返回`float32`和`float64`类型的数值`19.66`。但是，`GetQueryInt`/`GetQueryUint`将会返回`19`（如果参数为`float`类型的字符串，将会按照**向下取整**进行整型转换）。
+## 参数类型
 
-> 需要注意的，从通用性及效率上考虑，服务端不会自动解析客户端提交的`JSON`参数，因此服务端无法通过例如`GetPost*`方法获得`JSON`数据中的特定字段参数。服务端开发者必须自行调用`GetBody`方法获取提交数据后进行解析，或者通过`GetJson`获得`JSON`对象（注意判断解析错误`error`）。
+获取的参数方法可以对指定键名的数据进行自动类型转换，例如： http://127.0.0.1:8199/?amount=19.66 ，通过`GetQueryString`将会返回`19.66`的字符串类型，`GetQueryFloat32`/`GetQueryFloat64`将会分别返回`float32`和`float64`类型的数值`19.66`。但是，`GetQueryInt`/`GetQueryUint`将会返回`19`（如果参数为`float`类型的字符串，将会按照**向下取整**进行整型转换）。
+
+变量类型的获取方法仅提供了常用类型的直接获取方法，如果有更多参数类型转换的需求，可以使用`Get*Var`参数获取方法，获得`*gvar.Var`变量再进行相应类型转换。例如，假如我们要获取一个`int8`类型的参数，我们可以这样`GetVar("id").Int8()`。
+
+## JSON参数获取
+
+这也是新手问得比较多问题。
+
+从通用性及效率上考虑，服务端不会自动解析客户端提交的`JSON`参数，因此服务端无法通过例如`GetPost*`方法获得`JSON`数据中的特定字段参数。服务端开发者可以调用`GetJson`方法获得`JSON`对象（注意判断解析错误`error`）。也可以通过`GetBody*`方法获得`Body`数据后自行解析。
+
+获得的`JSON`对象其实是一个`gjson.Json`类型，针对于`JSON`参数的检索和操作非常方便，具体请参考【[gjson模块](encoding/gjson/index.md)】章节。
 
 ## 请求参数解析
 `ghttp.Request`对象支持智能的参数类型解析（不区分请求提交方式及请求提交类型），以下为提交参数示例以及服务端对应解析的变量类型：
