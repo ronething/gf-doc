@@ -289,8 +289,8 @@ func Order(r *ghttp.Request) {
 
 func main() {
     s := g.Server()
-    s.Group("/api.v1", func(g *ghttp.RouterGroup) {
-        g.GET("/order", Order)
+    s.Group("/api.v1", func(group *ghttp.RouterGroup) {
+        group.GET("/order", Order)
     })
     s.SetPort(8199)
     s.Run()
@@ -320,11 +320,11 @@ func Order(r *ghttp.Request) {
 
 func main() {
 	s := g.Server()
-	s.Group("/api.v1", func(g *ghttp.RouterGroup) {
-		g.Hook("/*any", ghttp.HOOK_BEFORE_SERVE, func(r *ghttp.Request) {
+	s.Group("/api.v1", func(group *ghttp.RouterGroup) {
+		group.Hook("/*any", ghttp.HOOK_BEFORE_SERVE, func(r *ghttp.Request) {
 			r.Response.CORSDefault()
 		})
-		g.GET("/order", Order)
+		group.GET("/order", Order)
 	})
 	s.SetPort(8199)
 	s.Run()

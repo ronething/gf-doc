@@ -52,9 +52,9 @@ func UploadShow(r *ghttp.Request) {
 
 func main() {
 	s := g.Server()
-	s.Group("/upload", func(g *ghttp.RouterGroup) {
-		g.ALL("/", Upload)
-		g.ALL("/show", UploadShow)
+	s.Group("/upload", func(group *ghttp.RouterGroup) {
+		group.ALL("/", Upload)
+		group.ALL("/show", UploadShow)
 	})
 	s.SetPort(8199)
 	s.Run()

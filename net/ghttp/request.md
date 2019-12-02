@@ -105,8 +105,8 @@ type User struct {
 
 func main() {
 	s := g.Server()
-	s.Group("/", func(rg *ghttp.RouterGroup) {
-		rg.ALL("/user", func(r *ghttp.Request) {
+	s.Group("/", func(group *ghttp.RouterGroup) {
+		group.ALL("/user", func(r *ghttp.Request) {
 			user := new(User)
 			if err := r.GetToStruct(user); err != nil {
 				r.Response.WriteJsonExit(g.Map{

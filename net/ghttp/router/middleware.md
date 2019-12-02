@@ -72,9 +72,9 @@ func MiddlewareCORS(r *ghttp.Request) {
 
 func main() {
 	s := g.Server()
-	s.Group("/api.v2", func(g *ghttp.RouterGroup) {
-		g.Middleware(MiddlewareCORS)
-		g.ALL("/user/list", func(r *ghttp.Request) {
+	s.Group("/api.v2", func(group *ghttp.RouterGroup) {
+		group.Middleware(MiddlewareCORS)
+		group.ALL("/user/list", func(r *ghttp.Request) {
 			r.Response.Write("list")
 		})
 	})
@@ -116,9 +116,9 @@ func MiddlewareCORS(r *ghttp.Request) {
 
 func main() {
 	s := g.Server()
-	s.Group("/api.v2", func(g *ghttp.RouterGroup) {
-		g.Middleware(MiddlewareAuth, MiddlewareCORS)
-		g.ALL("/user/list", func(r *ghttp.Request) {
+	s.Group("/api.v2", func(group *ghttp.RouterGroup) {
+		group.Middleware(MiddlewareAuth, MiddlewareCORS)
+		group.ALL("/user/list", func(r *ghttp.Request) {
 			r.Response.Write("list")
 		})
 	})
@@ -157,8 +157,8 @@ func MiddlewareAuth(r *ghttp.Request) {
 
 func main() {
 	s := g.Server()
-	s.Group("/admin", func(g *ghttp.RouterGroup) {
-		g.MiddlewarePattern("/*action", func(r *ghttp.Request) {
+	s.Group("/admin", func(group *ghttp.RouterGroup) {
+		group.MiddlewarePattern("/*action", func(r *ghttp.Request) {
 			if action := r.GetRouterString("action"); action != "" {
 				switch action {
 				case "login":
@@ -168,10 +168,10 @@ func main() {
 			}
 			MiddlewareAuth(r)
 		})
-		g.ALL("/login", func(r *ghttp.Request) {
+		group.ALL("/login", func(r *ghttp.Request) {
 			r.Response.Write("login")
 		})
-		g.ALL("/dashboard", func(r *ghttp.Request) {
+		group.ALL("/dashboard", func(r *ghttp.Request) {
 			r.Response.Write("dashboard")
 		})
 	})
@@ -231,9 +231,9 @@ func MiddlewareError(r *ghttp.Request) {
 
 func main() {
 	s := g.Server()
-	s.Group("/api.v2", func(g *ghttp.RouterGroup) {
-		g.Middleware(MiddlewareAuth, MiddlewareCORS, MiddlewareError)
-		g.ALL("/user/list", func(r *ghttp.Request) {
+	s.Group("/api.v2", func(group *ghttp.RouterGroup) {
+		group.Middleware(MiddlewareAuth, MiddlewareCORS, MiddlewareError)
+		group.ALL("/user/list", func(r *ghttp.Request) {
 			panic("db error: sql is xxxxxxx")
 		})
 	})
@@ -284,12 +284,12 @@ func MiddlewareLog(r *ghttp.Request) {
 
 func main() {
 	s := g.Server()
-	s.Group("/", func(g *ghttp.RouterGroup) {
-		g.Middleware(MiddlewareLog)
+	s.Group("/", func(group *ghttp.RouterGroup) {
+		group.Middleware(MiddlewareLog)
 	})
-	s.Group("/api.v2", func(g *ghttp.RouterGroup) {
-		g.Middleware(MiddlewareAuth, MiddlewareCORS)
-		g.ALL("/user/list", func(r *ghttp.Request) {
+	s.Group("/api.v2", func(group *ghttp.RouterGroup) {
+		group.Middleware(MiddlewareAuth, MiddlewareCORS)
+		group.ALL("/user/list", func(r *ghttp.Request) {
 			panic("custom error")
 		})
 	})

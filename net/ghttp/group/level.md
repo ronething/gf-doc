@@ -39,38 +39,38 @@ func MiddlewareLog(r *ghttp.Request) {
 
 func main() {
 	s := g.Server()
-	s.Group("/", func(g *ghttp.RouterGroup) {
-		g.Middleware(MiddlewareLog)
+	s.Group("/", func(group *ghttp.RouterGroup) {
+		group.Middleware(MiddlewareLog)
 	})
-	s.Group("/api.v2", func(g *ghttp.RouterGroup) {
-		g.Middleware(MiddlewareAuth, MiddlewareCORS)
-		g.GET("/test", func(r *ghttp.Request) {
+	s.Group("/api.v2", func(group *ghttp.RouterGroup) {
+		group.Middleware(MiddlewareAuth, MiddlewareCORS)
+		group.GET("/test", func(r *ghttp.Request) {
 			r.Response.Write("test")
 		})
-		g.Group("/order", func(g *ghttp.RouterGroup) {
-			g.GET("/list", func(r *ghttp.Request) {
+		group.Group("/order", func(group *ghttp.RouterGroup) {
+			group.GET("/list", func(r *ghttp.Request) {
 				r.Response.Write("list")
 			})
-			g.PUT("/update", func(r *ghttp.Request) {
+			group.PUT("/update", func(r *ghttp.Request) {
 				r.Response.Write("update")
 			})
 		})
-		g.Group("/user", func(g *ghttp.RouterGroup) {
-			g.GET("/info", func(r *ghttp.Request) {
+		group.Group("/user", func(group *ghttp.RouterGroup) {
+			group.GET("/info", func(r *ghttp.Request) {
 				r.Response.Write("info")
 			})
-			g.POST("/edit", func(r *ghttp.Request) {
+			group.POST("/edit", func(r *ghttp.Request) {
 				r.Response.Write("edit")
 			})
-			g.DELETE("/drop", func(r *ghttp.Request) {
+			group.DELETE("/drop", func(r *ghttp.Request) {
 				r.Response.Write("drop")
 			})
 		})
-		g.Group("/hook", func(g *ghttp.RouterGroup) {
-			g.Hook("/*", ghttp.HOOK_BEFORE_SERVE, func(r *ghttp.Request) {
+		group.Group("/hook", func(group *ghttp.RouterGroup) {
+			group.Hook("/*", ghttp.HOOK_BEFORE_SERVE, func(r *ghttp.Request) {
 				r.Response.Write("hook any")
 			})
-			g.Hook("/:name", ghttp.HOOK_BEFORE_SERVE, func(r *ghttp.Request) {
+			group.Hook("/:name", ghttp.HOOK_BEFORE_SERVE, func(r *ghttp.Request) {
 				r.Response.Write("hook name")
 			})
 		})
