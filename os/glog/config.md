@@ -81,7 +81,7 @@ l2 := g.Log("logger2")
 // 对应默认配置项 logger
 l3 := g.Log("none")
 // 对应默认配置项 logger
-l4 := g.Server()
+l4 := g.Log()
 ```
 
 
