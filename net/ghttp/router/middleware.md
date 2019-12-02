@@ -8,7 +8,7 @@
 
 ## 中间件定义
 
-中间件的定义和普通HTTP执行方法一样，但是可以在`Request`参数中使用`Middleware`属性对象来控制请求流程。
+中间件的定义和普通HTTP执行方法`HandlerFunc`一样，但是可以在`Request`参数中使用`Middleware`属性对象来控制请求流程。
 
 我们拿一个跨域请求的中间件定义来示例说明一下：
 ```go
@@ -37,10 +37,35 @@ func MiddlewareCORS(r *ghttp.Request) {
 	}
 	```
 
+## 中间件注册
+
+中间件也是通过路由的方式进行注册，不过中间件由于需要执行一些统一的前置/后置操作，因此往往是使用"模糊匹配"或者"命名匹配"规则，以便拦截处理到多个路由规则请求。
+
+中间件的注册有多种方式，参考接口文档： https://godoc.org/github.com/gogf/gf/net/ghttp
+```go
+// 通过Server对象绑定
+func (s *Server) BindMiddleware(pattern string, handlers ...HandlerFunc)
+func (s *Server) BindMiddlewareDefault(handlers ...HandlerFunc)
+
+// 通过Domain对象绑定
+func (d *Domain) BindMiddleware(pattern string, handlers ...HandlerFunc)
+func (d *Domain) BindMiddlewareDefault(handlers ...HandlerFunc)
+
+// 通过分组路由绑定
+func (g *RouterGroup) Middleware(handlers ...HandlerFunc) *RouterGroup
+func (g *RouterGroup) MiddlewarePattern(pattern string, handlers ...HandlerFunc) *RouterGroup
+```
+其中：
+1. `BindMiddleware`方法是将中间件注册到指定的路由规则下，中间件参数可以给定多个。
+1. `BindMiddlewareDefault`方法是将中间件注册到`/*`全局路由规则下。
+1. `Middleware`和`MiddlewarePattern`方法是分组路由下的方法：`Middleware`方法将中间件注册到当前分组路由的`/*`规则下；`MiddlewarePattern`可以指定基于当前分组路由下的路由规则参数。
+1. 推荐使用分组路由方式来管理路由和中间件。
+
+
 ## 中间件执行优先级
 
-1. 首先，由于中间件是基于模糊路由匹配，因此当同一个路由匹配到多个中间件时，会按照路由的深度优先规则执行，具体请查看路由章节；
-1. 其次，同一个路由规则下，会按照中间件的注册先后顺序执行，中间件的注册方法也支持同时按照先后顺序注册多个中间件；
+1. 首先，由于中间件是基于模糊路由匹配，因此**当同一个路由匹配到多个中间件时，会按照路由的深度优先规则执行**，具体请查看路由章节；
+1. 其次，**同一个路由规则下，会按照中间件的注册先后顺序执行**，中间件的注册方法也支持同时按照先后顺序注册多个中间件；
 1. 最后，为避免优先级混淆和后续管理，建议将所有中间件放到同一个地方进行先后顺序注册来控制执行优先级；
 
 > 这里的建议来参考于`gRPC`的拦截器设计，没有过多的路由控制，仅在一个地方同一个方法统一注册。往往越简单，越容易理解，也便于长期维护。
