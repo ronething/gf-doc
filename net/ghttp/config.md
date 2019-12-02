@@ -1,8 +1,6 @@
 
 [TOC]
 
-编辑中。。。
-
 
 `GF`框架的`Web Server`配置管理非常方便，支持多种配置方式以及若干配置方法。
 
@@ -23,23 +21,101 @@ https://godoc.org/github.com/gogf/gf/net/ghttp#ServerConfig
 
 我们可以使用`SetConfigWithMap`方法通过`Key-Value`键值对来设置/修改`Server`的特定配置，其余的配置使用默认配置即可。其中`Key`的名称即是`ServerConfig`这个`struct`中的属性名称，并且不区分大小写，单词间也支持使用`-`/`_`/`空格`符号连接，具体可参考【[gconv.Struct转换规则](util/gconv/struct.md)】章节。
 
-
-# 常用配置介绍
-
-## 关闭路由表打印
-
-在WebServer启动的时候默认会打印出当前注册的所有路由信息(包括HOOK注册)，这对于开发者来说非常有用。如果不想启动时打印路由表信息，可以通过以下方式关闭：
+简单示例：
 ```go
-g.Server().SetDumpRouteMap(false)
+s := g.Server()
+s.SetConfigWithMap(g.Map{
+    "Address":    ":80",
+    "ServerRoot": "/var/www/MyServerRoot",
+})
+s.Run()
 ```
-此外，我们也可以通过以下方式获取路由表信息(不自动打印)，随后我们可以自定义处理：
+其中`ServerRoot`的键名也可以使用`serverRoot`, `server-root`, `server_root`, `server root`，其他配置属性以此类推。
+
+
+一个比较完整的示例：
 ```go
-routes := g.Server().GetRouteMap()
+s := g.Server()
+s.SetConfigWithMap(g.Map{
+    "Address":          ":80",
+    "ServerRoot":       "/var/www/Server",
+    "IndexFiles":       g.Slice{"index.php", "main.php"},
+    "AccessLogEnabled": true,
+    "ErrorLogEnabled":  true,
+    "PProfEnabled":     true,
+    "LogPath":          "/var/log/ServerLog",
+    "SessionIdName":    "MySessionId",
+    "SessionPath":      "/tmp/MySessionStoragePath",
+    "SessionMaxAge":    24 * time.Hour,
+})
+s.Run()
 ```
 
+# 配置管理文件
 
+当使用`g.Server(单例名称)`获取`Server`单例对象时，将会自动通过默认的配置管理对象获取对一个的`Server`配置。默认情况下会读取`server.单例名称`配置项，当该配置项不存在时，将会读取`server`配置项。
 
+## 配置示例1，默认配置项
+```toml
+[server]
+    Address    = ":80"
+    ServerRoot = "/var/www/Server"
+```
 
+## 配置示例2，多个配置项
+多个`Server`的配置示例：
+```toml
+[server]
+    Address    = ":80"
+    ServerRoot = "/var/www/Server"
+    [server.server1]
+        Address    = ":8080"
+        ServerRoot = "/var/www/Server1"
+    [server.server2]
+        Address    = ":8088"
+        ServerRoot = "/var/www/Server2"
+```
+我们可以通过单例对象名称获取对应配置的`Server`单例对象：
+```go
+// 对应 server.server1 配置项
+s1 := g.Server("server1")
+// 对应 server.server2 配置项
+s2 := g.Server("server2")
+// 对应默认配置项 server
+s3 := g.Server("none")
+// 对应默认配置项 server
+s3 := g.Server()
+```
+
+## 配置示例3，较完整示例
+比如上一个章节的示例，对应的配置文件如下：
+```toml
+[server]
+    Address          = ":8199"
+    ServerRoot       = "/var/www/Server"
+    IndexFiles       = ["index.php", "main.php"]
+    AccessLogEnabled = true
+    ErrorLogEnabled  = true
+    PProfEnabled     = true
+    LogPath          = "/var/log/ServerLog"
+    SessionIdName    = "MySessionId"
+    SessionPath      = "/tmp/MySessionStoragePath"
+    SessionMaxAge    = "24h"
+```
+同理，配置属性项的名称也不区分大小写，单词间也支持使用`-`/`_`符号连接。也就是说以上配置文件效果和以下配置文件一致：
+```toml
+[server]
+    address          = ":8199"
+    serverRoot       = "/var/www/Server"
+    indexFiles       = ["index.php", "main.php"]
+    accessLogEnabled = true
+    errorLogEnabled  = true
+    pprofEnabled     = true
+    log-path         = "/var/log/ServerLog"
+    session_Id_Name  = "MySessionId"
+    Session-path     = "/tmp/MySessionStoragePath"
+    session_MaxAge   = "24h"
+```
 
 
 
