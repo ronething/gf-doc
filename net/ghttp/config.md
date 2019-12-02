@@ -4,7 +4,9 @@
 
 `GF`框架的`Web Server`配置管理非常方便，支持多种配置方式以及若干配置方法。
 
-# 配置管理对象
+# 配置对象
+
+配置对象定义：
 https://godoc.org/github.com/gogf/gf/net/ghttp#ServerConfig
 
 
@@ -51,18 +53,19 @@ s.SetConfigWithMap(g.Map{
 s.Run()
 ```
 
-# 配置管理文件
+# 配置文件
 
 当使用`g.Server(单例名称)`获取`Server`单例对象时，将会自动通过默认的配置管理对象获取对应的`Server`配置。默认情况下会读取`server.单例名称`配置项，当该配置项不存在时，将会读取`server`配置项。
 
-## 配置示例1，默认配置项
+## 示例1，默认配置项
 ```toml
 [server]
     Address    = ":80"
     ServerRoot = "/var/www/Server"
 ```
+随后可以使用`g.Server()`获取默认的单例对象时自动获取并设置该配置。
 
-## 配置示例2，多个配置项
+## 示例2，多个配置项
 多个`Server`的配置示例：
 ```toml
 [server]
@@ -84,10 +87,10 @@ s2 := g.Server("server2")
 // 对应默认配置项 server
 s3 := g.Server("none")
 // 对应默认配置项 server
-s3 := g.Server()
+s4 := g.Server()
 ```
 
-## 配置示例3，较完整示例
+## 示例3，较完整示例
 比如上一个章节的示例，对应的配置文件如下：
 ```toml
 [server]

@@ -92,6 +92,7 @@
     * [错误处理](errors/gerror/index.md)
     * [日志管理](#)
         * [基本介绍](os/glog/index.md)
+        * [配置管理](os/glog/config.md)
         * [日志级别](os/glog/level.md)
         * [日志目录](os/glog/path.md)
         * [日志文件](os/glog/file.md)
