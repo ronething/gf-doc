@@ -119,6 +119,7 @@
         * [自定义错误](util/gvalid/defaultmsg.md)
     * [模板引擎](#)
         * [基本介绍](os/gview/index.md)
+        * [配置管理](os/gview/config.md)
         * [模板标签](os/gview/tags.md)
         * [模板函数](os/gview/funcs.md)
         * [模板变量](os/gview/vars.md)
