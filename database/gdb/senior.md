@@ -1,6 +1,31 @@
 
 [TOC]
 
+
+# 字段排除
+
+我们知道可以通过`Fields`方法来指定需要操作的字段，例如写入/修改的字段、查询的字段等等。同时，我们也可以使用`FieldsEx`方法来排除需要操作的字段。例如：
+
+1. 假如`user`表有4个字段`uid`, `nickname`, `passport`, `password`。
+
+1. 查询字段排除
+    ```go
+    // SELECT `uid`,`nickname` FROM `user` ORDER BY uid asc
+    db.Table("user").FieldsEx("passport, password").OrderBy("uid asc").All()
+    ```
+
+1. 写入字段排除
+    ```go
+    m := g.Map{
+        "uid"      : 10000,
+        "nickname" : "John Guo",
+        "passport" : "john",
+        "password" : "123456",
+    }
+    db.Table(table).FieldsEx("uid").Data(m).Insert()
+    // INSERT INTO `user`(`nickname`,`passport`,`password`) VALUES('John Guo','john','123456')
+    ```
+
 # 调试模式
 
 为便于开发阶段调试，`gdb`支持调试模式，可以使用以下方式开启调试模式：
@@ -52,10 +77,10 @@ func main() {
 ```
 执行后，输出结果如下：
 ```shell
-2018-08-31 13:54:32.913 [DEBU] SELECT * FROM user WHERE uid=?, [1], 2018-08-31 13:54:32.912, 2018-08-31 13:54:32.913, 1 ms, DB:Query
-2018-08-31 13:54:32.915 [DEBU] SELECT * FROM user WHERE uid=?, [2], 2018-08-31 13:54:32.914, 2018-08-31 13:54:32.915, 1 ms, DB:Query
-2018-08-31 13:54:32.915 [DEBU] SELECT * FROM user WHERE uid=?, [3], 2018-08-31 13:54:32.915, 2018-08-31 13:54:32.915, 0 ms, DB:Query
-2018-08-31 13:54:32.915 [ERRO] SELECT * FROM user WHERE no_such_field=?, [just_test], 2018-08-31 13:54:32.915, 2018-08-31 13:54:32.915, 0 ms, DB:Query
+2018-08-31 13:54:32.913 [DEBU] SELECT * FROM user WHERE uid=1
+2018-08-31 13:54:32.915 [DEBU] SELECT * FROM user WHERE uid=2
+2018-08-31 13:54:32.915 [DEBU] SELECT * FROM user WHERE uid=3
+2018-08-31 13:54:32.915 [ERRO] SELECT * FROM user WHERE no_such_field='just_test'
 Error: Error 1054: Unknown column 'no_such_field' in 'where clause'
 1.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/database/gdb/gdb_base.go:120
 2.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/database/gdb/gdb_base.go:174
@@ -120,7 +145,7 @@ func main() {
 ```
 执行后输出结果为（测试表数据结构仅供示例参考）：
 ```shell
-2018-08-31 13:56:58.132 [DEBU] SELECT * FROM user WHERE uid=?, [1], 2018-08-31 13:56:58.131, 2018-08-31 13:56:58.132, 1 ms, DB:Query
+2018-08-31 13:56:58.132 [DEBU] SELECT * FROM `user` WHERE uid=1
 {
 	"datetime": "",
 	"name": "smith",
@@ -133,8 +158,8 @@ func main() {
 	"uid": "1"
 }
 
-2018-08-31 13:56:58.144 [DEBU] UPDATE `user` SET `name`=? WHERE uid=?, [smith 1], 2018-08-31 13:56:58.133, 2018-08-31 13:56:58.144, 11 ms, DB:Exec
-2018-08-31 13:56:58.144 [DEBU] SELECT * FROM user WHERE uid=?, [1], 2018-08-31 13:56:58.144, 2018-08-31 13:56:58.144, 0 ms, DB:Query
+2018-08-31 13:56:58.144 [DEBU] UPDATE `user` SET `name`='smith' WHERE uid=1
+2018-08-31 13:56:58.144 [DEBU] SELECT * FROM `user` WHERE uid=1
 {
 	"datetime": "",
 	"name": "smith",
@@ -144,7 +169,7 @@ func main() {
 
 # 日志输出
 
-> 章节文档待完善，看到了请提醒作者。
+日志输出请查看ORM的使用配置章节。
 
 # 类型识别
 
