@@ -49,6 +49,7 @@ s.SetConfigWithMap(g.Map{
     "SessionIdName":    "MySessionId",
     "SessionPath":      "/tmp/MySessionStoragePath",
     "SessionMaxAge":    24 * time.Hour,
+    "DumpRouterMap":    false,
 })
 s.Run()
 ```
@@ -106,6 +107,7 @@ s4 := g.Server()
     SessionIdName    = "MySessionId"
     SessionPath      = "/tmp/MySessionStoragePath"
     SessionMaxAge    = "24h"
+    DumpRouterMap    = false
 ```
 同理，配置属性项的名称也不区分大小写，单词间也支持使用`-`/`_`符号连接。也就是说以下配置文件效果和上面的配置文件一致：
 ```toml
@@ -120,6 +122,7 @@ s4 := g.Server()
     session_Id_Name  = "MySessionId"
     Session-path     = "/tmp/MySessionStoragePath"
     session_MaxAge   = "24h"
+    DumpRouterMap    = false
 ```
 
 
