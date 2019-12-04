@@ -9,6 +9,7 @@
 
 数据库配置管理功能使用的是配置管理模块实现，因此同样支持多种数据格式如：`toml`, `yaml`, `json`, `xml`。默认并且推荐的配置文件数据格式为`toml`。
 
+## 完整配置
 完整的`config.toml`数据库配置项的数据格式形如下：
 ```toml
 [database]
@@ -50,7 +51,7 @@
 
 > 篇幅有限，这里仅展示了推荐的`toml`格式的文件示例格式，其他配置文件的数据格式请自行研究。
 
-# 简化配置(推荐)
+## 简化配置(推荐)
 
 为兼容不同的数据库类型，`gdb`将数据库的各个字段拆分出来单独配置，这样对于各种数据库的对接来说兼容性会很好。但是对于开发者来说看起来配置比较多。针对于项目中使用的已确定的数据库类型的配置，我们可以使用`linkinfo`属性（名称也可以简化为`link`）进行配置。如：
 
@@ -96,6 +97,22 @@
 |oracle|`[oracle:]账号/密码@地址:端口/数据库名称`| [go-oci8](https://github.com/mattn/go-oci8)
 
 各数据库类型更详细的`linkinfo`参数信息请查看对应引擎官网，参考【[ORM数据库类型](database/gdb/database.md)】章节
+
+## 日志输出配置
+
+`gdb`支持日志输出，内部使用的是`glog.Logger`对象实现日志管理，并且可以通过配置文件对日志对象进行配置。默认情况下`gdb`关闭了`DEBUG`日志输出，如果需要打开`DEBUG`信息需要将数据库的`debug`参数设置为`true`。以下是为一个配置文件示例：
+```toml
+[database]
+    [database.logger]
+        Path   = "/var/log/gf-app/sql"
+        Level  = "all"
+        Stdout = true
+    [database.primary]
+        link   = "mysql:root:12345678@tcp(127.0.0.1:3306)/user_center"
+        debug  = true
+```
+其中`database.logger`即为`gdb`的日志配置，当该配置不存在是时，将会使用日志组件的默认配置，具体请参考【[日志管理](os/glog/config.md)】章节。
+
 
 # 原生配置(高阶，可选)
 
