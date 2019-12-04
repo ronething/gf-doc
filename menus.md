@@ -135,7 +135,6 @@
         * [ORM方法操作](database/gdb/method.md)
         * [ORM事务操作](database/gdb/transaction.md)
         * [ORM空值处理](database/gdb/empty.md)
-        * [ORM错误处理](database/gdb/error.md)
         * [ORM结果处理](database/gdb/result.md)
         * [ORM高级特性](database/gdb/senior.md)
         * [FAQ常见问题](database/gdb/faq.md)
