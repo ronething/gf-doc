@@ -111,7 +111,7 @@
         link   = "mysql:root:12345678@tcp(127.0.0.1:3306)/user_center"
         debug  = true
 ```
-其中`database.logger`即为`gdb`的日志配置，当该配置不存在是时，将会使用日志组件的默认配置，具体请参考【[日志管理](os/glog/config.md)】章节。
+其中`database.logger`即为`gdb`的日志配置，当该配置不存在时，将会使用日志组件的默认配置，具体请参考【[日志管理](os/glog/config.md)】章节。
 
 
 # 原生配置(高阶，可选)
