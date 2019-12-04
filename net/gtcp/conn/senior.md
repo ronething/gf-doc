@@ -99,7 +99,7 @@
                     case "hello":     onClientHello(conn, msg)
                     case "heartbeat": onClientHeartBeat(conn, msg)
                     default:
-                        glog.Errorfln("invalid message: %v", msg)
+                        glog.Errorf("invalid message: %v", msg)
                         break
                 }
             }
@@ -107,12 +107,12 @@
     }
 
     func onClientHello(conn *gtcp.Conn, msg *types.Msg) {
-        glog.Printfln("hello message from [%s]: %s", conn.RemoteAddr().String(), msg.Data)
+        glog.Printf("hello message from [%s]: %s", conn.RemoteAddr().String(), msg.Data)
         funcs.SendPkg(conn, msg.Act, "Nice to meet you!")
     }
 
     func onClientHeartBeat(conn *gtcp.Conn, msg *types.Msg) {
-        glog.Printfln("heartbeat from [%s]", conn.RemoteAddr().String())
+        glog.Printf("heartbeat from [%s]", conn.RemoteAddr().String())
     }
     ```
 1. `gtcp_common_client.go`
@@ -165,22 +165,22 @@
                 case "doexit":    onServerDoExit(conn, msg)
                 case "heartbeat": onServerHeartBeat(conn, msg)
                 default:
-                    glog.Errorfln("invalid message: %v", msg)
+                    glog.Errorf("invalid message: %v", msg)
                     break
             }
         }
     }
 
     func onServerHello(conn *gtcp.Conn, msg *types.Msg) {
-        glog.Printfln("hello response message from [%s]: %s", conn.RemoteAddr().String(), msg.Data)
+        glog.Printf("hello response message from [%s]: %s", conn.RemoteAddr().String(), msg.Data)
     }
 
     func onServerHeartBeat(conn *gtcp.Conn, msg *types.Msg) {
-        glog.Printfln("heartbeat from [%s]", conn.RemoteAddr().String())
+        glog.Printf("heartbeat from [%s]", conn.RemoteAddr().String())
     }
 
     func onServerDoExit(conn *gtcp.Conn, msg *types.Msg) {
-        glog.Printfln("exit command from [%s]", conn.RemoteAddr().String())
+        glog.Printf("exit command from [%s]", conn.RemoteAddr().String())
         conn.Close()
     }
     ```
