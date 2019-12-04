@@ -26,7 +26,7 @@ require github.com/gogf/gf latest
 
 # 限制
 ```html
-golang版本 >= 1.10.0
+golang版本 >= 1.11
 ```
 
 # 架构
