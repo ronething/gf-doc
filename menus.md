@@ -192,7 +192,6 @@
     * [数据管理模块](#)
         * [gdb (数据库ORM)](database/gdb/index2.md)
         * [gredis (Redis客户端)](database/gredis/index.md)
-        <!-- * [gkafka (Kafka客户端)](database/gkafka/index.md) -->
     * [加密解密模块](#)
         * [gmd5 (MD5算法)](crypto/gmd5/index.md)
         * [gaes (AES算法)](crypto/gaes/index.md)
@@ -204,6 +203,7 @@
         * [gvalid (数据/表单校验)](util/gvalid/index2.md)
         * [grand (随机数管理)](util/grand/index.md)
         * [gpage (分页管理)](util/gpage/index2.md)
+        * [guuid (UUID)](util/guuid/index.md)
     * [单元测试模块](#)
         * [gtest (单元测试)](test/gtest/index.md)
     * [错误处理模块](#)
@@ -219,6 +219,7 @@
     * [容器日志搜集工具套件](cases/k8s-log.md)
 * [版本发布记录](#)
     * [版本发布说明](release/index.md)
+    * [v1.10 2019-12-05](release/v1.10.md)
     * [v1.9 2019-09-24](release/v1.9.md)
     * [v1.8 2019-07-15](release/v1.8.md)
     * [v1.7 2019-06-10](release/v1.7.md)
