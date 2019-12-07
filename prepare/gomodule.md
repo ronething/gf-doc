@@ -83,9 +83,9 @@ module my-hello
     export GO111MODULE=on GOPROXY=https://goproxy.io; go get -u github.com/gogf/gf
     ```
     该命令将会立即下载最新的`GoFrame`框架。其中 `export GO111MODULE=on;` 表示开启`Go Module`特性（Go `1.11.x`版本默认关闭，需要手动开启），`export GOPROXY=https://goproxy.io` 表示使用代理下载，原因你懂的，并且也能极大提高依赖包下载速度。代理地址也可使用：
-    - https://goproxy.io
-    - https://goproxy.cn
-    - https://mirrors.aliyun.com/goproxy
+    - ```https://goproxy.io```
+    - ```https://goproxy.cn```
+    - ```https://mirrors.aliyun.com/goproxy```
 
     ![](/images/gomodule1.png)
 
