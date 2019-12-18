@@ -34,7 +34,7 @@ PASS
 ```
 ## 使用示例
 
-### 示例1，基本使用
+### 示例1，简单使用
 ```go
 package main
 
@@ -48,10 +48,10 @@ func main() {
 	// Push
 	l.PushBack(1)
 	l.PushBack(2)
-	e0 := l.PushFront(0)
+	e := l.PushFront(0)
 	// Insert
-	l.InsertBefore(e0, -1)
-	l.InsertAfter(e0, "a")
+	l.InsertBefore(e, -1)
+	l.InsertAfter(e, "a")
 	fmt.Println(l)
 	// Pop
 	fmt.Println(l.PopFront())
@@ -61,10 +61,74 @@ func main() {
 ```
 执行后，输出结果：
 ```
-
+[-1,0,"a",1,2]
+-1
+2
+[0,"a",1]
 ```
 
-### 示例2，JSON序列化/反序列
+### 示例2，链表遍历
+
+该示例中我们将通过读锁和写锁遍历一个并发安全的链表，分别通过`RLockFunc`和`LockFunc`实现。
+
+```go
+package main
+
+import (
+	"container/list"
+	"fmt"
+	"github.com/gogf/gf/container/garray"
+	"github.com/gogf/gf/container/glist"
+)
+
+func main() {
+	// concurrent-safe list.
+	l := glist.NewFrom(garray.NewArrayRange(1, 10, 1).Slice(), true)
+	// iterate reading from head.
+	l.RLockFunc(func(list *list.List) {
+		length := list.Len()
+		if length > 0 {
+			for i, e := 0, list.Front(); i < length; i, e = i+1, e.Next() {
+				fmt.Print(e.Value)
+			}
+		}
+	})
+	fmt.Println()
+	// iterate reading from tail.
+	l.RLockFunc(func(list *list.List) {
+		length := list.Len()
+		if length > 0 {
+			for i, e := 0, list.Back(); i < length; i, e = i+1, e.Prev() {
+				fmt.Print(e.Value)
+			}
+		}
+	})
+
+	fmt.Println()
+
+	// iterate writing from head.
+	l.LockFunc(func(list *list.List) {
+		length := list.Len()
+		if length > 0 {
+			for i, e := 0, list.Front(); i < length; i, e = i+1, e.Next() {
+				if e.Value == 6 {
+					e.Value = "M"
+					break
+				}
+			}
+		}
+	})
+	fmt.Println(l)
+}
+```
+执行后，输出结果为：
+```
+12345678910
+10987654321
+[1,2,3,4,5,"M",7,8,9,10]
+```
+
+### 示例3，JSON序列化/反序列
 `glist`容器实现了标准库`json`数据格式的序列化/反序列化接口。
 1. `Marshal`
     ```go
