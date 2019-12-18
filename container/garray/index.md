@@ -31,7 +31,7 @@ import (
 
 
 func main () {
-    // 创建普通的int类型数组，并关闭默认的并发安全特性
+    // 创建并发安全的int类型数组
     a := garray.NewIntArray(true)
 
     // 添加数据项
