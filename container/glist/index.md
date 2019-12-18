@@ -112,7 +112,7 @@ func main() {
 		return true
 	})
 	fmt.Println()
-	// iterate reading from head using IteratorDesc.
+	// iterate reading from tail using IteratorDesc.
 	l.IteratorDesc(func(e *glist.Element) bool {
 		fmt.Print(e.Value)
 		return true
