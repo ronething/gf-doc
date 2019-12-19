@@ -58,12 +58,16 @@ $ ./main
 ## 1. 用户注册 - `/user/signup`
 注册一个账号`test001`，昵称为`john`，密码为`123456`。
 ```shell
-$ curl -d 'nickname=john&passport=test001&password=123456&password2=123456' http://127.0.0.1:8199/user/signup
+curl -d 'nickname=john&passport=test001&password=123456&password2=123456' http://127.0.0.1:8199/user/signup
+```
+```json
 {"data":null,"err":0,"msg":"ok"}
 ```
 我们再次使用刚才的信息注册一次试试。
 ```shell
-$ curl -d 'nickname=john&passport=test001&password=123456&password2=123456' http://127.0.0.1:8199/user/signup
+curl -d 'nickname=john&passport=test001&password=123456&password2=123456' http://127.0.0.1:8199/user/signup
+```
+```json
 {"data":null,"err":1,"msg":"账号 test001 已经存在"}
 ```
 可以看到注册失败了，相同名称只能注册一个账号。
@@ -71,7 +75,9 @@ $ curl -d 'nickname=john&passport=test001&password=123456&password2=123456' http
 ## 2.用户登录 - `/user/signin`
 我们用刚才注册的账号登录。
 ```shell
-$ curl -d 'passport=test001&password=123456' http://127.0.0.1:8199/user/signin
+curl -d 'passport=test001&password=123456' http://127.0.0.1:8199/user/signin
+```
+```json
 {"data":null,"err":0,"msg":"ok"}
 ```
 
