@@ -26,7 +26,7 @@
             * [对象注册](net/ghttp/router/object.md)
             * [控制器注册](net/ghttp/router/controller.md)
         * [请求控制](#)
-            * [中间件设计](net/ghttp/router/middleware.md)
+            * [中间件](net/ghttp/router/middleware.md)
             * [事件回调](net/ghttp/router/hook.md)
         * [分组路由](#)
             * [基本介绍](net/ghttp/group/index.md)

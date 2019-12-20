@@ -1,47 +1,53 @@
 
 [TOC]
 
-`gf`框架提供了完善的Web Server日志管理功能，包括`access log`以及`error log`，并可自定义日志输出回调方法，开发者可灵活使用。
+`GF`框架提供了完善的`Web Server`日志管理功能，包括`access log`以及`error log`，并可自定义日志输出回调方法，开发者可灵活使用。
 
 # 相关配置
-在Web Server中的日志相关配置选项如下：
+配置对象：
+https://godoc.org/github.com/gogf/gf/net/ghttp#ServerConfig
+
+## 配置属性
+日志相关配置属性如下：
 ```go
-// 日志配置
-LogPath           string                // 存放日志的目录路径(默认为空，表示不写文件)
-LogHandler        LogHandler            // 自定义日志处理回调方法(默认为空)
-LogStdPrint       bool                  // 是否打印日志到终端(默认开启)
-ErrorLogEnabled   bool                  // 是否开启error log(默认开启)
-AccessLogEnabled  bool                  // 是否开启access log(默认关闭)
+Logger            *glog.Logger      // Logger for server.
+LogPath           string            // Directory for storing logging files.
+LogStdout         bool              // Printing logging content to stdout.
+ErrorStack        bool              // Logging stack information when error.
+ErrorLogEnabled   bool              // Enable error logging files.
+ErrorLogPattern   string            // Error log file pattern like: error-{Ymd}.log
+AccessLogEnabled  bool              // Enable access logging files.
+AccessLogPattern  string            // Error log file pattern like: access-{Ymd}.log
 ```
-其中需要特别说明的是，默认情况下，日志不会输出到文件中，而是直接打印到终端。并且，默认情况下的请求日志终端输出是关闭的，仅有错误日志默认开启。
+简要说明：
+1. 默认情况下，日志不会输出到文件中，而是直接打印到终端。默认情况下的access日志终端输出是关闭的，仅有error日志默认开启。
+1. 所有的选项均可通过`Server.Set*`方法设置，大部分选项可以通过`Server.Get*`方法获取。
+1. 日志管理的配置选项也可通过配置文件进行便捷的配置，具体请参考【[配置管理](net/ghttp/config.md)】章节。
+1. `Logger`是一个自定义的日志管理对象，开发者也可以传递一个完整的日志管理对象，忽略其他日志选项配置。
+1. `LogPath`属性用于设置日志目录，只有在设置了日志目录的情况下才会输出日志到日志文件中。
+1. `ErrorLogPattern`及`AccessLogPattern`用于配置日志文件名称格式，默认为`error-{Ymd}.log`及`access-{Ymd}.log`，例如：`error-20191212.log`, `access-20191212.log`。
+1. 其他配置选项说明请参考注释和模块API文档。
 
-# 相关方法
+## 配置文件
 
-```go
-// 设置日志目录，只有在设置了日志目录的情况下才会输出日志到日志文件中。
-// 日志文件路径格式为：
-// 1. 请求日志: access/YYYY-MM-DD.log
-// 2. 错误日志: error/YYYY-MM-DD.log
-func (s *Server)SetLogPath(path string)
-// 设置日志内容是否输出到终端，默认情况下只有错误日志才会自动输出到终端。
-// 如果需要输出请求日志到终端，默认情况下使用SetAccessLogEnabled方法开启请求日志特性即可。
-func (s *Server)SetLogStdPrint(enabled bool)
-// 设置是否开启access log日志功能
-func (s *Server)SetAccessLogEnabled(enabled bool)
-// 设置是否开启error log日志功能
-func (s *Server)SetErrorLogEnabled(enabled bool)
-
-// 获取日志写入的回调函数
-func (s *Server)GetLogHandler() LogHandler
-// 获取日志目录
-func (s *Server)GetLogPath() string
-// access log日志功能是否开启
-func (s *Server)IsAccessLogEnabled() bool
-// error log日志功能是否开启
-func (s *Server)IsErrorLogEnabled() bool
+一个参考的配置文件示例（以`toml`格式为例）：
+```toml
+[server]
+	LogPath           = "/var/log/gf-demos/server"
+    LogStdout         = false            
+    ErrorStack        = true              
+    ErrorLogEnabled   = true              
+    ErrorLogPattern   = "error.{Ymd}.log"            
+    AccessLogEnabled  = true        
+    AccessLogPattern  = "access.{Ymd}.log"    
 ```
 
-# 请求日志
+
+# 使用示例
+
+以下示例通过配置方法的方式进行对`Server`进行配置。
+
+## 请求日志
 
 我们来看一个简单的例子：
 ```go
@@ -71,9 +77,9 @@ func main() {
 
 > 注意，日志中记录的`执行时间`单位为`毫秒`，绝大多数情况下看到的时间几乎都是`0.xxx`毫秒时间，也就是说执行时间都是纳秒级不到1毫秒。
 
-# 错误日志
+## 错误日志
 
-Web Server运行产生的任何错误信息(默认开启，输出到终端)，都将会被记录到`error log`中，以下是一个手动触发异常的示例：
+`Web Server`运行产生的任何错误信息(默认开启，输出到终端)，都将会被记录到`error log`中，以下是一个手动触发异常的示例：
 
 ```go
 package main
@@ -95,21 +101,20 @@ func main() {
 
 运行并访问后，终端输出的错误日志信息如下：
 ```shell
-2018-04-20 18:31:03.484 [ERRO] "GET http 127.0.0.1:8199 /log/error HTTP/1.1" 0.098, 127.0.0.1, "", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/53.0.2785.143 Chrome/53.0.2785.143 Safari/537.36", 异常信息
-Trace:
-1. /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/geg/net/ghttp/log.go:10
-2. /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/net/ghttp/http_server_handler.go:83
-3. /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/net/ghttp/http_server_handler.go:52
-4. /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/net/ghttp/http_server_handler.go:25
-5. /home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/net/ghttp/http_server.go:137
+2019-12-20 20:10:56.484 [ERRO] 500, "GET http 127.0.0.1:8199 /log/error HTTP/1.1" 0.210, 127.0.0.1, "", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36"
+Stack:
+1. OMG
+   1).  main.main.func1
+        /Users/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/.example/net/ghttp/server/log/log_error.go:10
+
 ```
-错误信息会打印出对应错误产生的```caller backtrace```，以便于错误定位以及开发者分析问题原因。
+错误信息会打印出对应错误产生的堆栈信息（堆栈信息中不包含框架内部调用信息），以便于错误定位以及开发者分析问题原因。
 
 > WebServer产生的任何`panic`错误都将会被自动捕获到错误日志中，因此对于业务端程序来讲，无论是在控制器中、业务封装层、数据模型中，如果产生了错误想要直接退出业务请求处理，直接`panic`即可。特别是对于绝大多数`golang`风格的方法`error`返回值判断，处理将会变得异常的简单。如果是业务程序自身定义的方法`error`甚至可不用返回，可以根据业务情况选择直接`panic`。
 
-# 输出日志到文件
+## 输出日志到文件
 
-我们可以通过```SetLogPath```方法来设置日志目录，这样我们的日志信息将会保存到文件中，示例如下：
+我们可以通过`SetLogPath`方法来设置日志目录，这样我们的日志信息将会保存到文件中，示例如下：
 
 ```go
 package main
@@ -130,22 +135,22 @@ func main() {
     s.Run()
 }
 ```
-运行并访问后，日志将会被保存到```/tmp/gf.log/access```目录中，其中```access```目录为请求日志，此外错误日志将会写入到```error```目录中。手动在终端查看目录结构如下：
+运行并访问后，日志将会被保存到`/tmp/gf.log/access`目录中，其中`access`目录为请求日志，此外错误日志将会写入到`error`目录中。手动在终端查看目录结构如下：
 ```shell
 john@johnstation:/tmp$ tree gf.log
-gf.log/
-├── access
-│   └── 2018-04-20.log
-└── error
-    └── 2018-04-20.log
+/tmp/gf.log
+├── 2019-12-20.log
+└── access-20191220.log
 ```
+需要注意的是，其中的`2019-12-20.log`是应用的默认日志文件，往往是通过使用`glog`/`g.Log()`方式输出的业务或者模块日志。而`access-*.log`/`error*.log`日志文件记录的是`Web Server`的访问日志及错误日志。
 
 
 
+## 自定义日志处理
 
-# 自定义日志处理
+`gf`支持自定义的日志处理特性，便于开发者灵活控制日志输出，使用`SetLogHandler`来实现日志回调方法注册。
 
-`gf`支持自定义的日志处理特性，便于开发者灵活控制日志输出，使用```SetLogHandler```来实现日志回调方法注册。
+> 也可以使用中间件或者事件回调来实现自定义的日志输出，具体请查看对应【[中间件](net/ghttp/router/middleware.md)】和【[事件回调](net/ghttp/router/hook.md)】章节。
 
 以下是自定义日志处理的简单示例：
 ```go
