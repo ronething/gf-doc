@@ -138,7 +138,7 @@ func main() {
     s.Run()
 }
 ```
-运行并访问后，日志将会被保存到`/tmp/gf.log/access`目录中，其中`access`目录为请求日志，此外错误日志将会写入到`error`目录中。手动在终端查看目录结构如下：
+运行并访问后，日志将会被保存到`/tmp/gf.log`目录中。手动在终端查看目录结构如下：
 ```shell
 john@johnstation:/tmp$ tree gf.log
 /tmp/gf.log
