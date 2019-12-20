@@ -42,10 +42,11 @@ AccessLogPattern  string            // Error log file pattern like: access-{Ymd}
     AccessLogPattern  = "access.{Ymd}.log"    
 ```
 
+当`Server`启动时将会自动去读取默认配置文件`config.toml`中的`server`节点配置。
 
 # 使用示例
 
-以下示例通过配置方法的方式进行对`Server`进行配置。
+配置文件的方式比较简单，这里不再示例说明。以下示例通过配置方法的方式进行对`Server`进行配置。
 
 ## 请求日志
 
@@ -59,7 +60,7 @@ import (
 )
 
 func main() {
-    s := g.GetServer()
+    s := g.Server()
     s.BindHandler("/log/access", func(r *ghttp.Request){
         r.Response.Writeln("请在运行终端查看日志输出")
     })
@@ -85,11 +86,12 @@ func main() {
 package main
 
 import (
+    "github.com/gogf/gf/frame/g"
     "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
-    s := ghttp.GetServer()
+    s := g.Server()
     s.BindHandler("/log/error", func(r *ghttp.Request){
         panic("异常信息")
     })
@@ -120,11 +122,12 @@ Stack:
 package main
 
 import (
+    "github.com/gogf/gf/frame/g"
     "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
-    s := ghttp.GetServer()
+    s := g.Server()
     s.BindHandler("/log/path", func(r *ghttp.Request){
         r.Response.Writeln("请到/tmp/gf.log目录查看日志")
     })
@@ -159,11 +162,12 @@ package main
 import (
     "fmt"
     "net/http"
+    "github.com/gogf/gf/frame/g"
     "github.com/gogf/gf/net/ghttp"
 )
 
 func main() {
-    s := ghttp.GetServer()
+    s := g.Server()
     s.BindHandler("/log/handler", func(r *ghttp.Request){
         r.Response.WriteStatus(http.StatusNotFound, "文件找不到了")
     })
