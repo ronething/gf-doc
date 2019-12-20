@@ -22,6 +22,7 @@
         type         = "数据库类型(目前支持mysql/pgsql/sqlite)"
         role         = "(可选)数据库主从角色(master/slave)，不使用应用层的主从机制请均设置为master"
         debug        = "(可选)开启调试模式"
+        prefix       = "(可选)表名前缀"
         charset      = "(可选)数据库编码(如: utf8/gbk/gb2312)，一般设置为utf8"
         weight       = "(可选)负载均衡权重，用于负载均衡控制，不使用应用层的负载均衡机制请置空"
         linkinfo     = "(可选)自定义数据库链接信息，当该字段被设置值时，以上链接字段(Host,Port,User,Pass,Name)将失效，但是type必须有值"
@@ -42,6 +43,7 @@
         role         = "master"
         debug        = "true"
         weight       = "100"
+        prefix       = "gf_"
         charset      = "utf8"
         linkinfo     = ""
         maxIdle      = "10"
@@ -138,6 +140,7 @@ type ConfigNode  struct {
     Role             string   // (可选，默认为master)数据库的角色，用于主从操作分离，至少需要有一个master，参数值：master, slave
     Debug            bool     // (可选)开启调试模式
     Charset          string   // (可选，默认为 utf8)编码，默认为 utf8
+    Prefix           string   // (可选)表名前缀
     Weight           int      // (可选)用于负载均衡的权重计算，当集群中只有一个节点时，权重没有任何意义
     Linkinfo         string   // (可选)自定义链接信息，当该字段被设置值时，以上链接字段(Host,Port,User,Pass,Name)将失效(该字段是一个扩展功能)
     MaxIdleConnCount int      // (可选)连接池最大闲置的连接数
