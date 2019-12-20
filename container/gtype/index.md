@@ -7,10 +7,11 @@
 **使用场景**：
 
 `gtype`使用得非常频繁，任何需要并发安全的场景下都适用。
-在普通的并发安全场景中，一个基本类型的变量，特别是一个`struct`的属性，往往使用使用互斥(读写)锁或者多把(读写)锁来进行管理。
-但是在这样的使用中，`变量/struct/属性`的操作性能**十分低下**，且由于互斥锁机制的存在往往使得操作变得相当复杂，必须小心翼翼地维护好`变量/属性`的并发安全性(特别是使用到的`(RW)Mutex`)。
 
-`gtype`针对于最常用的基本数据类型，提供了对应的并发安全数据类型，便于在并发安全场景下更好地维护变量/属性，开发者无需在struct中再创建和维护繁琐的`(RW)Mutex`。且`gtype`内部绝大多数基本类型都使用了`atomic`原子操作来维护并发安全性，因此效率往往会比`(RW)Mutex`互斥锁高出数十倍。
+在普通的并发安全场景中，一个基本类型的变量，特别是一个`struct`含有若干的属性，往往使用使用互斥(读写)锁或者多把(读写)锁来进行安全管理。
+但这样的使用中，`变量/struct/属性`的操作性能**十分低下**，且由于互斥锁机制的存在往往使得操作变得相当复杂，必须小心翼翼地维护好`变量/属性`的并发安全控制（特别是`(RW)Mutex`）。
+
+`gtype`针对于最常用的基本数据类型，提供了对应的并发安全数据类型，便于在并发安全场景下更好地维护变量/属性，开发者无需在`struct`中再创建和维护繁琐的`(RW)Mutex`。由于`gtype`维护的是基本类型的并发安全，因此内部基本都使用了`atomic`原子操作来维护并发安全性，因此效率往往会比`(RW)Mutex`互斥锁高出数十倍。
 
 **使用方式**：
 
@@ -69,16 +70,23 @@ ok   github.com/gogf/gf/container/gtype 49.454s
 `gtype`并发安全基本类型的使用非常简单，往往就类似以下几个方法(以`gtype.Int`类型举例)：
 
 ```go
-// 创建并发安全基本类型对象
-func NewInt(value...int) *Int
-// 克隆一个对象
-func (t *Int) Clone() *Int
-// 设置变量值，并返回旧的变量值
-func (t *Int) Set(value int) (old int)
-// 获取当前变量值
-func (t *Int) Val() int
-// (整型/浮点型有效)数值 增加/删除 delta
-func (t *Int) Add(delta int) int {
+// NewInt creates and returns a concurrent-safe object for int type,
+// with given initial value <value>.
+func NewInt(value ...int) *Int
+
+// Set atomically stores <value> into t.value and returns the previous value of t.value.
+func (v *Int) Set(value int) (old int)
+
+// Val atomically loads and returns t.value.
+func (v *Int) Val() int
+
+// Add atomically adds <delta> to t.value and returns the new value.
+func (v *Int) Add(delta int) (new int)
+
+// Cas executes the compare-and-swap operation for value.
+func (v *Int) Cas(old, new int) bool {
+	return atomic.CompareAndSwapInt64(&v.value, int64(old), int64(new))
+}
 ```
 
 ### 示例1，基本使用
