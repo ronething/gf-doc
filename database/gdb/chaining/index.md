@@ -11,52 +11,66 @@
 https://godoc.org/github.com/gogf/gf/database/gdb#Model
 
 ```go
-func (md *Model) LeftJoin(joinTable string, on string) *Model
-func (md *Model) RightJoin(joinTable string, on string) *Model
-func (md *Model) InnerJoin(joinTable string, on string) *Model
+func (m *Model) Insert(data ...interface{}) (result sql.Result, err error)
+func (m *Model) Replace(data ...interface{}) (result sql.Result, err error)
+func (m *Model) Save(data ...interface{}) (result sql.Result, err error)
+func (m *Model) Update(dataAndWhere ...interface{}) (result sql.Result, err error)
+func (m *Model) Delete(where ...interface{}) (result sql.Result, err error)
 
-func (md *Model) Fields(fields string) *Model
-func (md *Model) Limit(start int, limit int) *Model
-func (md *Model) Data(data...interface{}) *Model
-func (md *Model) Batch(batch int) *Model
-func (md *Model) Filter() *Model
-func (md *Model) Safe(safe...bool) *Model
+func (m *Model) All(where ...interface{} (Result, error)
+func (m *Model) One(where ...interface{}) (Record, error)
+func (m *Model) Value(where ...interface{}) (Value, error)
+func (m *Model) Count(fieldsAndWhere ...interface{}) (int, error)
 
-func (md *Model) Where(where interface{}, args...interface{}) *Model
-func (md *Model) And(where interface{}, args ...interface{}) *Model
-func (md *Model) Or(where interface{}, args ...interface{}) *Model
+func (m *Model) FindAll(where ...interface{}) (Result, error)
+func (m *Model) FindOne(where ...interface{}) (Record, error)
+func (m *Model) FindValue(fieldsAndWhere ...interface{}) (Value, error)
+func (m *Model) FindCount(where ...interface{}) (int, error)
 
-func (md *Model) GroupBy(groupby string) *Model
-func (md *Model) OrderBy(orderby string) *Model
+func (m *Model) Struct(pointer interface{}) error
+func (m *Model) Structs(pointer interface{}) error
+func (m *Model) Scan(pointer interface{}) error
 
-func (md *Model) Insert() (sql.Result, error)
-func (md *Model) Replace() (sql.Result, error)
-func (md *Model) Save() (sql.Result, error)
-func (md *Model) Update() (sql.Result, error)
-func (md *Model) Delete() (sql.Result, error)
+func (m *Model) LeftJoin(joinTable string, on string) *Model
+func (m *Model) RightJoin(joinTable string, on string) *Model
+func (m *Model) InnerJoin(joinTable string, on string) *Model
 
-func (md *Model) Select() (Result, error)
-func (md *Model) All() (Result, error)
-func (md *Model) One() (Record, error)
-func (md *Model) Value() (Value, error)
-func (md *Model) Count() (int, error)
+func (m *Model) Where(where interface{}, args...interface{}) *Model
+func (m *Model) WherePri(where interface{}, args ...interface{}) *Model
+func (m *Model) And(where interface{}, args ...interface{}) *Model
+func (m *Model) Or(where interface{}, args ...interface{}) *Model
 
-func (md *Model) Struct(objPointer interface{}) error
-func (md *Model) Structs(objPointerSlice interface{}) error
-func (md *Model) Scan(objPointer interface{}) error
+func (m *Model) Group(group string) *Model
+func (m *Model) Order(order string) *Model
 
-func (md *Model) Chunk(limit int, callback func(result Result, err error) bool)
-func (md *Model) Option(option int) *Model
-func (md *Model) ForPage(page, limit int) (*Model)
+func (m *Model) Fields(fields string) *Model
+func (m *Model) FieldsEx(fields string) *Model
+func (m *Model) Data(data...interface{}) *Model
+func (m *Model) Batch(batch int) *Model
+func (m *Model) Filter() *Model
+func (m *Model) Safe(safe...bool) *Model
+
+func (m *Model) DB(db DB) *Model
+func (m *Model) TX(tx *TX) *Model
+
+func (m *Model) Master() *Model
+func (m *Model) Slave() *Model
+
+func (m *Model) Chunk(limit int, callback func(result Result, err error) bool)
+func (m *Model) Option(option int) *Model
+func (m *Model) OmitEmpty() *Model
+func (m *Model) Page(page, limit int) (*Model)
+func (m *Model) Offset(offset int) *Model
+func (m *Model) Limit(start int, limit int) *Model
 ```
 
 ## `Insert/Replace/Save`
 1. **Insert**
-	使用```insert into```语句进行数据库写入，如果写入的数据中存在`Primary Key`或者`Unique Key`的情况，返回失败，否则写入一条新数据；
+	使用`insert into`语句进行数据库写入，如果写入的数据中存在`Primary Key`或者`Unique Key`的情况，返回失败，否则写入一条新数据；
 3. **Replace**
-	使用```replace into```语句进行数据库写入，如果写入的数据中存在`Primary Key`或者`Unique Key`的情况，会删除原有的记录，必定会写入一条新记录；
+	使用`replace into`语句进行数据库写入，如果写入的数据中存在`Primary Key`或者`Unique Key`的情况，会删除原有的记录，必定会写入一条新记录；
 5. **Save**
-	使用```insert into```语句进行数据库写入，如果写入的数据中存在`Primary Key`或者`Unique Key`的情况，更新原有数据，否则写入一条新数据；
+	使用`insert into`语句进行数据库写入，如果写入的数据中存在`Primary Key`或者`Unique Key`的情况，更新原有数据，否则写入一条新数据；
 
 ## `Data`方法
 
@@ -93,7 +107,7 @@ n, err := user.Count()
 
 > 默认情况下，基于性能以及GC优化考虑，模型对象为`非链式安全`，防止产生过多的临时模型对象。
 
-## Clone方法
+## `Clone`方法
 
 此外，我们也可以手动调动`Clone`方法克隆当前模型，创建一个新的模型来实现链式安全，由于是新的模型对象，因此并不担心会修改已有的模型对象的问题。例如：
 ```go
@@ -118,7 +132,7 @@ r, err := m.Select()
 n, err := m.Count()
 ```
 
-## Safe方法
+## `Safe`方法
 
 当然，我们可以通过`Safe`方法设置当前模型为`链式安全`的对象，后续的每一个链式操作都将返回一个新的`Model`对象，该`Model`对象可重复使用。但需要特别注意的是，模型属性的修改，或者操作条件的叠加，需要通过变量赋值的方式（`m = m.xxx`）覆盖原有的模型对象来实现。例如：
 ```go
