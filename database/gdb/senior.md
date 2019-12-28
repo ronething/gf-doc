@@ -2,30 +2,6 @@
 [TOC]
 
 
-# 字段排除
-
-我们知道可以通过`Fields`方法来指定需要操作的字段，例如写入/修改的字段、查询的字段等等。同时，我们也可以使用`FieldsEx`方法来排除需要操作的字段。例如：
-
-1. 假如`user`表有4个字段`uid`, `nickname`, `passport`, `password`。
-
-1. 查询字段排除
-    ```go
-    // SELECT `uid`,`nickname` FROM `user` ORDER BY uid asc
-    db.Table("user").FieldsEx("passport, password").OrderBy("uid asc").All()
-    ```
-
-1. 写入字段排除
-    ```go
-    m := g.Map{
-        "uid"      : 10000,
-        "nickname" : "John Guo",
-        "passport" : "john",
-        "password" : "123456",
-    }
-    db.Table(table).FieldsEx("uid").Data(m).Insert()
-    // INSERT INTO `user`(`nickname`,`passport`,`password`) VALUES('John Guo','john','123456')
-    ```
-
 # 调试模式
 
 为便于开发阶段调试，`gdb`支持调试模式，可以使用以下方式开启调试模式：
@@ -77,10 +53,10 @@ func main() {
 ```
 执行后，输出结果如下：
 ```shell
-2018-08-31 13:54:32.913 [DEBU] SELECT * FROM user WHERE uid=1
-2018-08-31 13:54:32.915 [DEBU] SELECT * FROM user WHERE uid=2
-2018-08-31 13:54:32.915 [DEBU] SELECT * FROM user WHERE uid=3
-2018-08-31 13:54:32.915 [ERRO] SELECT * FROM user WHERE no_such_field='just_test'
+2018-08-31 13:54:32.913 [DEBU] SELECT * FROM user WHERE uid=1 LIMIT 1
+2018-08-31 13:54:32.915 [DEBU] SELECT * FROM user WHERE uid=2 LIMIT 1
+2018-08-31 13:54:32.915 [DEBU] SELECT * FROM user WHERE uid=3 LIMIT 1
+2018-08-31 13:54:32.915 [ERRO] SELECT * FROM user WHERE no_such_field='just_test' LIMIT 1
 Error: Error 1054: Unknown column 'no_such_field' in 'where clause'
 1.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/database/gdb/gdb_base.go:120
 2.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/database/gdb/gdb_base.go:174
@@ -91,85 +67,11 @@ Error: Error 1054: Unknown column 'no_such_field' in 'where clause'
 7.	/home/john/Workspace/Go/GOPATH/src/github.com/gogf/gf/geg/database/gdb/mysql/gdb_debug.go:30
 ```
 
-# 查询缓存
 
-`gdb`支持对查询结果的缓存处理，并支持手动的缓存清理，一切都由业务层调用端自主决定。需要注意的是，查询缓存仅支持链式操作，且在事务操作下不可用。
-相关方法：
-```go
-// 查询缓存/清除缓存操作，需要注意的是，事务查询不支持缓存。
-// 当time < 0时表示清除缓存， time=0时表示不过期, time > 0时表示过期时间，time过期时间单位：秒；
-// name表示自定义的缓存名称，便于业务层精准定位缓存项(如果业务层需要手动清理时，必须指定缓存名称)，
-// 例如：查询缓存时设置名称，清理缓存时可以给定清理的缓存名称进行精准清理。
-func (md *Model) Cache(time int, name ... string) *Model
-```
-使用示例：
-```go
-package main
-
-import (
-    "github.com/gogf/gf/database/gdb"
-    "github.com/gogf/gf/util/gutil"
-)
-
-func main() {
-    gdb.AddDefaultConfigNode(gdb.ConfigNode {
-        Host    : "127.0.0.1",
-        Port    : "3306",
-        User    : "root",
-        Pass    : "123456",
-        Name    : "test",
-        Type    : "mysql",
-        Role    : "master",
-        Charset : "utf8",
-    })
-    db, err := gdb.New()
-    if err != nil {
-        panic(err)
-    }
-    // 开启调试模式，以便于记录所有执行的SQL
-    db.SetDebug(true)
-
-    // 执行2次查询并将查询结果缓存3秒，并可执行缓存名称(可选)
-    for i := 0; i < 2; i++ {
-        r, _ := db.Table("user").Cache(3, "vip-user").Where("uid=?", 1).One()
-        gutil.Dump(r.ToMap())
-    }
-
-    // 执行更新操作，并清理指定名称的查询缓存
-    db.Table("user").Cache(-1, "vip-user").Data(gdb.Map{"name" : "smith"}).Where("uid=?", 1).Update()
-
-    // 再次执行查询，启用查询缓存特性
-    r, _ := db.Table("user").Cache(3, "vip-user").Where("uid=?", 1).One()
-    gutil.Dump(r.ToMap())
-}
-```
-执行后输出结果为（测试表数据结构仅供示例参考）：
-```shell
-2018-08-31 13:56:58.132 [DEBU] SELECT * FROM `user` WHERE uid=1
-{
-	"datetime": "",
-	"name": "smith",
-	"uid": "1"
-}
-
-{
-	"datetime": "",
-	"name": "smith",
-	"uid": "1"
-}
-
-2018-08-31 13:56:58.144 [DEBU] UPDATE `user` SET `name`='smith' WHERE uid=1
-2018-08-31 13:56:58.144 [DEBU] SELECT * FROM `user` WHERE uid=1
-{
-	"datetime": "",
-	"name": "smith",
-	"uid": "1"
-}
-```
 
 # 日志输出
 
-日志输出请查看ORM的使用配置章节。
+日志输出请查看`ORM`的使用配置章节。
 
 # 类型识别
 
@@ -250,14 +152,14 @@ goods proce: 5999.99
 `gdb`模块针对于`struct`继承提供了良好的支持，包括参数传递、结果处理。例如：
 ```go
 type Base struct {
-    Uid        int    `json:"uid"`
-    CreateTime string `json:"create_time"`
+    Uid        int    `orm:"uid"`
+    CreateTime string `orm:"create_time"`
 }
 type User struct {
     Base
-    Passport   string `json:"passport"`
-    Password   string `json:"password"`
-    Nickname   string `json:"nickname"`
+    Passport   string `orm:"passport"`
+    Password   string `orm:"password"`
+    Nickname   string `orm:"nickname"`
 }
 ```
 并且，无论多少层级的`struct`继承，`gdb`的参数传递和结果处理都支持。
