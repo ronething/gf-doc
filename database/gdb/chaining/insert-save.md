@@ -7,17 +7,17 @@
 
 1. `Insert`
 
-	使用`INSERT INTO`语句进行数据库写入，如果写入的数据中存在`Primary Key`或者`Unique Key`的情况，返回失败，否则写入一条新数据；
+	使用`INSERT INTO`语句进行数据库写入，如果写入的数据中存在主键或者唯一索引时，返回失败，否则写入一条新数据；
 3. `Replace`
 
-	使用`REPLACE INTO`语句进行数据库写入，如果写入的数据中存在`Primary Key`或者`Unique Key`的情况，会删除原有的记录，必定会写入一条新记录；
+	使用`REPLACE INTO`语句进行数据库写入，如果写入的数据中存在主键或者唯一索引时，会删除原有的记录，必定会写入一条新记录；
 5. `Save`
 
-	使用`INSERT INTO`语句进行数据库写入，如果写入的数据中存在`Primary Key`或者`Unique Key`的情况，更新原有数据，否则写入一条新数据；
+	使用`INSERT INTO`语句进行数据库写入，如果写入的数据中存在主键或者唯一索引时，更新原有数据，否则写入一条新数据；
 
 > 在部分数据库类型中，并不支持`Replace/Save`方法，具体请参考数据库类型介绍章节。
 
-这三个方法往往需要结合`Data`方法使用，该方法用于传递数据参数，用于数据写入/更新等写操作，支持的参数为`string/map/slice/struct/*struct`。例如，在进行`Insert`操作时，开发者可以传递任意的`map`类型，如: `map[string]string`/`map[string]interface{}`/`map[interface{}]interface{}`等等，也可以传递任意的`struct`对象或者其指针`*struct`。此外，这三个方法也支持`data`参数传递，该参数`Data`方法参数一致。
+这三个方法往往需要结合`Data`方法使用，该方法用于传递数据参数，用于数据写入/更新等写操作，支持的参数为`string/map/slice/struct/*struct`。例如，在进行`Insert`操作时，开发者可以传递任意的`map`类型，如: `map[string]string`/`map[string]interface{}`/`map[interface{}]interface{}`等等，也可以传递任意的`struct/*struct/[]struct/[]*struct`类型。此外，这三个方法也支持直接的`data`参数输入，该参数`Data`方法参数一致。
 
 
 ## 示例1，基本使用
