@@ -25,6 +25,7 @@
     db.Table(table).Fields("nickname,passport,password").Data(m).Insert()
     // INSERT INTO `user`(`nickname`,`passport`,`password`) VALUES('John Guo','john','123456')
     ```
+    
 ### `FieldsEx`示例
 1. 假如`user`表有4个字段`uid`, `nickname`, `passport`, `password`。
 1. 查询字段排除
