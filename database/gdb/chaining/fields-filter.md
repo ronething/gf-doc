@@ -1,13 +1,12 @@
 [TOC]
 
-# 字段过滤
 
-## `Fields/FieldsEx`字段过滤
+# `Fields/FieldsEx`字段过滤
 
 1. `Fields` 用于指定需要操作的表字段，包括查询字段、写入字段、更新字段等过滤；
 1. `FieldsEx` 用于例外的字段指定，可用于查询字段、写入字段、更新字段等过滤；
 
-### `Fields`示例
+## `Fields`示例
 1. 假如`user`表有4个字段`uid`, `nickname`, `passport`, `password`。
 1. 查询字段过滤
     ```go
@@ -25,8 +24,8 @@
     db.Table(table).Fields("nickname,passport,password").Data(m).Insert()
     // INSERT INTO `user`(`nickname`,`passport`,`password`) VALUES('John Guo','john','123456')
     ```
-    
-### `FieldsEx`示例
+
+## `FieldsEx`示例
 1. 假如`user`表有4个字段`uid`, `nickname`, `passport`, `password`。
 1. 查询字段排除
     ```go
@@ -45,7 +44,7 @@
     // INSERT INTO `user`(`nickname`,`passport`,`password`) VALUES('John Guo','john','123456')
     ```
     
-## `Filter`字段过滤
+# `Filter`字段过滤
 
 `gdb`可以自动同步**数据表结构**到程序缓存中(缓存不过期，直至程序重启/重新部署)，并且可以过滤提交参数中不符合表结构的数据项，该特性可以使用`Filter`方法实现。
 
