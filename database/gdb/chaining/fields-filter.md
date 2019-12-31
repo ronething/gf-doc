@@ -104,6 +104,12 @@ db.Table("user").OmitEmpty().Data(user).Insert()
 
 > 注意，批量写入/更新操作中`OmitEmpty`方法将会失效，因为在批量操作中，必须保证每个写入记录的字段是统一的。
 
+<hr>
+
+关于`omitempty`标签与`OmitEmpty`方法：
+1. 针对于`struct`的空值过滤大家会想到`omitempty`的标签。该标签常用于`json`转换的空值过滤，也在某一些第三方的`ORM`库中用作`struct`到数据表字段的空值过滤，即当属性为空值时不做转换。
+1. `omitempty`标签与`OmitEmpty`方法所达到的效果是一样的。在`ORM`操作中，我们不建议对`struct`使用`omitempty`的标签来控制字段的空值过滤，而建议使用`OmitEmpty`方法来做控制。因为该标签一旦加上之后便绑定到了`struct`上，没有办法做灵活控制；而通过`OmitEmpty`方法使得开发者可以选择性地、根据业务场景对`struct`做空值过滤，操作更加灵活地。
+
 ## 数据查询操作
 
 空值也会影响数据查询操作，主要是影响`where`条件参数。我们可以通过`OmitEmpty`方法过滤条件参数中的空值。
