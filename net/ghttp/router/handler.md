@@ -67,40 +67,40 @@ func showTotal(r *ghttp.Request) {
 ```
 
 ## 使用示例3，请求参数绑定到struct对象
-[github.com/gogf/gf/blob/master/.example/net/ghttp/server/request/request_struct.go](https://github.com/gogf/gf/blob/master/.example/net/ghttp/server/request/request_struct.go)
+https://github.com/gogf/gf/blob/master/.example/net/ghttp/server/request/request_struct.go
 ```go
 package main
 
 import (
-    "github.com/gogf/gf/frame/g"
-    "github.com/gogf/gf/net/ghttp"
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
 )
 
-type User struct {
-    Uid   int    `json:"uid"`
-    Name  string `json:"name"  params:"username"`
-    Pass1 string `json:"pass1" params:"password1,userpass1"`
-    Pass2 string `json:"pass2" params:"password3,userpass2"`
-}
-
 func main() {
-    s := g.Server()
-    s.BindHandler("/user", func(r *ghttp.Request){
-        user := new(User)
-        r.GetToStruct(user)
-        //r.GetPostToStruct(user)
-        //r.GetQueryToStruct(user)
-        r.Response.WriteJson(user)
-    })
-    s.SetPort(8199)
-    s.Run()
+	type User struct {
+		Uid   int    `json:"uid"`
+		Name  string `json:"name"  p:"username"`
+		Pass1 string `json:"pass1" p:"password1"`
+		Pass2 string `json:"pass2" p:"password2"`
+	}
+
+	s := g.Server()
+	s.BindHandler("/user", func(r *ghttp.Request) {
+		var user *User
+		if err := r.GetStruct(&user); err != nil {
+			panic(err)
+		}
+		r.Response.WriteJson(user)
+	})
+	s.SetPort(8199)
+	s.Run()
 }
 ```
-可以看到，我们可以在定义struct的时候使用```params```的标签来指定匹配绑定的参数名称，并且支持多个参数名称的绑定，多个参数名称以```,```号分隔。在使用中我们可以使用```GetRequestToStruct/GetPostToStruct/GetQueryToStruct```三种方式来获得指定Method提交方式的参数map，此外```GetToStruct```是```GetRequestToStruct```的别名，大多数情况下我们使用该方式获取参数即可。
+可以看到，我们可以在定义`struct`的时候使用`p`标签来指定匹配绑定的参数名称，该标签也可以使用`param/params`。
 
-如果是其他方式提交参数，如果Json/Xml等等，由于设计到自定义参数格式的解析再绑定，请参考```gconv```模块map转换struct的标签名称```gconv```的[用法示例](util/gconv/index.md)。
+如果是其他方式提交参数，如果Json/Xml等等，由于设计到自定义参数格式的解析再绑定，请参考`gconv`模块map转换`struct`的标签名称`gconv`的[用法示例](util/gconv/index.md)。
 
-以上示例执行后，我们手动访问地址 http://127.0.0.1:8199/user?uid=1&name=john&password1=123&userpass2=123 ，输出结果为：
+以上示例执行后，我们手动访问地址 http://127.0.0.1:8199/user?uid=1&name=john&password1=123&password2=123 ，输出结果为：
 ```json
 {"name":"john","pass1":"123","pass2":"123","uid":1}
 ```
