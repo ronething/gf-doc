@@ -89,7 +89,7 @@ func main() {
     s.Run()
 }
 ```
-其中返回的参数```r.Router```是当前匹配的路由规则信息，访问当该方法的时候，服务端会输出当前匹配的路由规则信息。执行后，我们在终端使用```curl```命令进行测试：
+其中返回的参数`r.Router`是当前匹配的路由规则信息，访问当该方法的时候，服务端会输出当前匹配的路由规则信息。执行后，我们在终端使用`curl`命令进行测试：
 ```shell
 john@johnhome:~$ curl -XGET http://127.0.0.1:8199/order/list/1.html
 {"Domain":"default","Method":"GET","Priority":3,"Uri":"/{table}/list/{page}.html"}
