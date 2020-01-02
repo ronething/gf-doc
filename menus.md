@@ -31,7 +31,7 @@
         * [分组路由](#)
             * [基本介绍](net/ghttp/group/index.md)
             * [层级注册](net/ghttp/group/level.md)
-            * [批量注册](net/ghttp/group/items.md)
+            * [批量注册](net/ghttp/group/batch.md)
     * [请求输入(更新中)](#)
         * [基本介绍](net/ghttp/request/index.md)
         * [复杂参数](net/ghttp/request/params.md)

@@ -5,7 +5,9 @@
 
 推荐使用路由层级注册方式，注册的路由代码更清晰直观。
 
-`GF`框架的分组路由注册支持更加直观优雅层级的注册方式，以便于开发者更方便地管理路由列表。路由层级注册方式也是推荐的路由注册方式。`Talk is cheap, so` 我们来看一个比较完整的示例，便能很好地说明一切：
+`GF`框架的分组路由注册支持更加直观优雅层级的注册方式，以便于开发者更方便地管理路由列表。路由层级注册方式也是推荐的路由注册方式。
+
+我们来看一个比较完整的示例，该示例中注册了使用到了中间件、`HOOK`以及不同`HTTP Method`绑定的路由注册：
 
 ```go
 package main
@@ -15,7 +17,6 @@ import (
 
 	"github.com/gogf/gf/frame/g"
 	"github.com/gogf/gf/net/ghttp"
-	"github.com/gogf/gf/os/glog"
 )
 
 func MiddlewareAuth(r *ghttp.Request) {
@@ -34,14 +35,12 @@ func MiddlewareCORS(r *ghttp.Request) {
 
 func MiddlewareLog(r *ghttp.Request) {
 	r.Middleware.Next()
-	glog.Println(r.Response.Status, r.URL.Path)
+	g.Log().Println(r.Response.Status, r.URL.Path)
 }
 
 func main() {
 	s := g.Server()
-	s.Group("/", func(group *ghttp.RouterGroup) {
-		group.Middleware(MiddlewareLog)
-	})
+	s.Use(MiddlewareLog)
 	s.Group("/api.v2", func(group *ghttp.RouterGroup) {
 		group.Middleware(MiddlewareAuth, MiddlewareCORS)
 		group.GET("/test", func(r *ghttp.Request) {
@@ -83,30 +82,26 @@ func main() {
 执行后，注册的路由列表如下：
 
 ```
-  SERVER  | ADDRESS | DOMAIN  | METHOD | P |        ROUTE         |       HANDLER       |    MIDDLEWARE      
-|---------|---------|---------|--------|---|----------------------|---------------------|-------------------|
-  default |  :8199  | default | ALL    | 1 | /*                   | main.MiddlewareLog  | MIDDLEWARE         
-|---------|---------|---------|--------|---|----------------------|---------------------|-------------------|
-  default |  :8199  | default | ALL    | 3 | /api.v2/*            | main.MiddlewareAuth | MIDDLEWARE         
-|---------|---------|---------|--------|---|----------------------|---------------------|-------------------|
-  default |  :8199  | default | ALL    | 2 | /api.v2/*            | main.MiddlewareCORS | MIDDLEWARE         
-|---------|---------|---------|--------|---|----------------------|---------------------|-------------------|
-  default |  :8199  | default | ALL    | 3 | /api.v2/hook/*       | main.main.func2.4.1 | HOOK_BEFORE_SERVE  
-|---------|---------|---------|--------|---|----------------------|---------------------|-------------------|
-  default |  :8199  | default | ALL    | 3 | /api.v2/hook/:name   | main.main.func2.4.2 | HOOK_BEFORE_SERVE  
-|---------|---------|---------|--------|---|----------------------|---------------------|-------------------|
-  default |  :8199  | default | GET    | 3 | /api.v2/order/list   | main.main.func2.2.1 |                    
-|---------|---------|---------|--------|---|----------------------|---------------------|-------------------|
-  default |  :8199  | default | PUT    | 3 | /api.v2/order/update | main.main.func2.2.2 |                    
-|---------|---------|---------|--------|---|----------------------|---------------------|-------------------|
-  default |  :8199  | default | GET    | 2 | /api.v2/test         | main.main.func2.1   |                    
-|---------|---------|---------|--------|---|----------------------|---------------------|-------------------|
-  default |  :8199  | default | DELETE | 3 | /api.v2/user/drop    | main.main.func2.3.3 |                    
-|---------|---------|---------|--------|---|----------------------|---------------------|-------------------|
-  default |  :8199  | default | POST   | 3 | /api.v2/user/edit    | main.main.func2.3.2 |                    
-|---------|---------|---------|--------|---|----------------------|---------------------|-------------------|
-  default |  :8199  | default | GET    | 3 | /api.v2/user/info    | main.main.func2.3.1 |                    
-|---------|---------|---------|--------|---|----------------------|---------------------|-------------------|
+  SERVER  | DOMAIN  | ADDRESS | METHOD |        ROUTE         |       HANDLER       |               MIDDLEWARE                 
+|---------|---------|---------|--------|----------------------|---------------------|-----------------------------------------|
+  default | default | :8199   | ALL    | /*                   | main.MiddlewareLog  | GLOBAL MIDDLEWARE                        
+|---------|---------|---------|--------|----------------------|---------------------|-----------------------------------------|
+  default | default | :8199   | ALL    | /api.v2/hook/*       | main.main.func1.4.1 | HOOK_BEFORE_SERVE                        
+|---------|---------|---------|--------|----------------------|---------------------|-----------------------------------------|
+  default | default | :8199   | ALL    | /api.v2/hook/:name   | main.main.func1.4.2 | HOOK_BEFORE_SERVE                        
+|---------|---------|---------|--------|----------------------|---------------------|-----------------------------------------|
+  default | default | :8199   | GET    | /api.v2/order/list   | main.main.func1.2.1 | main.MiddlewareAuth,main.MiddlewareCORS  
+|---------|---------|---------|--------|----------------------|---------------------|-----------------------------------------|
+  default | default | :8199   | PUT    | /api.v2/order/update | main.main.func1.2.2 | main.MiddlewareAuth,main.MiddlewareCORS  
+|---------|---------|---------|--------|----------------------|---------------------|-----------------------------------------|
+  default | default | :8199   | GET    | /api.v2/test         | main.main.func1.1   | main.MiddlewareAuth,main.MiddlewareCORS  
+|---------|---------|---------|--------|----------------------|---------------------|-----------------------------------------|
+  default | default | :8199   | DELETE | /api.v2/user/drop    | main.main.func1.3.3 | main.MiddlewareAuth,main.MiddlewareCORS  
+|---------|---------|---------|--------|----------------------|---------------------|-----------------------------------------|
+  default | default | :8199   | POST   | /api.v2/user/edit    | main.main.func1.3.2 | main.MiddlewareAuth,main.MiddlewareCORS  
+|---------|---------|---------|--------|----------------------|---------------------|-----------------------------------------|
+  default | default | :8199   | GET    | /api.v2/user/info    | main.main.func1.3.1 | main.MiddlewareAuth,main.MiddlewareCORS  
+|---------|---------|---------|--------|----------------------|---------------------|-----------------------------------------|
 ```
 
 
