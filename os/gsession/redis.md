@@ -27,7 +27,7 @@ func main() {
 		"SessionStorage": gsession.NewStorageRedis(g.Redis()),
 	})
 	s.BindHandler("/set", func(r *ghttp.Request) {
-		r.Session.Set("time", gtime.Second())
+		r.Session.Set("time", gtime.Timestamp())
 		r.Response.Write("ok")
 	})
 	s.BindHandler("/get", func(r *ghttp.Request) {

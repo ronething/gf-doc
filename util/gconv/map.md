@@ -125,57 +125,33 @@ func main() {
 package main
 
 import (
-	"github.com/gogf/gf/frame/g"
+	"fmt"
 	"github.com/gogf/gf/util/gconv"
 )
 
 func main() {
-	type Ids struct {
-		Id         int    `c:"id"`
-		Uid        int    `c:"uid"`
-	}
 	type Base struct {
-		Ids
+		Id         int    `c:"id"`
 		CreateTime string `c:"create_time"`
 	}
 	type User struct {
-		Base
-		Passport   string `c:"passport"`
-		Password   string `c:"password"`
-		Nickname   string `c:"nickname"`
+		Base     `c:"base"`
+		Passport string `c:"passport"`
+		Password string `c:"password"`
+		Nickname string `c:"nickname"`
 	}
 	user := new(User)
-	user.Id         = 1
-	user.Uid        = 100
-	user.Nickname   = "John"
-	user.Passport   = "johng"
-	user.Password   = "123456"
+	user.Id = 1
+	user.Nickname = "John"
+	user.Passport = "johng"
+	user.Password = "123456"
 	user.CreateTime = "2019"
-	g.Dump(gconv.Map(user))
-	g.Dump(gconv.MapDeep(user))
+	fmt.Println(gconv.Map(user))
+	fmt.Println(gconv.MapDeep(user))
 }
 ```
 执行后，终端输出结果为：
 ```html
-{
-        "Base": {
-                "Ids": {
-                        "id": 1,
-                        "uid": 100
-                },
-                "create_time": "2019"
-        },
-        "nickname": "John",
-        "passport": "johng",
-        "password": "123456"
-}
-
-{
-        "create_time": "2019",
-        "id": 1,
-        "nickname": "John",
-        "passport": "johng",
-        "password": "123456",
-        "uid": 100
-}
+map[base:{1 2019} nickname:John passport:johng password:123456]
+map[create_time:2019 id:1 nickname:John passport:johng password:123456]
 ```

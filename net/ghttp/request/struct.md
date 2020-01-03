@@ -2,12 +2,10 @@
 
 # 对象转换
 
-对象转换在请求处理中非常常见。我们推荐将输入和输出定义为`struct`结构体对象，以便于后续的输入输出参数的维护。
+对象转换在请求处理中非常常见。我们推荐将输入和输出定义为`struct`结构体对象，以便于结构化的参数输入输出维护。`GF`框架支持非常便捷的对象转换，支持将客户端提交的参数如`Query`参数、表单参数、内容参数、`JSON/XML`等参数非常便捷地转换为指定的`struct`结构体，并且支持提交参数与`struct`属性的映射关系维护。
 
-`GF`框架支持非常方便的对象转换，支持将客户端提交的参数如`Query`参数、表单参数、内容参数、`JSON/XML`等参数非常便捷地转换为指定的`struct`结构体，并且支持提交参数与`struct`属性的映射关系维护。
-
-对象转换方法使用`Request`对象的`Get*Struct`方法，具体请参考API文档：
-https://godoc.org/github.com/gogf/gf/net/ghttp
+对象转换方法使用`Request`对象的`Parse`方法或者`Get*Struct`方法，具体方法定义请参考API文档：
+https://godoc.org/github.com/gogf/gf/net/ghttp#Request
 
 # 参数映射
 
@@ -34,7 +32,7 @@ nick_name  Nick_Name      match
 nick name  Nick_Name      match
 ```
 
-> 更详细的规则请参考【[gconv.Struct](util/gconv/struct.md)】章节。
+> 由于底层对象转换实现使用的是`gconv`模块，因此也支持`c/gconv/json`标签，更详细的规则可以参考请参考【[gconv.Struct](util/gconv/struct.md)】章节。
 
 ## 自定义规则
 
@@ -48,17 +46,67 @@ type User struct{
     Pass2 string `p:"password2"`
 }
 ```
-其中我们使用了`p`标签来指定该属性绑定的参数名称。`password1`参数将会映射到`Pass1`属性，`password2`将会映射到`Pass2`属性上。其他属性采用默认的转换规则即可，无序设置`tag`。
+其中我们使用了`p`标签来指定该属性绑定的参数名称。`password1`参数将会映射到`Pass1`属性，`password2`将会映射到`Pass2`属性上。其他属性采用默认的转换规则即可，无需设置`tag`。
 
-此外，`Get*Struct`转换方法也支持自定义的映射关系输入，通过`mapping`参数输入，该参数在对象转换时的映射优先级最高，只是大部分场景中都是采用`tag`形式，该参数往往不会使用到。
+# `Parse`转换
 
-# 示例1，基本使用
+从`v1.11`版本开始，我们推荐使用`Parse`方法来实现`struct`的转换，该方法是一个便捷方法，内部会自动进行转换及数据校验，但如果`struct`中没有校验`tag`的绑定将不会执行校验逻辑。
 
+使用示例：
+```go
+package main
 
+import (
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
+)
 
+type RegisterReq struct {
+	Name  string
+	Pass  string `p:"password1"`
+	Pass2 string `p:"password2"`
+}
 
+type RegisterRes struct {
+	Code  int         `json:"code"`
+	Error string      `json:"error"`
+	Data  interface{} `json:"data"`
+}
 
+func main() {
+	s := g.Server()
+	s.BindHandler("/register", func(r *ghttp.Request) {
+		var req *RegisterReq
+		if err := r.Parse(&req); err != nil {
+			r.Response.WriteJsonExit(RegisterRes{
+				Code:  1,
+				Error: err.Error(),
+			})
+		}
+		// ...
+		r.Response.WriteJsonExit(RegisterRes{
+			Data: req,
+		})
+	})
+	s.SetPort(8199)
+	s.Run()
+}
+```
+在该示例中，我们定义了两个结构体：`RegisterReq`用于参数接收，`RegisterRes`用于数据返回。
 
+其中，我们使用`r.Parse(&req)`将客户端提交的参数转换为`RegisterReq`对象，当转换成功时`req`变量将会被初始化赋值（默认情况下为`nil`），否则该方法返回`err`并且`req`变量为`nil`。返回数据结构通过`RegisterRes`定义，并且返回格式为`JSON`，通过`r.Response.WriteJsonExit`实现，该方法将`RegisterRes`根据其内部定义的`json`标签转换为`JSON`格式并退出当前服务方法，不再执行该服务方法的后续逻辑。
+
+为了演示测试效果，这里在正常的返回结果`Data`属性中将`RegisterReq`对象返回，由于该对象没有绑定`json`标签，因此返回的`JSON`字段将会为其属性名称。
+
+执行后，我们通过`curl`工具来测试一下：
+```
+$ curl "http://127.0.0.1:8199/register?name=john&password1=123&password2=456"
+{"code":0,"error":"","data":{"Name":"john","Pass":"123","Pass2":"456"}}
+
+$ curl -d "name=john&password1=123&password2=456" -X POST "http://127.0.0.1:8199/"
+{"code":0,"error":"","data":{"Name":"john","Pass":"123","Pass2":"456"}}
+```
+我们使用了`GET`和`POST`两种提交方式来做测试，可以看到服务端都能完美地获取到提交参数并完成对象转换。
 
 
 
