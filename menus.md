@@ -30,7 +30,7 @@
             * [层级注册](net/ghttp/group/level.md)
             <!-- * [批量注册](net/ghttp/group/batch.md) -->
         * [中间件设计](net/ghttp/router/middleware.md)
-    * [请求输入(更新中)](#)
+    * [请求输入](#)
         * [基本介绍](net/ghttp/request/index.md)
         * [复杂参数](net/ghttp/request/params.md)
         * [对象处理](net/ghttp/request/struct.md)
