@@ -1,6 +1,6 @@
 # Redis存储
 
-文件存储的方式在单节点的场景下非常不错，但是涉及到对应用进行多节点部署的场景下，各个节点的`Session`无法共享，因此需要将`Session`存储单独剥离出来管理，`Redis`服务器是比较常用的一个选择。
+文件存储的方式在单节点的场景下非常不错，但是涉及到对应用进行多节点部署的场景下，各个节点的`Session`无法共享，因此需要将`Session`存储单独剥离出来管理，`Redis`服务器是比较常见的一个选择。
 
 `gsession`的`Redis`存储使用`StorageRedis`对象实现，与文件存储比较类似，为了提高执行效率，也是采用了`内存+Redis`的方式。与文件存储唯一不同的是，在每一次请求中如果需要对`Session`进行操作时，将会从`Redis`中拉取一次最新的`Session`数据（而文件存储只会在`Session`不存在时读取一次文件）。
 
@@ -26,16 +26,18 @@ func main() {
 		"SessionMaxAge":  time.Minute,
 		"SessionStorage": gsession.NewStorageRedis(g.Redis()),
 	})
-	s.BindHandler("/set", func(r *ghttp.Request) {
-		r.Session.Set("time", gtime.Timestamp())
-		r.Response.Write("ok")
-	})
-	s.BindHandler("/get", func(r *ghttp.Request) {
-		r.Response.Write(r.Session.Map())
-	})
-	s.BindHandler("/del", func(r *ghttp.Request) {
-		r.Session.Clear()
-		r.Response.Write("ok")
+	s.Group("/", func(group *ghttp.RouterGroup) {
+		group.ALL("/set", func(r *ghttp.Request) {
+			r.Session.Set("time", gtime.Timestamp())
+			r.Response.Write("ok")
+		})
+		group.ALL("/get", func(r *ghttp.Request) {
+			r.Response.Write(r.Session.Map())
+		})
+		group.ALL("/del", func(r *ghttp.Request) {
+			r.Session.Clear()
+			r.Response.Write("ok")
+		})
 	})
 	s.SetPort(8199)
 	s.Run()
