@@ -1,6 +1,6 @@
 [TOC]
 
-# `JSON/XML`支持
+# `JSON/XML`解析
 
 从`GF v1.11`版本开始，`Request`对象提供了对客户端提交的`JSON/XML`数据格式的原生支持，为开发者提供了更便捷的数据接收，以进一步提高开发效率。
 
@@ -55,7 +55,7 @@ func main() {
 }
 ```
 
-## `JSON`
+## `JSON`支持
 
 我们通过`curl`工具来提交`JSON`数据来测试：
 ```
@@ -68,7 +68,7 @@ $ curl -d '{"username":"johngcn","password1":"123456","password2":"123456"}' "ht
 
 可以看到，我们提交的`JSON`内容也被`Parse`方法智能地转换为了结构体对象。
 
-## `XML`
+## `XML`支持
 
 我们通过`curl`工具来提交`XML`数据来测试：
 ```
