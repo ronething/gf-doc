@@ -34,7 +34,7 @@
         * [基本介绍](net/ghttp/request/index.md)
         * [复杂参数](net/ghttp/request/params.md)
         * [对象处理](net/ghttp/request/struct.md)
-        * [数据校验](net/ghttp/request/validation.md)
+        * [请求校验](net/ghttp/request/validation.md)
         * [JSON/XML](net/ghttp/request/json-xml.md)
         * [上下文变量](net/ghttp/request/context.md)
         * [Exit退出方法](net/ghttp/request/exit.md)

@@ -1,12 +1,72 @@
 
+# 请求校验
+
+`Request`对象支持非常完美的请求校验能力，通过给结构体属性绑定`v`标签即可。由于底层校验功能通过`gvalid`模块实现，更详细的校验规则和介绍请参考【[数据校验 - 结构体校验](util/gvalid/index.md)】章节。
+
+## 示例1，基本使用
+
+我们将之前的示例做下调整，增加`v`校验标签。
 
 
-# 使用示例
+```go
+package main
 
-## 示例1，请求数据校验
+import (
+	"github.com/gogf/gf/frame/g"
+	"github.com/gogf/gf/net/ghttp"
+)
 
-### 请求参数绑定+数据校验示例
-https://github.com/gogf/gf/blob/master/.example/net/ghttp/server/request/request_validation.go
+type RegisterReq struct {
+	Name  string `p:"username"  v:"required|length:6,30#请输入账号|账号长度为:min到:max位"`
+	Pass  string `p:"password1" v:"required|length:6,30#请输入密码|密码长度不够"`
+	Pass2 string `p:"password2" v:"required|length:6,30|same:password1#请确认密码|两次密码不一致"`
+}
+
+type RegisterRes struct {
+	Code  int         `json:"code"`
+	Error string      `json:"error"`
+	Data  interface{} `json:"data"`
+}
+
+func main() {
+	s := g.Server()
+	s.BindHandler("/register", func(r *ghttp.Request) {
+		var req *RegisterReq
+		if err := r.Parse(&req); err != nil {
+			r.Response.WriteJsonExit(RegisterRes{
+				Code:  1,
+				Error: err.Error(),
+			})
+		}
+		// ...
+		r.Response.WriteJsonExit(RegisterRes{
+			Data: req,
+		})
+	})
+	s.SetPort(8199)
+	s.Run()
+}
+```
+在该示例中，我们定义了两个结构体：`RegisterReq`用于参数接收，`RegisterRes`用于数据返回。由于该接口返回的是`JSON`数据结构，可以看到，只有返回的结构体中存在`json`标签，而接收的结构体中只有`p`标签。因为`RegisterReq`仅用于参数接收，无序设置返回的`json`标签。
+
+为了演示测试效果，这里在正常的返回结果`Data`属性中将`RegisterReq`对象返回，由于该对象没有绑定`json`标签，因此返回的`JSON`字段将会为其属性名称。
+
+执行后，我们通过`curl`工具来测试一下：
+```
+$ curl "http://127.0.0.1:8199/register?name=john&password1=123456&password2=123456"
+{"code":0,"error":"","data":{"Name":"john","Pass":"123456","Pass2":"123456"}}
+
+$ curl "http://127.0.0.1:8199/register?name=john&password1=123456&password2=12345"
+{"code":1,"error":"密码长度不够; 两次密码不一致","data":null}
+
+$ curl "http://127.0.0.1:8199/register"
+{"code":1,"error":"请输入账号; 账号长度为6到30位; 请输入密码; 密码长度不够; 请确认密码; 两次密码不一致","data":null}
+```
+
+## 示例2，校验错误处理
+
+可以看到在以上示例中，当请求校验错误时，所有校验失败的错误都返回了，这样对于用户体验不是特别友好。当产生错误时，我们可以将校验错误转换为`*gvalid.Error`对象，随后可以通过灵活的方法控制错误的返回。
+
 ```go
 package main
 
@@ -16,65 +76,59 @@ import (
 	"github.com/gogf/gf/util/gvalid"
 )
 
-type User struct {
-	Uid   int    `gvalid:"uid@min:1"`
-	Name  string `params:"username"  gvalid:"username @required|length:6,30"`
-	Pass1 string `params:"password1" gvalid:"password1@required|password3"`
-	Pass2 string `params:"password2" gvalid:"password2@required|password3|same:password1#||两次密码不一致，请重新输入"`
+type RegisterReq struct {
+	Name  string `p:"username"  v:"required|length:6,30#请输入账号|账号长度为:min到:max位"`
+	Pass  string `p:"password1" v:"required|length:6,30#请输入密码|密码长度不够"`
+	Pass2 string `p:"password2" v:"required|length:6,30|same:password1#请确认密码|两次密码不一致"`
+}
+
+type RegisterRes struct {
+	Code  int         `json:"code"`
+	Error string      `json:"error"`
+	Data  interface{} `json:"data"`
 }
 
 func main() {
 	s := g.Server()
-	s.Group("/", func(group *ghttp.RouterGroup) {
-		group.ALL("/user", func(r *ghttp.Request) {
-			user := new(User)
-			if err := r.GetToStruct(user); err != nil {
-				r.Response.WriteJsonExit(g.Map{
-					"message": err,
-					"errcode": 1,
+	s.BindHandler("/register", func(r *ghttp.Request) {
+		var req *RegisterReq
+		if err := r.Parse(&req); err != nil {
+			// Validation error.
+			if v, ok := err.(*gvalid.Error); ok {
+				r.Response.WriteJsonExit(RegisterRes{
+					Code:  1,
+					Error: v.FirstString(),
 				})
 			}
-			if err := gvalid.CheckStruct(user, nil); err != nil {
-				r.Response.WriteJsonExit(g.Map{
-					"message": err.Maps(),
-					"errcode": 1,
-				})
-			}
-			r.Response.WriteJsonExit(g.Map{
-				"message": "ok",
-				"errcode": 0,
+			// Other error.
+			r.Response.WriteJsonExit(RegisterRes{
+				Code:  1,
+				Error: err.Error(),
 			})
+		}
+		// ...
+		r.Response.WriteJsonExit(RegisterRes{
+			Data: req,
 		})
 	})
 	s.SetPort(8199)
 	s.Run()
 }
 ```
+可以看到，当错误产生后，我们可以通过`err.(*gvalid.Error)`断言的方式判断错误是否为校验错误，如果是的话则返回第一条校验错误，而不是所有都返回。更详细的错误控制方法，请参考【[数据校验 - 校验结果](util/gvalid/error.md)】章节。
 
-简要说明，
-1. 这里使用了`r.GetToStruct(user)`方法将请求参数绑定到指定的`user`对象上（不区分提交方式），注意这里的`user`是`User`的结构体实例化指针；在`struct tag`中，使用`params`标签来指定参数名称与结构体属性名称对应关系；
-1. 这里通过`GetToStruct`方法将参数赋值给`struct`对象，给定的参数为`struct`对象的指针，以便于内部自动赋值。同时，该系列方法也支持自动对结构体对象进行自动初始化，但是务必注意此时参数类型为`**User`（这样`GetToStruct`方法内部才能对`*User`进行初始化），如下：
-    ```go
-    user := (*User)(nil)
-    r.GetToStruct(&user)
-    ```
-1. 通过`gvalid`标签为`gavlid`数据校验包特定的校验规则标签，这里的`gvalid`标签也可以使用`valid`或者`v`，详细请具体参考【[数据校验](util/gvalid/index.md)】章节；其中，密码字段的校验规则为`password3`，表示: `密码格式为任意6-18位的可见字符，必须包含大小写字母、数字和特殊字符`。
-1. 当校验返回结果非`nil`时，表示校验不通过，这里使用`r.Response.WriteJson`方法返回`json`结果。
+执行后，我们通过`curl`工具来测试一下：
+```
+$ curl "http://127.0.0.1:8199/register"
+{"code":1,"error":"请输入账号","data":null}
 
-执行后，为方便测试，我们这里使用`curl`工具来测试下（当然也可以通过浏览器访问对应的`URL`来测试）：
-```shell
-$ curl "http://127.0.0.1:8199/user"
-{"errcode":1,"message":{"password1":{"password3":"密码格式不合法，密码格式为任意6-18位的可见字符，必须包含大小写字母、数字和特殊字符","required":"字段不能为空"},"password2":{"password3":"密码格式不合法，密码格式为任意6-18位的可见字符，必须包含大小写字母、数字和特殊字符","required":"字段不能为空"},"uid":{"min":"字段最小值为1"},"username":{"length":"字段长度为6到30个字符","required":"字段不能为空"}}}
-
-$ curl "http://127.0.0.1:8199/user?uid=1&name=john&password1=123&password2=456"
-{"errcode":1,"message":{"password1":{"password3":"密码格式不合法，密码格式为任意6-18位的可见字符，必须包含大小写字母、数字和特殊字符"},"password2":{"password3":"密码格式不合法，密码格式为任意6-18位的可见字符，必须包含大小写字母、数字和特殊字符","same":"两次密码不一致，请重新输入"},"username":{"length":"字段长度为6到30个字符"}}}
-
-$ curl "http://127.0.0.1:8199/user?uid=1&name=john&password1=Abc@123&password2=Abc@123"
-{"errcode":1,"message":{"username":{"length":"字段长度为6到30个字符"}}}
-
-$ curl "http://127.0.0.1:8199/user?uid=1&name=johng-cn&password1=John@123&password2=John@123"
-{"errcode":0,"message":"ok"}
+$ curl "http://127.0.0.1:8199/register?name=john&password1=123456&password2=12345"
+{"code":1,"error":"两次密码不一致","data":null}
 ```
 
-> 注意使用`curl`测试时在字符串参数中不能带有特殊含义的字符如`$`, `#`等。
+
+
+
+
+
 
