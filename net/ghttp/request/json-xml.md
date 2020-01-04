@@ -111,7 +111,7 @@ func main() {
     $ curl -d '{"username":"johngcn","password1":"123456","password2":"123456"}' "http://127.0.0.1:8199/register"
     {"code":0,"error":"","data":{"Name":"johngcn","Pass":"123456","Pass2":"123456"}}
 
-    $ curl -d '{"username":"johngcn","password1":"123456","password2":"123456"}' "http://127.0.0.1:8199/register"
+    $ curl -d '{"username":"johngcn","password1":"123456","password2":"123"}' "http://127.0.0.1:8199/register"
     {"code":1,"error":"两次密码不一致","data":null}
     ```
 
@@ -122,7 +122,7 @@ func main() {
     $ curl -d '<?xml version="1.0" encoding="UTF-8"?><doc><username>johngcn</username><password1>123456</password1><password2>123456</password2></doc>' "http://127.0.0.1:8199/register"
     {"code":0,"error":"","data":{"Name":"johngcn","Pass":"123456","Pass2":"123456"}}
 
-    $ curl -d '<?xml version="1.0" encoding="UTF-8"?><doc><username>johngcn</username><password1>123456</password1><password2>12345</password2></doc>' "http://127.0.0.1:8199/register"
+    $ curl -d '<?xml version="1.0" encoding="UTF-8"?><doc><username>johngcn</username><password1>123456</password1><password2>123</password2></doc>' "http://127.0.0.1:8199/register"
     {"code":1,"error":"两次密码不一致","data":null}
     ```
     可以看到，我们提交的`XML`内容也被`Parse`方法智能地转换为了结构体对象。
