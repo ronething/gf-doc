@@ -49,7 +49,6 @@
     * [HTTP客户端](#)
         * [Client对象](net/ghttp/client/index.md)
         * [工具方法](net/ghttp/client/function.md)
-        * [复杂参数](net/ghttp/client/params.md)
         * [使用示例](#)
             * [基本使用](net/ghttp/client/demo/index.md)
             * [文件上传](net/ghttp/client/demo/upload.md)
