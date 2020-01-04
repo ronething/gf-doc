@@ -22,7 +22,7 @@
         * [路由规则](net/ghttp/router/rules.md)
         * [路由管理](net/ghttp/router/index.md)
         * [注册方式](#)
-            * [函数注册(待更新)](net/ghttp/router/handler.md)
+            * [函数注册](net/ghttp/router/handler.md)
             * [对象注册](net/ghttp/router/object.md)
             * [~~控制器注册~~](net/ghttp/router/controller.md)
         * [分组路由](#)
