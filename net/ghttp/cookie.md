@@ -61,7 +61,7 @@ func main() {
 type Controller struct {
 	Request  *ghttp.Request  // 请求数据对象
 	Response *ghttp.Response // 返回数据对象(r.Response)
-	Server   *ghttp.Server   // Web Server对象(r.Server)
+	Server   *ghttp.Server   // WebServer对象(r.Server)
 	Cookie   *ghttp.Cookie   // COOKIE操作对象(r.Cookie)
 	Session  *ghttp.Session  // SESSION操作对象
 	View     *View           // 视图对象

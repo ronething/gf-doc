@@ -3,7 +3,7 @@
 
 # HTTPS服务
 
-建立`HTTPS`服务非常简单，使用框架Web Server提供的```EnableHTTPS(certFile, keyFile string) error```方法即可。很显然，该方法中需要提供两个参数，即两个用于HTTPS非对称加密的证书文件以及对应的秘钥文件。
+建立`HTTPS`服务非常简单，使用框架WebServer提供的```EnableHTTPS(certFile, keyFile string) error```方法即可。很显然，该方法中需要提供两个参数，即两个用于HTTPS非对称加密的证书文件以及对应的秘钥文件。
 
 
 ## 准备工作
@@ -87,7 +87,7 @@ func main() {
 }
 ```
 
-可以看到，我们直接将之前生成的证书和秘钥文件地址传递给```EnableHTTPS```即可，通过```s.SetPort(8199)```设置HTTPS的服务端口，当然我们也可以通过```s.SetHTTPSPort(8199)```来实现，在单一服务下两者没有区别，当Web Server需要同时支持HTTP和HTTPS服务的时候，两者的作用就不同了，这个特性我们会在后面介绍。随后我们访问页面```https://127.0.0.1:8199/```来看一下效果：
+可以看到，我们直接将之前生成的证书和秘钥文件地址传递给```EnableHTTPS```即可，通过```s.SetPort(8199)```设置HTTPS的服务端口，当然我们也可以通过```s.SetHTTPSPort(8199)```来实现，在单一服务下两者没有区别，当WebServer需要同时支持HTTP和HTTPS服务的时候，两者的作用就不同了，这个特性我们会在后面介绍。随后我们访问页面```https://127.0.0.1:8199/```来看一下效果：
 
 ![](/images/Selection_006_1524490791104.png)
 
@@ -102,7 +102,7 @@ func main() {
 
 # HTTPS与HTTP支持
 
-我们经常会遇到需要通过HTTP和HTTPS来提供同一个服务的情况，即除了端口和访问协议不一样，其他都是相同的。如果按照传统的使用多Web Server的方式来运行的话会比较繁琐，为轻松地解决开发者的烦恼，`ghttp`提供了非常方便的特性：支持 “同一个”Web Server同时支持HTTPS及HTTP访问协议。我们先来看一个例子：
+我们经常会遇到需要通过HTTP和HTTPS来提供同一个服务的情况，即除了端口和访问协议不一样，其他都是相同的。如果按照传统的使用多WebServer的方式来运行的话会比较繁琐，为轻松地解决开发者的烦恼，`ghttp`提供了非常方便的特性：支持 “同一个”WebServer同时支持HTTPS及HTTP访问协议。我们先来看一个例子：
 ```go
 package main
 
@@ -121,14 +121,14 @@ func main() {
     s.Run()
 }
 ```
-执行后，通过本地浏览器访问这两个地址 http://127.0.0.1/ 和```https://127.0.0.1/```都会看到同样的内容（需要注意的是，由于部分系统对于权限的限制，Web Server绑定`80`和`443`端口需要```root/管理员```权限，如果启动报错，可以更改端口号后重新执行即可）。
+执行后，通过本地浏览器访问这两个地址 http://127.0.0.1/ 和```https://127.0.0.1/```都会看到同样的内容（需要注意的是，由于部分系统对于权限的限制，WebServer绑定`80`和`443`端口需要```root/管理员```权限，如果启动报错，可以更改端口号后重新执行即可）。
 
 在本示例中，我们使用了两个方法来开启HTTPS特性：
 ```go
 func (s *Server) EnableHTTPS(certFile, keyFile string) error
 func (s *Server) SetHTTPSPort(port ...int) error
 ```
-一个是添加证书及密钥文件，一个是设置HTTPS协议的监听端口，一旦这两个属性被设置了，那么Web Server就会启用HTTPS特性。并且，在示例中也通过```SetPort```方法来设置了HTTP服务的监听端口，因此该Web Server将会同时监听指定的HTTPS和HTTP服务端口。
+一个是添加证书及密钥文件，一个是设置HTTPS协议的监听端口，一旦这两个属性被设置了，那么WebServer就会启用HTTPS特性。并且，在示例中也通过```SetPort```方法来设置了HTTP服务的监听端口，因此该WebServer将会同时监听指定的HTTPS和HTTP服务端口。
 
 # 使用Let's Encrypt免费证书
 
@@ -228,7 +228,7 @@ certbot renew
 
 我们可以使用`crontab`定时任务来实现自动续期：
 ```shell
-# 每天尝试续期一次，成功后重启`gf`框架运行的Web Server
+# 每天尝试续期一次，成功后重启`gf`框架运行的WebServer
 0 0 * * * certbot renew --quiet --renew-hook "kill -SIGUSR1 $(pidof 进程名称)"
 ```
 

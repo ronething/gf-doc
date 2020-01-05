@@ -47,7 +47,7 @@ func main() {
 ```
 go tool pprof "http://127.0.0.1:8199/debug/pprof/profile"
 ```
-执行后pprof工具经过约30秒左右的接口信息采集（这30秒期间Web Server应当有流量进入，我们这里不停地访问hello world页面以作测试），然后生成性能分析报告，随后可以通过```top10```/```web```等pprof命令查看报告结果，更多命令可使用```go tool pprof```查看。关于pprof的详细使用介绍，请查看golang官方：[blog.golang.org/profiling-go-programs](https://blog.golang.org/profiling-go-programs)
+执行后pprof工具经过约30秒左右的接口信息采集（这30秒期间WebServer应当有流量进入，我们这里不停地访问hello world页面以作测试），然后生成性能分析报告，随后可以通过```top10```/```web```等pprof命令查看报告结果，更多命令可使用```go tool pprof```查看。关于pprof的详细使用介绍，请查看golang官方：[blog.golang.org/profiling-go-programs](https://blog.golang.org/profiling-go-programs)
 
 本示例中的命令行性能分析结果如下：
 ```html

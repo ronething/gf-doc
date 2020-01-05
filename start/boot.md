@@ -56,7 +56,7 @@ func init() {
 	glog.SetPath(logpath)
 	glog.SetStdoutPrint(true)
 
-	// Web Server配置
+	// WebServer配置
 	s.SetServerRoot("public")
 	s.SetLogPath(logpath)
 	s.SetNameToUriType(ghttp.URI_TYPE_ALLLOWER)

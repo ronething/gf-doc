@@ -1,7 +1,7 @@
 
 [TOC]
 
-`GF`框架提供了完善的`Web Server`日志管理功能，包括`access log`以及`error log`，并可自定义日志输出回调方法，开发者可灵活使用。
+`GF`框架提供了完善的`WebServer`日志管理功能，包括`access log`以及`error log`，并可自定义日志输出回调方法，开发者可灵活使用。
 
 # 相关配置
 配置对象：
@@ -80,7 +80,7 @@ func main() {
 
 ## 错误日志
 
-`Web Server`运行产生的任何错误信息(默认开启，输出到终端)，都将会被记录到`error log`中，以下是一个手动触发异常的示例：
+`WebServer`运行产生的任何错误信息(默认开启，输出到终端)，都将会被记录到`error log`中，以下是一个手动触发异常的示例：
 
 ```go
 package main
@@ -93,7 +93,7 @@ import (
 func main() {
     s := g.Server()
     s.BindHandler("/log/error", func(r *ghttp.Request){
-        panic("异常信息")
+        panic("OMG")
     })
     s.SetErrorLogEnabled(true)
     s.SetPort(8199)
@@ -112,7 +112,7 @@ Stack:
 ```
 错误信息会打印出对应错误产生的堆栈信息（堆栈信息中不包含框架内部调用信息），以便于错误定位以及开发者分析问题原因。
 
-> WebServer产生的任何`panic`错误都将会被自动捕获到错误日志中，因此对于业务端程序来讲，无论是在控制器中、业务封装层、数据模型中，如果产生了错误想要直接退出业务请求处理，直接`panic`即可。特别是对于绝大多数`golang`风格的方法`error`返回值判断，处理将会变得异常的简单。如果是业务程序自身定义的方法`error`甚至可不用返回，可以根据业务情况选择直接`panic`。
+> `WebServer`产生的任何`panic`错误都将会被自动捕获到错误日志中，因此对于业务端程序来讲，无论是在控制器中、业务封装层、数据模型中，如果产生了错误想要直接退出业务请求处理，直接`panic`即可。特别是对于绝大多数`golang`风格的方法`error`返回值判断，处理将会变得异常的简单。如果是业务程序自身定义的方法`error`甚至可不用返回，可以根据业务场景选择直接`panic`。
 
 ## 输出日志到文件
 
@@ -140,12 +140,12 @@ func main() {
 ```
 运行并访问后，日志将会被保存到`/tmp/gf.log`目录中。手动在终端查看目录结构如下：
 ```shell
-john@johnstation:/tmp$ tree gf.log
+$ tree gf.log
 /tmp/gf.log
 ├── 2019-12-20.log
 └── access-20191220.log
 ```
-需要注意的是，其中的`2019-12-20.log`是应用的默认日志文件，往往是通过使用`glog`/`g.Log()`方式输出的业务或者模块日志。而`access-*.log`/`error*.log`日志文件记录的是`Web Server`的访问日志及错误日志。
+需要注意的是，其中的`2019-12-20.log`是应用的默认日志文件，往往是通过使用`glog`/`g.Log()`方式输出的业务或者模块日志。而`access-*.log`/`error*.log`日志文件记录的是`WebServer`的访问日志及错误日志。
 
 
 
