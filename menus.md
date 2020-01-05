@@ -149,7 +149,8 @@
         * [ORM事务操作](database/gdb/transaction.md)
         * [ORM结果处理](database/gdb/result.md)
         * [ORM高级特性](database/gdb/senior.md)
-        * [FAQ常见问题](database/gdb/faq.md)
+        * [ORM模型生成](database/gdb/generate.md)
+        <!-- * [FAQ常见问题](database/gdb/faq.md) -->
 * [功能模块设计](#)
     * [数据结构容器](#)
         * [gmap (并发安全map)](container/gmap/index.md)
