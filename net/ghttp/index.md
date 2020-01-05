@@ -2,7 +2,7 @@
 
 [TOC]
 
-`GF`框架提供了非常强大的`Web Server`模块，由`ghttp`模块实现。集成了丰富完善的相关组件，例如：Router、Cookie、Session、路由注册、配置管理、模板引擎、缓存控制等等，支持热重启、热更新、多域名、多端口、多实例、HTTPS、Rewrite等等特性。
+`GF`框架提供了非常强大的`Web Server`，由`ghttp`模块实现。实现了丰富完善的相关组件，例如：Router、Cookie、Session、路由注册、配置管理、模板引擎、缓存控制等等，支持热重启、热更新、多域名、多端口、多实例、HTTPS、Rewrite等等特性。
 
 接口文档地址： 
 

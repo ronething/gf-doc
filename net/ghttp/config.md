@@ -41,7 +41,7 @@ s := g.Server()
 s.SetConfigWithMap(g.Map{
     "Address":          ":80",
     "ServerRoot":       "/var/www/Server",
-    "IndexFiles":       g.Slice{"index.php", "main.php"},
+    "IndexFiles":       g.Slice{"index.html", "main.html"},
     "AccessLogEnabled": true,
     "ErrorLogEnabled":  true,
     "PProfEnabled":     true,
@@ -99,7 +99,7 @@ s4 := g.Server()
 [server]
     Address          = ":8199"
     ServerRoot       = "/var/www/Server"
-    IndexFiles       = ["index.php", "main.php"]
+    IndexFiles       = ["index.html", "main.html"]
     AccessLogEnabled = true
     ErrorLogEnabled  = true
     PProfEnabled     = true
@@ -114,7 +114,7 @@ s4 := g.Server()
 [server]
     address          = ":8199"
     serverRoot       = "/var/www/Server"
-    indexFiles       = ["index.php", "main.php"]
+    indexFiles       = ["index.html", "main.html"]
     accessLogEnabled = true
     errorLogEnabled  = true
     pprofEnabled     = true
