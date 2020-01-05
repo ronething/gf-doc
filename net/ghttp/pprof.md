@@ -51,7 +51,7 @@ go tool pprof "http://127.0.0.1:8199/debug/pprof/profile"
 
 本示例中的命令行性能分析结果如下：
 ```html
-john@johnhome:~/Workspace/Go/gf$ go tool pprof "http://127.0.0.1:8199/debug/pprof/profile"
+$ go tool pprof "http://127.0.0.1:8199/debug/pprof/profile"
 Fetching profile over HTTP from http://127.0.0.1:8199/debug/pprof/profile
 Saved profile in /home/john/pprof/pprof.___go_build_pprof_go.samples.cpu.001.pb.gz
 File: ___go_build_pprof_go

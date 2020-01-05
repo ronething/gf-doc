@@ -29,14 +29,14 @@
 ```openssl```支持的算法以及命令参数比较多，如果想要深入了解请使用```man openssl```命令进行查看。本次示例中，本地环境(Ubuntu)使用命令生成相关秘钥、公钥、证书文件的流程如下：
 
 ```shell
-john@johnhome:~/https$ openssl genrsa -out server.key 2048
+$ openssl genrsa -out server.key 2048
 Generating RSA private key, 2048 bit long modulus
 .........................+++
 .....................................................................+++
 unable to write 'random state'
 e is 65537 (0x10001)
 
-john@johnhome:~/https$ openssl req -new -x509 -key server.key -out server.crt -days 365
+$ openssl req -new -x509 -key server.key -out server.crt -days 365
 You are about to be asked to enter information that will be incorporated
 into your certificate request.
 What you are about to enter is what is called a Distinguished Name or a DN.
@@ -52,10 +52,10 @@ Organizational Unit Name (eg, section) []:Dev
 Common Name (e.g. server FQDN or YOUR name) []:John
 Email Address []:john@johng.cn
 
-john@johnhome:~/https$ openssl rsa -in server.key -out server.key.public
+$ openssl rsa -in server.key -out server.key.public
 writing RSA key
 
-john@johnhome:~/https$ ll
+$ ll
 total 20
 drwxrwxr-x  2 john john 4096 Apr 23 21:26 ./
 drwxr-xr-x 90 john john 4096 Apr 23 20:55 ../

@@ -91,19 +91,19 @@ func main() {
 ```
 其中返回的参数`r.Router`是当前匹配的路由规则信息，访问当该方法的时候，服务端会输出当前匹配的路由规则信息。执行后，我们在终端使用`curl`命令进行测试：
 ```shell
-john@johnhome:~$ curl -XGET http://127.0.0.1:8199/order/list/1.html
+$ curl -XGET http://127.0.0.1:8199/order/list/1.html
 {"Domain":"default","Method":"GET","Priority":3,"Uri":"/{table}/list/{page}.html"}
 
-john@johnhome:~$ curl -XGET http://127.0.0.1:8199/order/info/1
+$ curl -XGET http://127.0.0.1:8199/order/info/1
 Not Found
 
-john@johnhome:~$ curl -XGET http://localhost:8199/order/info/1
+$ curl -XGET http://localhost:8199/order/info/1
 {"Domain":"localhost","Method":"GET","Priority":3,"Uri":"/order/info/{order_id}"}
 
-john@johnhome:~$ curl -XDELETE http://127.0.0.1:8199/comment/1000
+$ curl -XDELETE http://127.0.0.1:8199/comment/1000
 {"Domain":"default","Method":"DELETE","Priority":2,"Uri":"/comment/{id}"}
 
-john@johnhome:~$ curl -XGET http://127.0.0.1:8199/comment/1000
+$ curl -XGET http://127.0.0.1:8199/comment/1000
 Not Found
 ```
 值得说明的是，在大多数场景下，我们很少直接在路由规则中使用```@域名```这样的规则来限定路由注册的域名，而是使用```ghttp.Server.Domain(domains string)```方法来获得指定域名列表的管理对象，随后使用该域名对象进行路由注册，域名对象即可实现对指定域名的绑定操作。
