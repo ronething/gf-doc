@@ -70,23 +70,13 @@ ok   github.com/gogf/gf/container/gtype 49.454s
 `gtype`并发安全基本类型的使用非常简单，往往就类似以下几个方法(以`gtype.Int`类型举例)：
 
 ```go
-// NewInt creates and returns a concurrent-safe object for int type,
-// with given initial value <value>.
 func NewInt(value ...int) *Int
-
-// Set atomically stores <value> into t.value and returns the previous value of t.value.
-func (v *Int) Set(value int) (old int)
-
-// Val atomically loads and returns t.value.
-func (v *Int) Val() int
-
-// Add atomically adds <delta> to t.value and returns the new value.
 func (v *Int) Add(delta int) (new int)
-
-// Cas executes the compare-and-swap operation for value.
-func (v *Int) Cas(old, new int) bool {
-	return atomic.CompareAndSwapInt64(&v.value, int64(old), int64(new))
-}
+func (v *Int) Cas(old, new int) bool
+func (v *Int) Clone() *Int
+func (v *Int) Set(value int) (old int)
+func (v *Int) String() string
+func (v *Int) Val() int
 ```
 
 ### 示例1，基本使用
