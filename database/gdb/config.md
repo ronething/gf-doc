@@ -136,7 +136,7 @@ type ConfigNode  struct {
     User             string   // 账号
     Pass             string   // 密码
     Name             string   // 数据库名称
-    Type             string   // 数据库类型：mysql, sqlite, mssql, pgsql, oracle(目前仅支持mysql)
+    Type             string   // 数据库类型：mysql, sqlite, mssql, pgsql, oracle
     Role             string   // (可选，默认为master)数据库的角色，用于主从操作分离，至少需要有一个master，参数值：master, slave
     Debug            bool     // (可选)开启调试模式
     Charset          string   // (可选，默认为 utf8)编码，默认为 utf8
