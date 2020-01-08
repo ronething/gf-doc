@@ -7,7 +7,9 @@
 
 我们推荐通过下载安装预编译的二进制使用。工具安装成功后，可以通过`gf`或者`gf -h`查看所有支持的命令。复杂的命令可以通过`gf help COMMAND`或者`gf COMMAND -h`查看更详细的使用帮助信息，例如：`gf help gen`、`gf gen -h`。
 
-> 当前帮助文档以`gf cli v0.4.5`版本为例进行简单的介绍，详细的介绍信息请查看命令行帮助信息。本章内容信息可能会有滞后，最新的具体详细介绍请查看工具帮助信息。
+> 工具运行初始化时将会自动打开`Go Modules`特性并设置反向代理地址为 `https://goproxy.cn`。
+
+> 当前帮助文档以`gf cli v0.5.0`版本为例进行简单的介绍，详细的介绍信息请查看命令行帮助信息。本章内容信息可能会有滞后，最新的具体详细介绍请查看工具帮助信息。
 
 ```
 $ gf
@@ -22,16 +24,18 @@ COMMAND
     help       show more information about a specified command
     pack       packing any file/directory to a resource file, or a go file
     build      cross-building go project for lots of platforms...
-    update     update current gf binary to latest one (you may need root/admin permission)
-    install    install gf binary to system (you may need root/admin permission)
-    version    show version info
+    docker     create a docker image for current GF project...
+    update     update current gf binary to latest one (might need root/admin permission)
+    install    install gf binary to system (might need root/admin permission)
+    version    show current binary version info
 
 OPTION
     -?,-h      show this help or detail for specified command
     -v,-i      show version information
 
 ADDITIONAL
-    Use 'gf help COMMAND' or 'gf COMMAND -h' for detail about a command, which has '...' in the tail of their comments.
+    Use 'gf help COMMAND' or 'gf COMMAND -h' for detail about a command, which has '...'
+    in the tail of their comments.
 ```
 
 
@@ -100,8 +104,6 @@ Built Detail:
 
 > 编译时的内置变量可以在运行时通过`gbuild`包获取。
 
-> 编译时会自动设置代理下载编译所需依赖包，开发者无需手动设置代理。
-
 ## `gen` 代码生成命令
 
 使用方式：`gf gen model [PATH] [OPTION]`
@@ -115,6 +117,25 @@ Built Detail:
 
 > 数据表模型生成支持的数据库类型为：`MySQL/MariaDB`、`PostgreSQL`、`SQLite`、`SQLServer`。目前暂不支持`Oracle`，若有需求请联系作者。
 
+## `run` 热编译（自动编译）
+使用方式：`gf run FILE`
+
+由于`Go`是不支持热编译特性的，每一次代码变更后都要重新手动停止、编译、运行代码文件。`run`命令也不是实现热编译功能，而是提供了自动编译功能，当开发者修改了项目中的`go`文件时，该命令将会自动编译当前程序，并停止原有程序，运行新版的程序。
+
+> `run`命令会递归监控**当前运行目录**的所有`go`文件变化来实现自动编译。
+
+## `get` 依赖包下载
+
+使用方式：`gf get PACKAGE`
+
+`gf get`命令和`go get`命令类似，内部自动提供了代理设置功能，并智能识别并设置最快的下载代理地址。
+
+
+## `docker` 镜像编译
+
+使用方式：`gf docker [FILE] [OPTIONS]`
+
+自动编译并生成`docker`镜像。非必需`FILE`参数为编译文件路径，默认为`main.go`。非必需参数`OPTIONS`为`docker build`命令相同参数及选项。
 
 ## `update` 工具更新
 
@@ -130,22 +151,6 @@ Built Detail:
 使用方式：`gf pack SRC DST`
 
 该命令用以将任意的文件打包为二进制文件，或者`Go`代码文件，可将任意文件打包后随着可执行文件一同发布。此外，在`build`命令中支持打包+编译一步进行，具体请查看`build`命令帮助信息。
-
-## `run` 热编译（自动编译）
-使用方式：`gf run FILE`
-
-由于`Go`是不支持热编译特性的，每一次代码变更后都要重新手动停止、编译、运行代码文件。`run`命令也不是实现热编译功能，而是提供了自动编译功能，当开发者修改了项目中的`go`文件时，该命令将会自动编译当前程序，并停止原有程序，运行新版的程序。
-
-> `run`命令会递归监控**当前运行目录**的所有`go`文件变化来实现自动编译。
-
-> 编译时会自动设置代理下载编译所需依赖包，开发者无需手动设置代理。
-
-## `get` 依赖包下载
-
-使用方式：`gf get PACKAGE`
-
-`gf get`命令和`go get`命令类似，内部自动提供了代理设置功能，并智能识别并设置最快的下载代理地址。
-
 
 ## `help` 命令行帮助
 
