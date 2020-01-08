@@ -55,7 +55,9 @@ func (m *Model) TX(tx *TX) *Model
 func (m *Model) Master() *Model
 func (m *Model) Slave() *Model
 
+func (m *Model) As(as string) *Model
 func (m *Model) Chunk(limit int, callback func(result Result, err error) bool)
+func (m *Model) Schema(schema string) *Model
 func (m *Model) Option(option int) *Model
 func (m *Model) OmitEmpty() *Model
 func (m *Model) Page(page, limit int) (*Model)

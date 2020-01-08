@@ -145,6 +145,7 @@
             * [事务处理](database/gdb/chaining/transaction.md)
             * [主从切换](database/gdb/chaining/master-slave.md)
             * [查询缓存](database/gdb/chaining/cache.md)
+            * [数据库切换](database/gdb/chaining/schema.md)
         * [ORM方法操作](database/gdb/method.md)
         * [ORM事务操作](database/gdb/transaction.md)
         * [ORM结果处理](database/gdb/result.md)
