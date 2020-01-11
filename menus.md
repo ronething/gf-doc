@@ -140,7 +140,7 @@
             * [模型创建](database/gdb/chaining/create.md)
             * [写入保存](database/gdb/chaining/insert-save.md)
             * [更新删除](database/gdb/chaining/update-delete.md)
-            * [查询操作](database/gdb/chaining/select.md)
+            * [数据查询](database/gdb/chaining/select.md)
             * [对象输入](database/gdb/chaining/struct.md)
             * [字段过滤](database/gdb/chaining/fields-filter.md)
             * [事务处理](database/gdb/chaining/transaction.md)
