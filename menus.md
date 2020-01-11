@@ -141,6 +141,7 @@
             * [写入保存](database/gdb/chaining/insert-save.md)
             * [更新删除](database/gdb/chaining/update-delete.md)
             * [查询操作](database/gdb/chaining/select.md)
+            * [对象输入](database/gdb/chaining/struct.md)
             * [字段过滤](database/gdb/chaining/fields-filter.md)
             * [事务处理](database/gdb/chaining/transaction.md)
             * [主从切换](database/gdb/chaining/master-slave.md)
