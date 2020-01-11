@@ -1,3 +1,4 @@
+[TOC]
 # 包名约定
 
 根据官方[《Effective Go》](https://golang.google.cn/doc/effective_go.html#package-names)建议，包名尽量采用言简意赅的名称(`short, concise, evocative`)。并且推荐通过不同的`import`路径来区分相同包名的包引入。

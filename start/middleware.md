@@ -1,4 +1,4 @@
-
+[TOC]
 # 中间件使用
 
 https://github.com/gogf/gf-demos/tree/master/app/service/middleware
