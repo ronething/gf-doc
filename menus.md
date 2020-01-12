@@ -236,6 +236,7 @@
 * [框架开发案例](#)
     * [GoFrame示例项目](cases/gf-demos.md)
     * [GoFrame官网项目](cases/gf-home.md)
+    * [GoFrame其他案例](cases/other.md)
 * [版本发布记录](#)
     * [版本发布说明](release/index.md)
     * [v1.10 2019-12-05](release/v1.10.md)
