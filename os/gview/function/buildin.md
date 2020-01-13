@@ -42,7 +42,7 @@
 // 输出: <div>测试</div>
 ```
 
-## urlencode/urlquery/url
+## urlencode/url
 ```go
 {{.url | url}}
 ```
