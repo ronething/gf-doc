@@ -42,12 +42,11 @@
 // 输出: <div>测试</div>
 ```
 
-## url
-同`urlquery`，别名`urlencode`。
+## urlencode/urlquery/url
 ```go
 {{.url | url}}
 ```
-将`url`变量值进行url转义。
+将`url`变量值进行`url`转义。
 示例：
 ```go
 {{"https://goframe.org" | url}}
@@ -58,7 +57,7 @@
 ```go
 {{.url | urldecode}}
 ```
-将`url`变量值进行url反转义。
+将`url`变量值进行`url`反转义。
 示例：
 ```go
 {{"https%3A%2F%2Fgoframe.org"|urldecode}}
