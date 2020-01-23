@@ -34,7 +34,7 @@ golang版本 >= 1.11
 
 # 架构
 <div align=center>
-<img src="https://gf.cdn.johng.cn/images/arch.png"/>
+<img src="https://gf.cdn.johng.cn/images/arch.png?v=1"/>
 </div>
 
 # 特点
