@@ -28,7 +28,7 @@ r, err := db.Table("user").Update(g.Map{"name" : "john guo"}, "name", "john")
 r, err := db.Table("user").Update("name='john guo'", "name", "john")
 
 // UPDATE `user` SET `status`=1
-r, err := db.Table("user")。Update("status=1")
+r, err := db.Table("user").Update("status=1")
 r, err := db.Table("user").Update(g.Map{"status" : 1})
 ```
 
