@@ -42,7 +42,7 @@ r, err := db.Table("user").Save(g.Map{"uid": 10001, "name": "john"})
 type User struct {
     Uid  int    `orm:"uid"`
     Name string `orm:"name"`
-    Site string `site:"site"`
+    Site string `orm:"site"`
 }
 user := &User{
     Uid:  1,
